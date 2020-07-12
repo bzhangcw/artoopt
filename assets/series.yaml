@@ -1,0 +1,8 @@
+---
+layout: post
+title: "A review on convex optimization"
+date: \today
+tags: [optimization, convex optimization]
+bibliography: [./convex.bib]
+---
+

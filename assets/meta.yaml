@@ -1,0 +1,27 @@
+---
+author: Chuwen Zhang
+link-citations: true
+# === Latex options ===
+fontsize: 10pt
+monofont: Hack
+mathfont: Asana Math
+titlepage: true
+include-before-body: []
+include-after-body: []
+include-in-header: []
+header-includes:
+  - |
+    ```{=html}
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.0/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true });</script>
+    ```
+  # - |
+  #   ```{=latex}
+  #   \definecolor{tufeijilk}{RGB}{68,87,151}
+  #   \hypersetup{colorlinks=true,linkcolor=tufeijilk,urlcolor=cyan}
+  #   \usepackage[onlyrm,nomath]{kpfonts-otf}
+  #   \usepackage[lining,mono=false]{libertinus-otf}
+  #   ```
+
+---
+

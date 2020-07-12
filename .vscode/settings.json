@@ -1,0 +1,128 @@
+{
+    "[julia]": {
+        "editor.defaultFormatter": "julialang.language-julia",
+        "editor.quickSuggestions": true,
+        "editor.tabSize": 4
+    },
+    "[minizinc]": {
+        "editor.tabSize": 2
+    },
+    "autoDocstring.docstringFormat": "google",
+    "editor.fontFamily": "'Hack', 'fira code', 'roboto mono'",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 13,
+    "editor.fontWeight": "400",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.lineNumbers": "on",
+    "editor.tabCompletion": "on",
+    "editor.tabSize": 2,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "latex-workshop.view.pdf.viewer": "tab",
+    "markdown.preview.doubleClickToSwitchToEditor": true,
+    "markdown.styles": [
+        "assets/markdown.css"
+    ],
+    "markdown.trace": "verbose",
+    "psi-header.changes-tracking": {
+        "autoHeader": "autoSave",
+        "changesTracking": true,
+        "isActive": true
+    },
+    "psi-header.config": {
+        "author": "brentian",
+        "authorEmail": "chuwzhang@gmail.com",
+        "copyrightHolder": "C. Zhang",
+        "license": "MIT",
+        "projectname": "arto"
+    },
+    "psi-header.lang-config": [
+        {
+            "begin": "",
+            "end": "",
+            "language": "minizinc",
+            "prefix": "% "
+        },
+        {
+            "begin": "",
+            "end": "",
+            "language": "python",
+            "prefix": "# "
+        },
+        {
+            "begin": "---",
+            "end": "---",
+            "language": "markdown",
+            "prefix": ""
+        },
+        {
+            "begin": "",
+            "end": "",
+            "language": "*",
+            "prefix": "# "
+        }
+    ],
+    "psi-header.templates": [
+        {
+            "language": "*",
+            "template": [
+                "@license: %<<licensename>>%:~ <<licenseurl>>",
+                "@project: <<projectname>>",
+                "@file: <<filerelativepath>>",
+                "@created: <<filecreated('dddd, Do MMMM YYYY')>>",
+                "@author: <<author>> (<<authoremail>>)",
+                "@modified: <<author>> (<<authoremail>>>)",
+                "   <<dateformat('dddd, Do MMMM YYYY h:mm:ss a')>>",
+                "@description: "
+            ]
+        }
+    ],
+    "python.dataScience.jupyterServerURI": "local",
+    "python.formatting.provider": "yapf",
+    "python.formatting.yapfArgs": [
+        "--style",
+        "chromium"
+    ],
+    "python.pythonPath": "/Users/chuwen/anaconda3/bin/python",
+    "window.zoomLevel": 0,
+    "workbench.editor.tabSizing": "shrink",
+    "latex-workshop.latex.tools": [
+        {
+            "name": "xetexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-xelatex",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ],
+            "env": {}
+        },
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk 🔃",
+            "tools": [
+                "xetexmk"
+            ]
+        },
+        {
+            "name": "xelatex",
+            "tools": [
+                "xetexmk"
+            ]
+        },
+    ],
+    "restructuredtext.confPath": "",
+}
