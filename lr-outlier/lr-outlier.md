@@ -1,4 +1,12 @@
 ---
+# @license: %MIT License%:~ http://www.opensource.org/licenses/MIT
+# @project: lr-outlier
+# @file: /lr-outlier.md
+# @created: Sunday, 7th June 2020
+# @author: brentian (chuwzhang@gmail.com)
+# @modified: brentian (chuwzhang@gmail.com>)
+#    Monday, 13th July 2020 1:07:01 am
+
 title: "OR-3: Linear Regression with Outlier Selection"
 subtitle: "A QCP formulation"
 tags: [scheduling, OR, applied, milp, complexity]
@@ -24,7 +32,6 @@ $$\hat{y} = \beta^Tx$$
 - $q$ - $0-1$ decision on whether to keep the sample (else classified as one of the **outliers**)
 - $r$ - residue of the estimates:
 $r_i = |y_i - \hat{y_i}|$, or $r \ge \|y-\hat{y}\|$, where $\|.\|$ is the $\mathcal{L}_1$ norm
-
 
 The model minimizes sum of "absolute selected loss":
 

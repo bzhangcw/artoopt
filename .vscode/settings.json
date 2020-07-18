@@ -54,7 +54,7 @@
             "begin": "---",
             "end": "---",
             "language": "markdown",
-            "prefix": ""
+            "prefix": "# "
         },
         {
             "begin": "",

@@ -7,11 +7,12 @@ A collection of optimization models & implementations.
 
 -  `lr-outlier <./lr-outlier/lr-outlier.md>`__, a simple regression
    model with outlier selection.
--  `lro-example <./lro-example/lro-example.md>`__, reproduce
-   computational experiments in paper Wang et al. (2016)
+-  `lro-example <./lro-example/lro-example.md>`__, a 1-D newsvendor
+   problem. Reproduce computational experiments in paper Wang et al.
+   (2016)
 
 Reference
----------
+=========
 
 .. container:: references hanging-indent
    :name: refs
