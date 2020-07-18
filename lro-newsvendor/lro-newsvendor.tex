@@ -1,0 +1,1013 @@
+%%
+% Copyright (c) 2017 - 2020, Pascal Wagler;
+% Copyright (c) 2014 - 2020, John MacFarlane
+%
+% All rights reserved.
+%
+% Redistribution and use in source and binary forms, with or without
+% modification, are permitted provided that the following conditions
+% are met:
+%
+% - Redistributions of source code must retain the above copyright
+% notice, this list of conditions and the following disclaimer.
+%
+% - Redistributions in binary form must reproduce the above copyright
+% notice, this list of conditions and the following disclaimer in the
+% documentation and/or other materials provided with the distribution.
+%
+% - Neither the name of John MacFarlane nor the names of other
+% contributors may be used to endorse or promote products derived
+% from this software without specific prior written permission.
+%
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+% "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+% LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+% FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+% COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+% INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+% BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+% LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+% CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+% LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+% ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+% POSSIBILITY OF SUCH DAMAGE.
+%%
+
+%%
+% This is the Eisvogel pandoc LaTeX template.
+%
+% For usage information and examples visit the official GitHub page:
+% https://github.com/Wandmalfarbe/pandoc-latex-template
+%%
+
+
+% @modified: Chuwen <chuwzhang@gmail.com>
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*,table}{xcolor}
+%
+\documentclass[
+  10pt,
+  a4paper,
+,tablecaptionabove
+]{scrartcl}
+\usepackage{lmodern}
+\usepackage{setspace}
+\setstretch{1.2}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\definecolor{default-linkcolor}{HTML}{A50000}
+\definecolor{default-filecolor}{HTML}{A50000}
+\definecolor{default-citecolor}{HTML}{4077C0}
+\definecolor{default-urlcolor}{HTML}{4077C0}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdfauthor={Chuwen Zhang},
+  hidelinks,
+  breaklinks=true,
+  pdfcreator={LaTeX via pandoc with the Eisvogel template}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=2.5cm,includehead=true,includefoot=true,centering,]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+
+% Workaround/bugfix from jannick0.
+% See https://github.com/jgm/pandoc/issues/4302#issuecomment-360669013)
+% or https://github.com/Wandmalfarbe/pandoc-latex-template/issues/2
+%
+% Redefine the verbatim environment 'Highlighting' to break long lines (with
+% the help of fvextra). Redefinition is necessary because it is unlikely that
+% pandoc includes fvextra in the default template.
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=\small,commandchars=\\\{\}}
+
+% add backlinks to footnote references, cf. https://tex.stackexchange.com/questions/302266/make-footnote-clickable-both-ways
+\usepackage{footnotebackref}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{3}
+
+% Make use of float-package and set default placement for figures to H.
+% The option H means 'PUT IT HERE' (as  opposed to the standard h option which means 'You may put it here if you like').
+\usepackage{float}
+\floatplacement{figure}{H}
+
+
+\usepackage[UTF8, heading=true]{ctex}
+\definecolor{tufeijilk}{RGB}{68,87,151}
+\hypersetup{colorlinks=true,linkcolor=tufeijilk,urlcolor=cyan}
+\usepackage[onlyrm,nomath]{kpfonts-otf}
+\usepackage[lining,mono=false]{libertinus-otf}
+\usepackage{GoMono}
+
+\author{Chuwen Zhang}
+\date{}
+
+
+
+%%
+%% added
+%%
+
+%
+% language specification
+%
+% If no language is specified, use English as the default main document language.
+%
+
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[shorthands=off,main=english]{babel}
+\else
+  % @update, do not use sfdefault,
+  % @chuwen, 20200711
+  %   % % Workaround for bug in Polyglossia that breaks `\familydefault` when `\setmainlanguage` is used.
+  % % See https://github.com/Wandmalfarbe/pandoc-latex-template/issues/8
+  % % See https://github.com/reutenauer/polyglossia/issues/186
+  % % See https://github.com/reutenauer/polyglossia/issues/127
+  % \renewcommand*\familydefault{\sfdefault}
+  %   % load polyglossia as late as possible as it *could* call bidi if RTL lang (e.g. Hebrew or Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[]{english}
+\fi
+
+
+
+%
+% for the background color of the title page
+%
+
+%
+% break urls
+%
+\PassOptionsToPackage{hyphens}{url}
+
+%
+% When using babel or polyglossia with biblatex, loading csquotes is recommended
+% to ensure that quoted texts are typeset according to the rules of your main language.
+%
+\usepackage{csquotes}
+
+%
+% captions
+%
+\definecolor{caption-color}{HTML}{777777}
+\usepackage[font={stretch=1.2}, textfont={color=caption-color}, position=top, skip=4mm, labelfont=bf, singlelinecheck=false, justification=raggedright]{caption}
+\setcapindent{0em}
+
+%
+% blockquote
+%
+\definecolor{blockquote-border}{RGB}{221,221,221}
+\definecolor{blockquote-text}{RGB}{119,119,119}
+\usepackage{mdframed}
+\newmdenv[rightline=false,bottomline=false,topline=false,linewidth=3pt,linecolor=blockquote-border,skipabove=\parskip]{customblockquote}
+\renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em}%
+\item\relax\color{blockquote-text}\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
+
+%
+% heading color
+%
+\definecolor{heading-color}{RGB}{40,40,40}
+\addtokomafont{section}{\color{heading-color}}
+% When using the classes report, scrreprt, book,
+% scrbook or memoir, uncomment the following line.
+%\addtokomafont{chapter}{\color{heading-color}}
+
+%
+% variables for title and author
+%
+\usepackage{titling}
+\title{}
+\author{Chuwen Zhang}
+
+%
+% tables
+%
+
+%
+% remove paragraph indention
+%
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+
+%
+%
+% Listings
+%
+%
+
+
+%
+% header and footer
+%
+\usepackage{fancyhdr}
+
+\fancypagestyle{eisvogel-header-footer}{
+  \fancyhead{}
+  \fancyfoot{}
+  \lhead[]{}
+  \chead[]{}
+  \rhead[]{}
+  \lfoot[\thepage]{Chuwen Zhang}
+  \cfoot[]{}
+  \rfoot[Chuwen Zhang]{\thepage}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+}
+\pagestyle{eisvogel-header-footer}
+
+%%
+%% end added
+%%
+
+\begin{document}
+
+%%
+%% begin titlepage
+%%
+
+%%
+%% end titlepage
+%%
+
+
+
+\hypertarget{newsvendor-problem-1-d}{%
+\section{Newsvendor problem (1-d)}\label{newsvendor-problem-1-d}}
+
+\hypertarget{parameters}{%
+\subsubsection{Parameters}\label{parameters}}
+
+\begin{itemize}
+\tightlist
+\item
+  \(h=b=1\)
+\item
+  \(F\) Underlying distribution
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(F_1 \sim N(50, 50)\)
+  \item
+    \(F_2 \sim \exp(1/50)\)
+  \end{itemize}
+\item
+  \(\mathbf N, |\mathbf N| = N\) is \# of realizations
+\end{itemize}
+
+\hypertarget{type-of-distribution-set}{%
+\paragraph{type of distribution set:}\label{type-of-distribution-set}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{likelihood}, see
+  \texttt{Wang,\ Zizhuo,\ Peter\ W\ Glynn,\ and\ Yinyu\ Ye.\ 2016.\ “Likelihood\ Robust\ Optimization\ for\ Data-Driven\ Problems.”\ Computational\ Management\ Science\ 13\ (2):\ 241–61.\ https://doi.org/10.1007/s10287-015-0240-3.}
+\end{itemize}
+
+\hypertarget{the-models}{%
+\subsubsection{The Models}\label{the-models}}
+
+\hypertarget{newsvendor-primal}{%
+\paragraph{Newsvendor primal}\label{newsvendor-primal}}
+
+\[\begin{aligned} 
+ \textsf{ minimize the worse-case expected cost: }  \\
+ & \min_x \max_p \mathbb E_p(\mathbf h) \\
+ \textsf{ loss function: }  \\
+ &  \mathbf h, \quad h_i = b(d_i - x)^+ + h(x-d_i)^+\\
+ \textbf {s.t. }  & \\
+ & \mathbf p \in \mathcal D_d, \quad \textsf{ where } \mathcal D_d \textsf{ is some valid distribution set }
+\end{aligned}\]
+
+\hypertarget{scarf-dro}{%
+\paragraph{Scarf (DRO)}\label{scarf-dro}}
+
+\[x_{\text {scar } f}^{*}=\hat{\mu}+\frac{\hat{\sigma}}{2}(\sqrt{\frac{b}{h}}-\sqrt{\frac{h}{b}})\]
+
+we discuss the distribution set:
+
+\hypertarget{lro-log-likelihood}{%
+\paragraph{LRO: log-likelihood}\label{lro-log-likelihood}}
+
+where
+
+\[\begin{aligned} 
+ \textsf{likehood: } & \\
+ & \sum_{i=0}^{n} N_{i} \log p_{i} \geq \gamma \\ 
+ & \sum_{i=0}^{n} p_{i}=1, \quad p_{i} \geq 0, \forall i
+ \end{aligned}\]
+
+we have the following:
+
+\[\begin{aligned}
+  & \max_{x, ...} 
+  \theta + \beta \gamma + \beta N + t \\
+  \textbf {s.t.} \\
+  & (\mathbf q, \beta\mathbf N, t) \in \mathcal K_{\exp} \\
+  & \beta \ge 0 \\
+  & \mathbf q \equiv - \mathbf h - \theta \mathbf 1 \ge 0\\
+  & \mathbf q + \theta \mathbf 1 +  b\cdot(d - x) \le 0\\
+  & \mathbf q +  \theta \mathbf 1 + h\cdot(x - d) \le 0\\
+  & x \in D 
+\end{aligned}\]
+
+using estimator:
+
+\[\gamma^{*}=\sum_{i=1}^{n} N_{i} \log \frac{N_{i}}{N}-\frac{1}{2} \chi_{n-1,1-\alpha}^{2}\]
+
+worst-case probability:
+
+\[p^\star = \frac{\beta \mathbf N}{q}\]
+
+\hypertarget{exact-moments}{%
+\paragraph{exact moments}\label{exact-moments}}
+
+where \[\begin{aligned} 
+  \textsf{moments (exact): } & \\
+ & \sum_{i=0}^{n} d_{i} p_{i} = \mu \\ 
+ & \sum_{i=0}^{n} d_{i}^2 p_{i} = \mu^2 +\sigma^2, \forall i, \quad \textsf{can use sample mean/var}
+ \end{aligned}\]
+
+\[\begin{aligned}
+  & p^\star = \frac{\beta\mathbf N}{h - \theta \mathbf 1 - \alpha d - w(d\bullet d)}
+\end{aligned}\]
+
+\[\begin{aligned}
+  & \max_{x, ...} 
+  \theta + \beta \gamma + \alpha \mu + w(\hat \mu^2 + \hat \sigma^2) +\beta N + t \\
+  \textbf {s.t.} \\
+  & (\mathbf q, \beta\mathbf N, t) \in \mathcal K_{\exp} \\
+  & \beta \ge 0 \\
+  & \mathbf q \equiv - \mathbf h - \theta \mathbf 1 - ...\ge 0\\
+  & \mathbf q + \theta \mathbf 1 + ...+  b\cdot(d - x) \le 0\\
+  & \mathbf q +  \theta \mathbf 1 + ... + h\cdot(x - d) \le 0\\
+  & x \in D 
+\end{aligned}\]
+
+\hypertarget{jump-code}{%
+\paragraph{JuMP code}\label{jump-code}}
+
+\begin{quote}
+Remark Julia MathOptInterface uses slight different notation on Cones,
+refer to
+\href{https://jump.dev/MathOptInterface.jl/v0.9.1/apireference/\#MathOptInterface.ExponentialCone}{MathOptInterface
+API}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{using}\NormalTok{ JuMP}
+\KeywordTok{using}\NormalTok{ Distributions}
+\KeywordTok{using}\NormalTok{ StatsBase}
+\KeywordTok{using}\NormalTok{ MosekTools}
+\KeywordTok{using}\NormalTok{ Plots}
+\KeywordTok{using}\NormalTok{ LinearAlgebra}
+\KeywordTok{import}\NormalTok{ MathOptInterface}
+\KeywordTok{const}\NormalTok{ MOI }\OperatorTok{=}\NormalTok{ MathOptInterface}
+
+\NormalTok{plotly()}
+
+\CommentTok{\# truncation @[0{-}200]}
+\NormalTok{int\_trunc }\OperatorTok{=}\NormalTok{ x }\OperatorTok{{-}\textgreater{}}\NormalTok{ round(min(max(x}\OperatorTok{,} \FloatTok{0}\NormalTok{)}\OperatorTok{,} \FloatTok{200}\NormalTok{))}
+
+\CommentTok{\# sample object}
+\KeywordTok{struct}\NormalTok{ Sample}
+\NormalTok{    h}\OperatorTok{::}\DataTypeTok{Float64}
+\NormalTok{    b}\OperatorTok{::}\DataTypeTok{Float64}
+\NormalTok{    N}\OperatorTok{::}\DataTypeTok{Int32}
+\NormalTok{    n}\OperatorTok{::}\DataTypeTok{Int32}
+\NormalTok{    S}
+\NormalTok{    H}
+\NormalTok{    mu}\OperatorTok{::}\DataTypeTok{Float64}
+\NormalTok{    sig}\OperatorTok{::}\DataTypeTok{Float64}
+\KeywordTok{end}
+
+\CommentTok{\# solution object}
+\KeywordTok{struct}\NormalTok{ Sol}
+\NormalTok{    x}\OperatorTok{::}\DataTypeTok{Float64}
+\NormalTok{    model}\OperatorTok{::}\NormalTok{JuMP.Model}
+\NormalTok{    p}\OperatorTok{::}\DataTypeTok{Array}\NormalTok{\{}\DataTypeTok{Float64}\OperatorTok{,}\FloatTok{1}\NormalTok{\}}
+\KeywordTok{end} 
+
+\NormalTok{h }\OperatorTok{=}\NormalTok{ b }\OperatorTok{=} \FloatTok{1}
+\NormalTok{N}\OperatorTok{,}\NormalTok{ n }\OperatorTok{=} \FloatTok{1000}\OperatorTok{,} \FloatTok{200}
+\NormalTok{S1 }\OperatorTok{=}\NormalTok{ int\_trunc.(rand(Normal(}\FloatTok{50}\OperatorTok{,} \FloatTok{50}\NormalTok{)}\OperatorTok{,}\NormalTok{ N))}
+\NormalTok{H1 }\OperatorTok{=}\NormalTok{ fit(Histogram}\OperatorTok{,}\NormalTok{ S1}\OperatorTok{,} \FloatTok{0}\OperatorTok{:}\NormalTok{n)}
+\NormalTok{mu1}\OperatorTok{,}\NormalTok{ sig1 }\OperatorTok{=}\NormalTok{ mean\_and\_std(S1)}
+\NormalTok{S2 }\OperatorTok{=}\NormalTok{ int\_trunc.(rand(Exponential(}\FloatTok{50}\NormalTok{)}\OperatorTok{,}\NormalTok{ N))}
+\NormalTok{H2 }\OperatorTok{=}\NormalTok{ fit(Histogram}\OperatorTok{,}\NormalTok{ S2}\OperatorTok{,} \FloatTok{0}\OperatorTok{:}\NormalTok{n)}
+\NormalTok{mu2}\OperatorTok{,}\NormalTok{ sig2 }\OperatorTok{=}\NormalTok{ mean\_and\_std(S2)}
+\NormalTok{d }\OperatorTok{=} \DataTypeTok{Array}\NormalTok{(}\FloatTok{1}\OperatorTok{:}\FloatTok{200}\NormalTok{)}
+
+\NormalTok{sample1 }\OperatorTok{=}\NormalTok{ Sample(h}\OperatorTok{,}\NormalTok{b}\OperatorTok{,}\NormalTok{N}\OperatorTok{,}\NormalTok{n}\OperatorTok{,}\NormalTok{S1}\OperatorTok{,}\NormalTok{ H1}\OperatorTok{,}\NormalTok{ mu1}\OperatorTok{,}\NormalTok{ sig1)}
+\NormalTok{sample2 }\OperatorTok{=}\NormalTok{ Sample(h}\OperatorTok{,}\NormalTok{b}\OperatorTok{,}\NormalTok{N}\OperatorTok{,}\NormalTok{n}\OperatorTok{,}\NormalTok{S2}\OperatorTok{,}\NormalTok{ H2}\OperatorTok{,}\NormalTok{ mu2}\OperatorTok{,}\NormalTok{ sig2)}
+
+\CommentTok{\# simple lambda function}
+\NormalTok{x\_scarf }\OperatorTok{=}\NormalTok{ s }\OperatorTok{{-}\textgreater{}}\NormalTok{ s.mu}
+\NormalTok{x\_ro\_1 }\OperatorTok{=}\NormalTok{ x\_scarf(sample1)}
+\NormalTok{x\_ro\_2 }\OperatorTok{=}\NormalTok{ x\_scarf(sample2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+48.497
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# solution evaluation}
+\KeywordTok{mutable struct}\NormalTok{ Eval}
+\NormalTok{    sol}\OperatorTok{::}\NormalTok{Sol}
+\NormalTok{    sample}\OperatorTok{::}\NormalTok{Sample}
+\NormalTok{    d}\OperatorTok{::}\DataTypeTok{Array}
+    
+    \CommentTok{\# objectives}
+\NormalTok{    obj\_worse}\OperatorTok{::}\DataTypeTok{Float64}
+\NormalTok{    obj\_true}\OperatorTok{::}\DataTypeTok{Float64}
+    
+    \KeywordTok{function}\NormalTok{ Eval(sol}\OperatorTok{::}\NormalTok{Sol}\OperatorTok{,}\NormalTok{ sample}\OperatorTok{::}\NormalTok{Sample}\OperatorTok{,}\NormalTok{ d}\OperatorTok{::}\DataTypeTok{Array}\NormalTok{)}
+\NormalTok{        x }\OperatorTok{=} \KeywordTok{new}\NormalTok{(sol}\OperatorTok{,}\NormalTok{ sample}\OperatorTok{,}\NormalTok{ d}\OperatorTok{,} \FloatTok{0}\OperatorTok{,} \FloatTok{0}\NormalTok{)}
+\NormalTok{        h }\OperatorTok{=}\NormalTok{ max.(}
+\NormalTok{            (d .}\OperatorTok{{-}}\NormalTok{ sol.x) }\OperatorTok{.*}\NormalTok{ sample.b}\OperatorTok{,} 
+\NormalTok{            (sol.x .}\OperatorTok{{-}}\NormalTok{ d) }\OperatorTok{.*}\NormalTok{ sample.h}
+\NormalTok{        )}
+\NormalTok{        x.obj\_true }\OperatorTok{=}\NormalTok{ sum(sample.H.weights }\OperatorTok{.*}\NormalTok{ h) }\OperatorTok{/}\NormalTok{ sample.N}
+\NormalTok{        x.obj\_worse }\OperatorTok{=}\NormalTok{ sum(sol.p }\OperatorTok{.*}\NormalTok{ h)}
+\NormalTok{        x}
+    \KeywordTok{end}
+\KeywordTok{end}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 1. pure lro model}
+\KeywordTok{function}\NormalTok{ lro\_nv\_model(sample)}
+\NormalTok{    h}\OperatorTok{,}\NormalTok{ b}\OperatorTok{,}\NormalTok{ N}\OperatorTok{,}\NormalTok{ n }\OperatorTok{=}\NormalTok{ sample.h}\OperatorTok{,}\NormalTok{ sample.b}\OperatorTok{,}\NormalTok{ sample.N}\OperatorTok{,}\NormalTok{ sample.n}
+\NormalTok{    H }\OperatorTok{=}\NormalTok{ sample.H.weights}
+\NormalTok{    Hs }\OperatorTok{=}\NormalTok{ [i }\KeywordTok{for}\NormalTok{ i }\KeywordTok{in}\NormalTok{ H }\KeywordTok{if}\NormalTok{ i }\OperatorTok{\textgreater{}} \FloatTok{0}\NormalTok{]}
+\NormalTok{    gamma }\OperatorTok{=}\NormalTok{ sum(Hs }\OperatorTok{.*}\NormalTok{ (log.(Hs}\OperatorTok{./}\NormalTok{N))) }\OperatorTok{{-}} \FloatTok{1}\OperatorTok{/}\FloatTok{2} \OperatorTok{*}\NormalTok{ quantile.(Gamma(n}\OperatorTok{{-}}\FloatTok{1}\NormalTok{)}\OperatorTok{,}\NormalTok{ [}\FloatTok{0.95}\NormalTok{])[}\FloatTok{1}\NormalTok{]}
+\NormalTok{    model }\OperatorTok{=}\NormalTok{ JuMP.Model()}
+    \PreprocessorTok{@variable}\NormalTok{(model}\OperatorTok{,}\NormalTok{ theta)}
+    \PreprocessorTok{@variable}\NormalTok{(model}\OperatorTok{,}\NormalTok{ beta }\OperatorTok{\textgreater{}=} \FloatTok{0}\NormalTok{)}
+    \PreprocessorTok{@variable}\NormalTok{(model}\OperatorTok{,}\NormalTok{ q[}\FloatTok{1}\OperatorTok{:}\NormalTok{n] }\OperatorTok{\textgreater{}=} \FloatTok{0}\NormalTok{)}
+    \PreprocessorTok{@variable}\NormalTok{(model}\OperatorTok{,}\NormalTok{ x }\OperatorTok{\textgreater{}=} \FloatTok{0}\NormalTok{)}
+
+    \PreprocessorTok{@constraint}\NormalTok{(model}\OperatorTok{,}\NormalTok{ q .}\OperatorTok{+}\NormalTok{ b }\OperatorTok{*}\NormalTok{ (d .}\OperatorTok{{-}}\NormalTok{ x) .}\OperatorTok{+}\NormalTok{ theta .}\OperatorTok{\textless{}=} \FloatTok{0}\NormalTok{)}
+    \PreprocessorTok{@constraint}\NormalTok{(model}\OperatorTok{,}\NormalTok{ q .}\OperatorTok{+}\NormalTok{ h }\OperatorTok{*}\NormalTok{ (x .}\OperatorTok{{-}}\NormalTok{ d) .}\OperatorTok{+}\NormalTok{ theta .}\OperatorTok{\textless{}=} \FloatTok{0}\NormalTok{)}
+
+    \PreprocessorTok{@variable}\NormalTok{(model}\OperatorTok{,}\NormalTok{ t[}\FloatTok{1}\OperatorTok{:}\NormalTok{n])}
+    \PreprocessorTok{@constraint}\NormalTok{(model}\OperatorTok{,}\NormalTok{ KL\_DEV[i}\OperatorTok{=}\FloatTok{1}\OperatorTok{:}\NormalTok{n]}\OperatorTok{,}\NormalTok{ [t[i]}\OperatorTok{,}\NormalTok{ H[i] }\OperatorTok{*}\NormalTok{ beta}\OperatorTok{,}\NormalTok{ q[i]] }\KeywordTok{in}\NormalTok{ MOI.ExponentialCone())}
+\NormalTok{    obj\_expr }\OperatorTok{=} 
+    \KeywordTok{begin}
+\NormalTok{        theta }\OperatorTok{+}\NormalTok{ beta }\OperatorTok{*}\NormalTok{ (gamma }\OperatorTok{+}\NormalTok{ N) }\OperatorTok{+}\NormalTok{ dot(ones(n)}\OperatorTok{,}\NormalTok{ t)}
+    \KeywordTok{end}
+    \PreprocessorTok{@objective}\NormalTok{(model}\OperatorTok{,}\NormalTok{ Max}\OperatorTok{,}\NormalTok{ obj\_expr)}
+\NormalTok{    set\_optimizer(model}\OperatorTok{,}\NormalTok{ Mosek.Optimizer)}
+\NormalTok{    optimize}\OperatorTok{!}\NormalTok{(model)}
+\NormalTok{    x\_sol }\OperatorTok{=}\NormalTok{ value.(x)}
+\NormalTok{    p\_sol }\OperatorTok{=}\NormalTok{ value.(beta)}\OperatorTok{.*}\NormalTok{H }\OperatorTok{./}\NormalTok{ value.(q)}
+    \KeywordTok{return}\NormalTok{ Sol(x\_sol}\OperatorTok{,}\NormalTok{ model}\OperatorTok{,}\NormalTok{ p\_sol)}
+\KeywordTok{end}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+lro_nv_model (generic function with 1 method)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lro\_sol1 }\OperatorTok{=}\NormalTok{ lro\_nv\_model(sample1)}
+\CommentTok{\# lro\_sol2 = lro\_nv\_model(sample2)}
+\CommentTok{\# plot sampling distribution and worse{-}case}
+
+
+\NormalTok{lro\_p1 }\OperatorTok{=}\NormalTok{ plot(}\FloatTok{1}\OperatorTok{:}\NormalTok{n}\OperatorTok{,}\NormalTok{ [sample1.H.weights lro\_sol1.p }\OperatorTok{*}\NormalTok{ N]}\OperatorTok{,}
+\NormalTok{    label}\OperatorTok{=}\NormalTok{reshape([}\StringTok{"@true"}\OperatorTok{,} \StringTok{"@worst{-}case"}\NormalTok{]}\OperatorTok{,} \FloatTok{1}\OperatorTok{,} \FloatTok{2}\NormalTok{)}\OperatorTok{,}
+\NormalTok{    title}\OperatorTok{=}\StringTok{"normal"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1003            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer started.
+Presolve started.
+Linear dependency checker started.
+Linear dependency checker terminated.
+Eliminator started.
+Freed constraints in eliminator : 0
+Eliminator terminated.
+Eliminator - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - number                 : 0               
+Presolve terminated. Time: 0.00    
+Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1003            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer  - threads                : 12              
+Optimizer  - solved problem         : the primal      
+Optimizer  - Constraints            : 560
+Optimizer  - Cones                  : 201
+Optimizer  - Scalar variables       : 1003              conic                  : 602             
+Optimizer  - Semi-definite variables: 0                 scalarized             : 0               
+Factor     - setup time             : 0.00              dense det. time        : 0.00            
+Factor     - ML order time          : 0.00              GP order time          : 0.00            
+Factor     - nonzeros before factor : 1.49e+04          after factor           : 1.52e+04        
+Factor     - dense dim.             : 4                 flops                  : 1.58e+06        
+ITE PFEAS    DFEAS    GFEAS    PRSTATUS   POBJ              DOBJ              MU       TIME  
+0   2.0e+02  2.2e+01  1.8e+02  0.00e+00   -1.835571490e+02  0.000000000e+00   1.0e+00  0.00  
+1   1.3e+02  1.4e+01  1.5e+02  -1.00e+00  -3.989615636e+02  -2.159883074e+02  6.6e-01  0.01  
+2   7.2e+01  7.7e+00  1.1e+02  -9.98e-01  -7.824056883e+02  -6.008989258e+02  3.6e-01  0.01  
+3   2.3e+01  2.5e+00  6.2e+01  -9.94e-01  -3.609534082e+03  -3.435781177e+03  1.2e-01  0.01  
+4   1.2e+01  1.3e+00  4.3e+01  -9.29e-01  -6.403360798e+03  -6.245779702e+03  6.1e-02  0.01  
+5   2.8e+00  2.9e-01  1.3e+01  -7.15e-01  -9.520306839e+03  -9.448357156e+03  1.4e-02  0.01  
+6   6.0e-01  6.5e-02  1.8e+00  3.07e-01   -2.608706123e+03  -2.589949885e+03  3.0e-03  0.01  
+7   9.2e-02  9.9e-03  1.1e-01  8.07e-01   -4.567125634e+02  -4.534855206e+02  4.6e-04  0.01  
+8   2.6e-02  2.7e-03  1.5e-02  1.00e+00   -1.768516712e+02  -1.759347962e+02  1.3e-04  0.01  
+9   8.1e-03  8.7e-04  2.5e-03  1.11e+00   -9.201516567e+01  -9.173400712e+01  4.0e-05  0.01  
+10  3.4e-03  3.6e-04  6.9e-04  9.65e-01   -6.915641721e+01  -6.903698977e+01  1.7e-05  0.01  
+11  1.6e-03  1.7e-04  2.1e-04  9.79e-01   -5.895075108e+01  -5.889592367e+01  7.7e-06  0.01  
+12  7.7e-04  8.2e-05  7.4e-05  1.01e+00   -5.475841261e+01  -5.473144813e+01  3.8e-06  0.02  
+13  3.3e-04  3.6e-05  2.1e-05  9.96e-01   -5.259406247e+01  -5.258235916e+01  1.7e-06  0.02  
+14  8.6e-05  9.2e-06  2.8e-06  9.92e-01   -5.134501011e+01  -5.134197255e+01  4.3e-07  0.02  
+15  8.2e-06  8.8e-07  8.2e-08  9.98e-01   -5.094834719e+01  -5.094805872e+01  4.1e-08  0.02  
+16  4.9e-07  5.2e-08  1.2e-09  9.99e-01   -5.090962356e+01  -5.090960643e+01  2.4e-09  0.02  
+17  1.1e-08  1.2e-09  4.2e-12  1.00e+00   -5.090725476e+01  -5.090725436e+01  5.6e-11  0.02  
+Optimizer terminated. Time: 0.04    
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{\{}\DataTypeTok{"layout"}\FunctionTok{:\{}\DataTypeTok{"annotations"}\FunctionTok{:}\OtherTok{[}\FunctionTok{\{}\DataTypeTok{"rotation"}\FunctionTok{:}\DecValTok{0}\FunctionTok{,}\DataTypeTok{"showarrow"}\FunctionTok{:}\KeywordTok{false}\FunctionTok{,}\DataTypeTok{"text"}\FunctionTok{:}\StringTok{"normal"}\FunctionTok{,}\DataTypeTok{"xref"}\FunctionTok{:}\StringTok{"paper"}\FunctionTok{,}\DataTypeTok{"x"}\FunctionTok{:}\FloatTok{0.5222222222222223}\FunctionTok{,}\DataTypeTok{"yanchor"}\FunctionTok{:}\StringTok{"top"}\FunctionTok{,}\DataTypeTok{"yref"}\FunctionTok{:}\StringTok{"paper"}\FunctionTok{,}\DataTypeTok{"font"}\FunctionTok{:\{}\DataTypeTok{"color"}\FunctionTok{:}\StringTok{"rgba(0, 0, 0, 1.000)"}\FunctionTok{,}\DataTypeTok{"size"}\FunctionTok{:}\DecValTok{20}\FunctionTok{,}\DataTypeTok{"family"}\FunctionTok{:}\StringTok{"sans{-}serif"}\FunctionTok{\},}\DataTypeTok{"xanchor"}\FunctionTok{:}\StringTok{"center"}\FunctionTok{,}\DataTypeTok{"y"}\FunctionTok{:}\DecValTok{1}\FunctionTok{\}}\OtherTok{]}\FunctionTok{,}\DataTypeTok{"height"}\FunctionTok{:}\DecValTok{400}\FunctionTok{,}\DataTypeTok{"yaxis"}\FunctionTok{:\{}\DataTypeTok{"zeroline"}\FunctionTok{:}\KeywordTok{false}\FunctionTok{,}\DataTypeTok{"showline"}\FunctionTok{:}\KeywordTok{true}\FunctionTok{,}\DataTypeTok{"ticktext"}\FunctionTok{:}\OtherTok{[}\StringTok{"0"}\OtherTok{,}\StringTok{"50"}\OtherTok{,}\StringTok{"100"}\OtherTok{,}\StringTok{"150"}\OtherTok{]}\FunctionTok{,}\DataTypeTok{"domain"}\FunctionTok{:}\OtherTok{[}\FloatTok{3.762029746281716e{-}2}\OtherTok{,}\FloatTok{0.9415463692038496}\OtherTok{]}\FunctionTok{,}\DataTypeTok{"showgrid"}\FunctionTok{:}\KeywordTok{true}\FunctionTok{,}\DataTypeTok{"titlefont"}\FunctionTok{:\{}\DataTypeTok{"color"}\FunctionTok{:}\StringTok{"rgba(0, 0, 0, 1.000)"}\FunctionTok{,}\DataTypeTok{"size"}\FunctionTok{:}\DecValTok{15}\FunctionTok{,}\DataTypeTok{"family"}\FunctionTok{:}\StringTok{"sans{-}serif"}\FunctionTok{\},}\DataTypeTok{"showticklabels"}\FunctionTok{:}\KeywordTok{true}\FunctionTok{,}\DataTypeTok{"visible"}\FunctionTok{:}\KeywordTok{true}\FunctionTok{,}\DataTypeTok{"tickfont"}\FunctionTok{:\{}\DataTypeTok{"color"}\FunctionTok{:}\StringTok{"rgba(0, 0, 0, 1.000)"}\FunctionTok{,}\DataTypeTok{"size"}\FunctionTok{:}\DecValTok{11}\FunctionTok{,}\DataTypeTok{"family"}\FunctionTok{:}\StringTok{"sans{-}serif"}\FunctionTok{\},}\DataTypeTok{"zerolinecolor"}\FunctionTok{:}\StringTok{"rgba(0, 0, 0, 1.000)"}\FunctionTok{,}\DataTypeTok{"anchor"}\FunctionTok{:}\StringTok{"x1"}\FunctionTok{,}\DataTypeTok{"tickangle"}\FunctionTok{:}\DecValTok{0}\FunctionTok{,}\DataTypeTok{"range"}\FunctionTok{:}\OtherTok{[}\FloatTok{{-}5.38671427660452}\OtherTok{,}\FloatTok{184.94385683008855}\OtherTok{]}\FunctionTok{,}\DataTypeTok{"gridcolor"}\FunctionTok{:}\StringTok{"rgba(0, 0, 0, 0.100)"}\FunctionTok{,}\DataTypeTok{"tickvals"}\FunctionTok{:}\OtherTok{[}\DecValTok{0}\OtherTok{,}\DecValTok{50}\OtherTok{,}\DecValTok{100}\OtherTok{,}\DecValTok{150}\OtherTok{]}\FunctionTok{,}\DataTypeTok{"title"}\FunctionTok{:}\StringTok{""}\FunctionTok{,}\DataTypeTok{"tickcolor"}\FunctionTok{:}\StringTok{"rgb(0, 0, 0)"}\FunctionTok{,}\DataTypeTok{"type"}\FunctionTok{:}\StringTok{"{-}"}\FunctionTok{,}\DataTypeTok{"linecolor"}\FunctionTok{:}\StringTok{"rgba(0, 0, 0, 1.000)"}\FunctionTok{,}\DataTypeTok{"ticks"}\FunctionTok{:}\StringTok{"inside"}\FunctionTok{,}\DataTypeTok{"tickmode"}\FunctionTok{:}\StringTok{"array"}\FunctionTok{,}\DataTypeTok{"gridwidth"}\FunctionTok{:}\FloatTok{0.5}\FunctionTok{,}\DataTypeTok{"mirror"}\FunctionTok{:}\KeywordTok{false}\FunctionTok{\},}\DataTypeTok{"showlegend"}\FunctionTok{:}\KeywordTok{true}\FunctionTok{,}\DataTypeTok{"xaxis"}\FunctionTok{:\{}\DataTypeTok{"zeroline"}\FunctionTok{:}\KeywordTok{false}\FunctionTok{,}\DataTypeTok{"showline"}\FunctionTok{:}\KeywordTok{true}\FunctionTok{,}\DataTypeTok{"ticktext"}\FunctionTok{:}\OtherTok{[}\StringTok{"0"}\OtherTok{,}\StringTok{"50"}\OtherTok{,}\StringTok{"100"}\OtherTok{,}\StringTok{"150"}\OtherTok{,}\StringTok{"200"}\OtherTok{]}\FunctionTok{,}\DataTypeTok{"domain"}\FunctionTok{:}\OtherTok{[}\FloatTok{5.100612423447069e{-}2}\OtherTok{,}\FloatTok{0.9934383202099737}\OtherTok{]}\FunctionTok{,}\DataTypeTok{"showgrid"}\FunctionTok{:}\KeywordTok{true}\FunctionTok{,}\DataTypeTok{"titlefont"}\FunctionTok{:\{}\DataTypeTok{"color"}\FunctionTok{:}\StringTok{"rgba(0, 0, 0, 1.000)"}\FunctionTok{,}\DataTypeTok{"size"}\FunctionTok{:}\DecValTok{15}\FunctionTok{,}\DataTypeTok{"family"}\FunctionTok{:}\StringTok{"sans{-}serif"}\FunctionTok{\},}\DataTypeTok{"showticklabels"}\FunctionTok{:}\KeywordTok{true}\FunctionTok{,}\DataTypeTok{"visible"}\FunctionTok{:}\KeywordTok{true}\FunctionTok{,}\DataTypeTok{"tickfont"}\FunctionTok{:\{}\DataTypeTok{"color"}\FunctionTok{:}\StringTok{"rgba(0, 0, 0, 1.000)"}\FunctionTok{,}\DataTypeTok{"size"}\FunctionTok{:}\DecValTok{11}\FunctionTok{,}\DataTypeTok{"family"}\FunctionTok{:}\StringTok{"sans{-}serif"}\FunctionTok{\},}\DataTypeTok{"zerolinecolor"}\FunctionTok{:}\StringTok{"rgba(0, 0, 0, 1.000)"}\FunctionTok{,}\DataTypeTok{"anchor"}\FunctionTok{:}\StringTok{"y1"}\FunctionTok{,}\DataTypeTok{"tickangle"}\FunctionTok{:}\DecValTok{0}\FunctionTok{,}\DataTypeTok{"range"}\FunctionTok{:}\OtherTok{[}\FloatTok{{-}4.97}\OtherTok{,}\FloatTok{205.97}\OtherTok{]}\FunctionTok{,}\DataTypeTok{"gridcolor"}\FunctionTok{:}\StringTok{"rgba(0, 0, 0, 0.100)"}\FunctionTok{,}\DataTypeTok{"tickvals"}\FunctionTok{:}\OtherTok{[}\DecValTok{0}\OtherTok{,}\DecValTok{50}\OtherTok{,}\DecValTok{100}\OtherTok{,}\DecValTok{150}\OtherTok{,}\DecValTok{200}\OtherTok{]}\FunctionTok{,}\DataTypeTok{"title"}\FunctionTok{:}\StringTok{""}\FunctionTok{,}\DataTypeTok{"tickcolor"}\FunctionTok{:}\StringTok{"rgb(0, 0, 0)"}\FunctionTok{,}\DataTypeTok{"type"}\FunctionTok{:}\StringTok{"{-}"}\FunctionTok{,}\DataTypeTok{"linecolor"}\FunctionTok{:}\StringTok{"rgba(0, 0, 0, 1.000)"}\FunctionTok{,}\DataTypeTok{"ticks"}\FunctionTok{:}\StringTok{"inside"}\FunctionTok{,}\DataTypeTok{"tickmode"}\FunctionTok{:}\StringTok{"array"}\FunctionTok{,}\DataTypeTok{"gridwidth"}\FunctionTok{:}\FloatTok{0.5}\FunctionTok{,}\DataTypeTok{"mirror"}\FunctionTok{:}\KeywordTok{false}\FunctionTok{\},}\DataTypeTok{"width"}\FunctionTok{:}\DecValTok{600}\FunctionTok{,}\DataTypeTok{"margin"}\FunctionTok{:\{}\DataTypeTok{"l"}\FunctionTok{:}\DecValTok{0}\FunctionTok{,}\DataTypeTok{"t"}\FunctionTok{:}\DecValTok{20}\FunctionTok{,}\DataTypeTok{"b"}\FunctionTok{:}\DecValTok{20}\FunctionTok{,}\DataTypeTok{"r"}\FunctionTok{:}\DecValTok{0}\FunctionTok{\},}\DataTypeTok{"paper\_bgcolor"}\FunctionTok{:}\StringTok{"rgba(255, 255, 255, 1.000)"}\FunctionTok{,}\DataTypeTok{"plot\_bgcolor"}\FunctionTok{:}\StringTok{"rgba(255, 255, 255, 1.000)"}\FunctionTok{,}\DataTypeTok{"legend"}\FunctionTok{:\{}\DataTypeTok{"bgcolor"}\FunctionTok{:}\StringTok{"rgba(255, 255, 255, 1.000)"}\FunctionTok{,}\DataTypeTok{"x"}\FunctionTok{:}\DecValTok{1}\FunctionTok{,}\DataTypeTok{"tracegroupgap"}\FunctionTok{:}\DecValTok{0}\FunctionTok{,}\DataTypeTok{"font"}\FunctionTok{:\{}\DataTypeTok{"color"}\FunctionTok{:}\StringTok{"rgba(0, 0, 0, 1.000)"}\FunctionTok{,}\DataTypeTok{"size"}\FunctionTok{:}\DecValTok{11}\FunctionTok{,}\DataTypeTok{"family"}\FunctionTok{:}\StringTok{"sans{-}serif"}\FunctionTok{\},}\DataTypeTok{"bordercolor"}\FunctionTok{:}\StringTok{"rgba(0, 0, 0, 1.000)"}\FunctionTok{,}\DataTypeTok{"y"}\FunctionTok{:}\DecValTok{1}\FunctionTok{\}\},}\DataTypeTok{"data"}\FunctionTok{:}\OtherTok{[}\FunctionTok{\{}\DataTypeTok{"colorbar"}\FunctionTok{:\{}\DataTypeTok{"title"}\FunctionTok{:}\StringTok{""}\FunctionTok{\},}\DataTypeTok{"yaxis"}\FunctionTok{:}\StringTok{"y1"}\FunctionTok{,}\DataTypeTok{"showlegend"}\FunctionTok{:}\KeywordTok{true}\FunctionTok{,}\DataTypeTok{"mode"}\FunctionTok{:}\StringTok{"lines"}\FunctionTok{,}\DataTypeTok{"xaxis"}\FunctionTok{:}\StringTok{"x1"}\FunctionTok{,}\DataTypeTok{"line"}\FunctionTok{:\{}\DataTypeTok{"color"}\FunctionTok{:}\StringTok{"rgba(0, 154, 250, 1.000)"}\FunctionTok{,}\DataTypeTok{"width"}\FunctionTok{:}\DecValTok{1}\FunctionTok{,}\DataTypeTok{"shape"}\FunctionTok{:}\StringTok{"linear"}\FunctionTok{,}\DataTypeTok{"dash"}\FunctionTok{:}\StringTok{"solid"}\FunctionTok{\},}\DataTypeTok{"name"}\FunctionTok{:}\StringTok{"@true"}\FunctionTok{,}\DataTypeTok{"x"}\FunctionTok{:}\OtherTok{[}\DecValTok{1}\OtherTok{,}\DecValTok{2}\OtherTok{,}\DecValTok{3}\OtherTok{,}\DecValTok{4}\OtherTok{,}\DecValTok{5}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{8}\OtherTok{,}\DecValTok{9}\OtherTok{,}\DecValTok{10}\OtherTok{,}\DecValTok{11}\OtherTok{,}\DecValTok{12}\OtherTok{,}\DecValTok{13}\OtherTok{,}\DecValTok{14}\OtherTok{,}\DecValTok{15}\OtherTok{,}\DecValTok{16}\OtherTok{,}\DecValTok{17}\OtherTok{,}\DecValTok{18}\OtherTok{,}\DecValTok{19}\OtherTok{,}\DecValTok{20}\OtherTok{,}\DecValTok{21}\OtherTok{,}\DecValTok{22}\OtherTok{,}\DecValTok{23}\OtherTok{,}\DecValTok{24}\OtherTok{,}\DecValTok{25}\OtherTok{,}\DecValTok{26}\OtherTok{,}\DecValTok{27}\OtherTok{,}\DecValTok{28}\OtherTok{,}\DecValTok{29}\OtherTok{,}\DecValTok{30}\OtherTok{,}\DecValTok{31}\OtherTok{,}\DecValTok{32}\OtherTok{,}\DecValTok{33}\OtherTok{,}\DecValTok{34}\OtherTok{,}\DecValTok{35}\OtherTok{,}\DecValTok{36}\OtherTok{,}\DecValTok{37}\OtherTok{,}\DecValTok{38}\OtherTok{,}\DecValTok{39}\OtherTok{,}\DecValTok{40}\OtherTok{,}\DecValTok{41}\OtherTok{,}\DecValTok{42}\OtherTok{,}\DecValTok{43}\OtherTok{,}\DecValTok{44}\OtherTok{,}\DecValTok{45}\OtherTok{,}\DecValTok{46}\OtherTok{,}\DecValTok{47}\OtherTok{,}\DecValTok{48}\OtherTok{,}\DecValTok{49}\OtherTok{,}\DecValTok{50}\OtherTok{,}\DecValTok{51}\OtherTok{,}\DecValTok{52}\OtherTok{,}\DecValTok{53}\OtherTok{,}\DecValTok{54}\OtherTok{,}\DecValTok{55}\OtherTok{,}\DecValTok{56}\OtherTok{,}\DecValTok{57}\OtherTok{,}\DecValTok{58}\OtherTok{,}\DecValTok{59}\OtherTok{,}\DecValTok{60}\OtherTok{,}\DecValTok{61}\OtherTok{,}\DecValTok{62}\OtherTok{,}\DecValTok{63}\OtherTok{,}\DecValTok{64}\OtherTok{,}\DecValTok{65}\OtherTok{,}\DecValTok{66}\OtherTok{,}\DecValTok{67}\OtherTok{,}\DecValTok{68}\OtherTok{,}\DecValTok{69}\OtherTok{,}\DecValTok{70}\OtherTok{,}\DecValTok{71}\OtherTok{,}\DecValTok{72}\OtherTok{,}\DecValTok{73}\OtherTok{,}\DecValTok{74}\OtherTok{,}\DecValTok{75}\OtherTok{,}\DecValTok{76}\OtherTok{,}\DecValTok{77}\OtherTok{,}\DecValTok{78}\OtherTok{,}\DecValTok{79}\OtherTok{,}\DecValTok{80}\OtherTok{,}\DecValTok{81}\OtherTok{,}\DecValTok{82}\OtherTok{,}\DecValTok{83}\OtherTok{,}\DecValTok{84}\OtherTok{,}\DecValTok{85}\OtherTok{,}\DecValTok{86}\OtherTok{,}\DecValTok{87}\OtherTok{,}\DecValTok{88}\OtherTok{,}\DecValTok{89}\OtherTok{,}\DecValTok{90}\OtherTok{,}\DecValTok{91}\OtherTok{,}\DecValTok{92}\OtherTok{,}\DecValTok{93}\OtherTok{,}\DecValTok{94}\OtherTok{,}\DecValTok{95}\OtherTok{,}\DecValTok{96}\OtherTok{,}\DecValTok{97}\OtherTok{,}\DecValTok{98}\OtherTok{,}\DecValTok{99}\OtherTok{,}\DecValTok{100}\OtherTok{,}\DecValTok{101}\OtherTok{,}\DecValTok{102}\OtherTok{,}\DecValTok{103}\OtherTok{,}\DecValTok{104}\OtherTok{,}\DecValTok{105}\OtherTok{,}\DecValTok{106}\OtherTok{,}\DecValTok{107}\OtherTok{,}\DecValTok{108}\OtherTok{,}\DecValTok{109}\OtherTok{,}\DecValTok{110}\OtherTok{,}\DecValTok{111}\OtherTok{,}\DecValTok{112}\OtherTok{,}\DecValTok{113}\OtherTok{,}\DecValTok{114}\OtherTok{,}\DecValTok{115}\OtherTok{,}\DecValTok{116}\OtherTok{,}\DecValTok{117}\OtherTok{,}\DecValTok{118}\OtherTok{,}\DecValTok{119}\OtherTok{,}\DecValTok{120}\OtherTok{,}\DecValTok{121}\OtherTok{,}\DecValTok{122}\OtherTok{,}\DecValTok{123}\OtherTok{,}\DecValTok{124}\OtherTok{,}\DecValTok{125}\OtherTok{,}\DecValTok{126}\OtherTok{,}\DecValTok{127}\OtherTok{,}\DecValTok{128}\OtherTok{,}\DecValTok{129}\OtherTok{,}\DecValTok{130}\OtherTok{,}\DecValTok{131}\OtherTok{,}\DecValTok{132}\OtherTok{,}\DecValTok{133}\OtherTok{,}\DecValTok{134}\OtherTok{,}\DecValTok{135}\OtherTok{,}\DecValTok{136}\OtherTok{,}\DecValTok{137}\OtherTok{,}\DecValTok{138}\OtherTok{,}\DecValTok{139}\OtherTok{,}\DecValTok{140}\OtherTok{,}\DecValTok{141}\OtherTok{,}\DecValTok{142}\OtherTok{,}\DecValTok{143}\OtherTok{,}\DecValTok{144}\OtherTok{,}\DecValTok{145}\OtherTok{,}\DecValTok{146}\OtherTok{,}\DecValTok{147}\OtherTok{,}\DecValTok{148}\OtherTok{,}\DecValTok{149}\OtherTok{,}\DecValTok{150}\OtherTok{,}\DecValTok{151}\OtherTok{,}\DecValTok{152}\OtherTok{,}\DecValTok{153}\OtherTok{,}\DecValTok{154}\OtherTok{,}\DecValTok{155}\OtherTok{,}\DecValTok{156}\OtherTok{,}\DecValTok{157}\OtherTok{,}\DecValTok{158}\OtherTok{,}\DecValTok{159}\OtherTok{,}\DecValTok{160}\OtherTok{,}\DecValTok{161}\OtherTok{,}\DecValTok{162}\OtherTok{,}\DecValTok{163}\OtherTok{,}\DecValTok{164}\OtherTok{,}\DecValTok{165}\OtherTok{,}\DecValTok{166}\OtherTok{,}\DecValTok{167}\OtherTok{,}\DecValTok{168}\OtherTok{,}\DecValTok{169}\OtherTok{,}\DecValTok{170}\OtherTok{,}\DecValTok{171}\OtherTok{,}\DecValTok{172}\OtherTok{,}\DecValTok{173}\OtherTok{,}\DecValTok{174}\OtherTok{,}\DecValTok{175}\OtherTok{,}\DecValTok{176}\OtherTok{,}\DecValTok{177}\OtherTok{,}\DecValTok{178}\OtherTok{,}\DecValTok{179}\OtherTok{,}\DecValTok{180}\OtherTok{,}\DecValTok{181}\OtherTok{,}\DecValTok{182}\OtherTok{,}\DecValTok{183}\OtherTok{,}\DecValTok{184}\OtherTok{,}\DecValTok{185}\OtherTok{,}\DecValTok{186}\OtherTok{,}\DecValTok{187}\OtherTok{,}\DecValTok{188}\OtherTok{,}\DecValTok{189}\OtherTok{,}\DecValTok{190}\OtherTok{,}\DecValTok{191}\OtherTok{,}\DecValTok{192}\OtherTok{,}\DecValTok{193}\OtherTok{,}\DecValTok{194}\OtherTok{,}\DecValTok{195}\OtherTok{,}\DecValTok{196}\OtherTok{,}\DecValTok{197}\OtherTok{,}\DecValTok{198}\OtherTok{,}\DecValTok{199}\OtherTok{,}\DecValTok{200}\OtherTok{]}\FunctionTok{,}\DataTypeTok{"zmin"}\FunctionTok{:}\KeywordTok{null}\FunctionTok{,}\DataTypeTok{"type"}\FunctionTok{:}\StringTok{"scatter"}\FunctionTok{,}\DataTypeTok{"zmax"}\FunctionTok{:}\KeywordTok{null}\FunctionTok{,}\DataTypeTok{"legendgroup"}\FunctionTok{:}\StringTok{"@true"}\FunctionTok{,}\DataTypeTok{"y"}\FunctionTok{:}\OtherTok{[}\DecValTok{163}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{5}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{5}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{5}\OtherTok{,}\DecValTok{8}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{5}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{9}\OtherTok{,}\DecValTok{11}\OtherTok{,}\DecValTok{10}\OtherTok{,}\DecValTok{5}\OtherTok{,}\DecValTok{9}\OtherTok{,}\DecValTok{5}\OtherTok{,}\DecValTok{8}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{3}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{8}\OtherTok{,}\DecValTok{4}\OtherTok{,}\DecValTok{3}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{5}\OtherTok{,}\DecValTok{3}\OtherTok{,}\DecValTok{4}\OtherTok{,}\DecValTok{8}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{9}\OtherTok{,}\DecValTok{5}\OtherTok{,}\DecValTok{8}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{10}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{9}\OtherTok{,}\DecValTok{3}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{9}\OtherTok{,}\DecValTok{12}\OtherTok{,}\DecValTok{4}\OtherTok{,}\DecValTok{8}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{10}\OtherTok{,}\DecValTok{8}\OtherTok{,}\DecValTok{8}\OtherTok{,}\DecValTok{2}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{14}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{3}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{10}\OtherTok{,}\DecValTok{11}\OtherTok{,}\DecValTok{4}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{11}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{11}\OtherTok{,}\DecValTok{8}\OtherTok{,}\DecValTok{10}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{11}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{5}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{4}\OtherTok{,}\DecValTok{8}\OtherTok{,}\DecValTok{13}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{4}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{11}\OtherTok{,}\DecValTok{5}\OtherTok{,}\DecValTok{11}\OtherTok{,}\DecValTok{8}\OtherTok{,}\DecValTok{4}\OtherTok{,}\DecValTok{5}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{5}\OtherTok{,}\DecValTok{5}\OtherTok{,}\DecValTok{9}\OtherTok{,}\DecValTok{4}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{3}\OtherTok{,}\DecValTok{8}\OtherTok{,}\DecValTok{4}\OtherTok{,}\DecValTok{8}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{2}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{5}\OtherTok{,}\DecValTok{5}\OtherTok{,}\DecValTok{5}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{10}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{3}\OtherTok{,}\DecValTok{3}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{2}\OtherTok{,}\DecValTok{3}\OtherTok{,}\DecValTok{4}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{3}\OtherTok{,}\DecValTok{3}\OtherTok{,}\DecValTok{3}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{3}\OtherTok{,}\DecValTok{3}\OtherTok{,}\DecValTok{5}\OtherTok{,}\DecValTok{4}\OtherTok{,}\DecValTok{3}\OtherTok{,}\DecValTok{2}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{4}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{2}\OtherTok{,}\DecValTok{4}\OtherTok{,}\DecValTok{4}\OtherTok{,}\DecValTok{4}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{4}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{3}\OtherTok{,}\DecValTok{4}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{2}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{2}\OtherTok{,}\DecValTok{2}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{2}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{3}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{2}\OtherTok{,}\DecValTok{2}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{2}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{2}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{1}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{]}\FunctionTok{\}}\OtherTok{,}\FunctionTok{\{}\DataTypeTok{"colorbar"}\FunctionTok{:\{}\DataTypeTok{"title"}\FunctionTok{:}\StringTok{""}\FunctionTok{\},}\DataTypeTok{"yaxis"}\FunctionTok{:}\StringTok{"y1"}\FunctionTok{,}\DataTypeTok{"showlegend"}\FunctionTok{:}\KeywordTok{true}\FunctionTok{,}\DataTypeTok{"mode"}\FunctionTok{:}\StringTok{"lines"}\FunctionTok{,}\DataTypeTok{"xaxis"}\FunctionTok{:}\StringTok{"x1"}\FunctionTok{,}\DataTypeTok{"line"}\FunctionTok{:\{}\DataTypeTok{"color"}\FunctionTok{:}\StringTok{"rgba(227, 111, 71, 1.000)"}\FunctionTok{,}\DataTypeTok{"width"}\FunctionTok{:}\DecValTok{1}\FunctionTok{,}\DataTypeTok{"shape"}\FunctionTok{:}\StringTok{"linear"}\FunctionTok{,}\DataTypeTok{"dash"}\FunctionTok{:}\StringTok{"solid"}\FunctionTok{\},}\DataTypeTok{"name"}\FunctionTok{:}\StringTok{"@worst{-}case"}\FunctionTok{,}\DataTypeTok{"x"}\FunctionTok{:}\OtherTok{[}\DecValTok{1}\OtherTok{,}\DecValTok{2}\OtherTok{,}\DecValTok{3}\OtherTok{,}\DecValTok{4}\OtherTok{,}\DecValTok{5}\OtherTok{,}\DecValTok{6}\OtherTok{,}\DecValTok{7}\OtherTok{,}\DecValTok{8}\OtherTok{,}\DecValTok{9}\OtherTok{,}\DecValTok{10}\OtherTok{,}\DecValTok{11}\OtherTok{,}\DecValTok{12}\OtherTok{,}\DecValTok{13}\OtherTok{,}\DecValTok{14}\OtherTok{,}\DecValTok{15}\OtherTok{,}\DecValTok{16}\OtherTok{,}\DecValTok{17}\OtherTok{,}\DecValTok{18}\OtherTok{,}\DecValTok{19}\OtherTok{,}\DecValTok{20}\OtherTok{,}\DecValTok{21}\OtherTok{,}\DecValTok{22}\OtherTok{,}\DecValTok{23}\OtherTok{,}\DecValTok{24}\OtherTok{,}\DecValTok{25}\OtherTok{,}\DecValTok{26}\OtherTok{,}\DecValTok{27}\OtherTok{,}\DecValTok{28}\OtherTok{,}\DecValTok{29}\OtherTok{,}\DecValTok{30}\OtherTok{,}\DecValTok{31}\OtherTok{,}\DecValTok{32}\OtherTok{,}\DecValTok{33}\OtherTok{,}\DecValTok{34}\OtherTok{,}\DecValTok{35}\OtherTok{,}\DecValTok{36}\OtherTok{,}\DecValTok{37}\OtherTok{,}\DecValTok{38}\OtherTok{,}\DecValTok{39}\OtherTok{,}\DecValTok{40}\OtherTok{,}\DecValTok{41}\OtherTok{,}\DecValTok{42}\OtherTok{,}\DecValTok{43}\OtherTok{,}\DecValTok{44}\OtherTok{,}\DecValTok{45}\OtherTok{,}\DecValTok{46}\OtherTok{,}\DecValTok{47}\OtherTok{,}\DecValTok{48}\OtherTok{,}\DecValTok{49}\OtherTok{,}\DecValTok{50}\OtherTok{,}\DecValTok{51}\OtherTok{,}\DecValTok{52}\OtherTok{,}\DecValTok{53}\OtherTok{,}\DecValTok{54}\OtherTok{,}\DecValTok{55}\OtherTok{,}\DecValTok{56}\OtherTok{,}\DecValTok{57}\OtherTok{,}\DecValTok{58}\OtherTok{,}\DecValTok{59}\OtherTok{,}\DecValTok{60}\OtherTok{,}\DecValTok{61}\OtherTok{,}\DecValTok{62}\OtherTok{,}\DecValTok{63}\OtherTok{,}\DecValTok{64}\OtherTok{,}\DecValTok{65}\OtherTok{,}\DecValTok{66}\OtherTok{,}\DecValTok{67}\OtherTok{,}\DecValTok{68}\OtherTok{,}\DecValTok{69}\OtherTok{,}\DecValTok{70}\OtherTok{,}\DecValTok{71}\OtherTok{,}\DecValTok{72}\OtherTok{,}\DecValTok{73}\OtherTok{,}\DecValTok{74}\OtherTok{,}\DecValTok{75}\OtherTok{,}\DecValTok{76}\OtherTok{,}\DecValTok{77}\OtherTok{,}\DecValTok{78}\OtherTok{,}\DecValTok{79}\OtherTok{,}\DecValTok{80}\OtherTok{,}\DecValTok{81}\OtherTok{,}\DecValTok{82}\OtherTok{,}\DecValTok{83}\OtherTok{,}\DecValTok{84}\OtherTok{,}\DecValTok{85}\OtherTok{,}\DecValTok{86}\OtherTok{,}\DecValTok{87}\OtherTok{,}\DecValTok{88}\OtherTok{,}\DecValTok{89}\OtherTok{,}\DecValTok{90}\OtherTok{,}\DecValTok{91}\OtherTok{,}\DecValTok{92}\OtherTok{,}\DecValTok{93}\OtherTok{,}\DecValTok{94}\OtherTok{,}\DecValTok{95}\OtherTok{,}\DecValTok{96}\OtherTok{,}\DecValTok{97}\OtherTok{,}\DecValTok{98}\OtherTok{,}\DecValTok{99}\OtherTok{,}\DecValTok{100}\OtherTok{,}\DecValTok{101}\OtherTok{,}\DecValTok{102}\OtherTok{,}\DecValTok{103}\OtherTok{,}\DecValTok{104}\OtherTok{,}\DecValTok{105}\OtherTok{,}\DecValTok{106}\OtherTok{,}\DecValTok{107}\OtherTok{,}\DecValTok{108}\OtherTok{,}\DecValTok{109}\OtherTok{,}\DecValTok{110}\OtherTok{,}\DecValTok{111}\OtherTok{,}\DecValTok{112}\OtherTok{,}\DecValTok{113}\OtherTok{,}\DecValTok{114}\OtherTok{,}\DecValTok{115}\OtherTok{,}\DecValTok{116}\OtherTok{,}\DecValTok{117}\OtherTok{,}\DecValTok{118}\OtherTok{,}\DecValTok{119}\OtherTok{,}\DecValTok{120}\OtherTok{,}\DecValTok{121}\OtherTok{,}\DecValTok{122}\OtherTok{,}\DecValTok{123}\OtherTok{,}\DecValTok{124}\OtherTok{,}\DecValTok{125}\OtherTok{,}\DecValTok{126}\OtherTok{,}\DecValTok{127}\OtherTok{,}\DecValTok{128}\OtherTok{,}\DecValTok{129}\OtherTok{,}\DecValTok{130}\OtherTok{,}\DecValTok{131}\OtherTok{,}\DecValTok{132}\OtherTok{,}\DecValTok{133}\OtherTok{,}\DecValTok{134}\OtherTok{,}\DecValTok{135}\OtherTok{,}\DecValTok{136}\OtherTok{,}\DecValTok{137}\OtherTok{,}\DecValTok{138}\OtherTok{,}\DecValTok{139}\OtherTok{,}\DecValTok{140}\OtherTok{,}\DecValTok{141}\OtherTok{,}\DecValTok{142}\OtherTok{,}\DecValTok{143}\OtherTok{,}\DecValTok{144}\OtherTok{,}\DecValTok{145}\OtherTok{,}\DecValTok{146}\OtherTok{,}\DecValTok{147}\OtherTok{,}\DecValTok{148}\OtherTok{,}\DecValTok{149}\OtherTok{,}\DecValTok{150}\OtherTok{,}\DecValTok{151}\OtherTok{,}\DecValTok{152}\OtherTok{,}\DecValTok{153}\OtherTok{,}\DecValTok{154}\OtherTok{,}\DecValTok{155}\OtherTok{,}\DecValTok{156}\OtherTok{,}\DecValTok{157}\OtherTok{,}\DecValTok{158}\OtherTok{,}\DecValTok{159}\OtherTok{,}\DecValTok{160}\OtherTok{,}\DecValTok{161}\OtherTok{,}\DecValTok{162}\OtherTok{,}\DecValTok{163}\OtherTok{,}\DecValTok{164}\OtherTok{,}\DecValTok{165}\OtherTok{,}\DecValTok{166}\OtherTok{,}\DecValTok{167}\OtherTok{,}\DecValTok{168}\OtherTok{,}\DecValTok{169}\OtherTok{,}\DecValTok{170}\OtherTok{,}\DecValTok{171}\OtherTok{,}\DecValTok{172}\OtherTok{,}\DecValTok{173}\OtherTok{,}\DecValTok{174}\OtherTok{,}\DecValTok{175}\OtherTok{,}\DecValTok{176}\OtherTok{,}\DecValTok{177}\OtherTok{,}\DecValTok{178}\OtherTok{,}\DecValTok{179}\OtherTok{,}\DecValTok{180}\OtherTok{,}\DecValTok{181}\OtherTok{,}\DecValTok{182}\OtherTok{,}\DecValTok{183}\OtherTok{,}\DecValTok{184}\OtherTok{,}\DecValTok{185}\OtherTok{,}\DecValTok{186}\OtherTok{,}\DecValTok{187}\OtherTok{,}\DecValTok{188}\OtherTok{,}\DecValTok{189}\OtherTok{,}\DecValTok{190}\OtherTok{,}\DecValTok{191}\OtherTok{,}\DecValTok{192}\OtherTok{,}\DecValTok{193}\OtherTok{,}\DecValTok{194}\OtherTok{,}\DecValTok{195}\OtherTok{,}\DecValTok{196}\OtherTok{,}\DecValTok{197}\OtherTok{,}\DecValTok{198}\OtherTok{,}\DecValTok{199}\OtherTok{,}\DecValTok{200}\OtherTok{]}\FunctionTok{,}\DataTypeTok{"zmin"}\FunctionTok{:}\KeywordTok{null}\FunctionTok{,}\DataTypeTok{"type"}\FunctionTok{:}\StringTok{"scatter"}\FunctionTok{,}\DataTypeTok{"zmax"}\FunctionTok{:}\KeywordTok{null}\FunctionTok{,}\DataTypeTok{"legendgroup"}\FunctionTok{:}\StringTok{"@worst{-}case"}\FunctionTok{,}\DataTypeTok{"y"}\FunctionTok{:}\OtherTok{[}\FloatTok{179.55714255348403}\OtherTok{,}\FloatTok{7.617256615599037}\OtherTok{,}\FloatTok{7.525722622553834}\OtherTok{,}\FloatTok{5.31168790526836}\OtherTok{,}\FloatTok{6.299228255323154}\OtherTok{,}\FloatTok{5.188472316530552}\OtherTok{,}\FloatTok{7.18057639984486}\OtherTok{,}\FloatTok{6.085011997998033}\OtherTok{,}\FloatTok{5.014006923259489}\OtherTok{,}\FloatTok{7.933487381343173}\OtherTok{,}\FloatTok{6.865700258436011}\OtherTok{,}\FloatTok{4.850892835965498}\OtherTok{,}\FloatTok{6.718395752727454}\OtherTok{,}\FloatTok{8.546256424361605}\OtherTok{,}\FloatTok{10.335723833942598}\OtherTok{,}\FloatTok{9.298458083083922}\OtherTok{,}\FloatTok{4.6014069762813765}\OtherTok{,}\FloatTok{8.198203129294868}\OtherTok{,}\FloatTok{4.508653309479396}\OtherTok{,}\FloatTok{7.141862724068933}\OtherTok{,}\FloatTok{5.30347788585389}\OtherTok{,}\FloatTok{2.625797607787855}\OtherTok{,}\FloatTok{6.067500618604502}\OtherTok{,}\FloatTok{6.867749726481849}\OtherTok{,}\FloatTok{3.401239698228746}\OtherTok{,}\FloatTok{2.526914076850712}\OtherTok{,}\FloatTok{5.006690693602237}\OtherTok{,}\FloatTok{4.960425743782115}\OtherTok{,}\FloatTok{5.73417577036943}\OtherTok{,}\FloatTok{4.058678897855441}\OtherTok{,}\FloatTok{2.4133120189114927}\OtherTok{,}\FloatTok{3.18907479083044}\OtherTok{,}\FloatTok{6.321813023687475}\OtherTok{,}\FloatTok{5.48315639419722}\OtherTok{,}\FloatTok{6.988585642917328}\OtherTok{,}\FloatTok{3.8491406469801577}\OtherTok{,}\FloatTok{6.106084234020931}\OtherTok{,}\FloatTok{5.297629112676372}\OtherTok{,}\FloatTok{7.504560233744957}\OtherTok{,}\FloatTok{5.209495252332997}\OtherTok{,}\FloatTok{6.642666833464777}\OtherTok{,}\FloatTok{2.1961060772747567}\OtherTok{,}\FloatTok{4.356565018801954}\OtherTok{,}\FloatTok{4.321493031513662}\OtherTok{,}\FloatTok{5.00147788234246}\OtherTok{,}\FloatTok{6.379523787945341}\OtherTok{,}\FloatTok{8.439169301562073}\OtherTok{,}\FloatTok{2.7911175798753143}\OtherTok{,}\FloatTok{5.539033759345165}\OtherTok{,}\FloatTok{4.122373105124852}\OtherTok{,}\FloatTok{6.8182605870374005}\OtherTok{,}\FloatTok{5.413353995585297}\OtherTok{,}\FloatTok{5.372718628464775}\OtherTok{,}\FloatTok{1.333173023263332}\OtherTok{,}\FloatTok{3.9699385423799494}\OtherTok{,}\FloatTok{9.195185514202164}\OtherTok{,}\FloatTok{3.912075205838232}\OtherTok{,}\FloatTok{4.5310665303541064}\OtherTok{,}\FloatTok{1.927936930139333}\OtherTok{,}\FloatTok{4.4733875840358}\OtherTok{,}\FloatTok{6.436525965947942}\OtherTok{,}\FloatTok{7.131483915480636}\OtherTok{,}\FloatTok{2.6121965608814928}\OtherTok{,}\FloatTok{0.6578518249228695}\OtherTok{,}\FloatTok{7.289961035314904}\OtherTok{,}\FloatTok{4.006017120294695}\OtherTok{,}\FloatTok{4.036137531189118}\OtherTok{,}\FloatTok{7.455641551258222}\OtherTok{,}\FloatTok{5.463676724370931}\OtherTok{,}\FloatTok{6.882130821616819}\OtherTok{,}\FloatTok{4.854836907077882}\OtherTok{,}\FloatTok{7.688630547380946}\OtherTok{,}\FloatTok{4.931291009382499}\OtherTok{,}\FloatTok{3.550306252760962}\OtherTok{,}\FloatTok{4.29445017212763}\OtherTok{,}\FloatTok{2.886055649166049}\OtherTok{,}\FloatTok{5.81903773101223}\OtherTok{,}\FloatTok{9.533442709673649}\OtherTok{,}\FloatTok{4.43641543575403}\OtherTok{,}\FloatTok{2.982257473625129}\OtherTok{,}\FloatTok{4.510977018634206}\OtherTok{,}\FloatTok{8.340208998455415}\OtherTok{,}\FloatTok{3.823406657593347}\OtherTok{,}\FloatTok{8.484005712842535}\OtherTok{,}\FloatTok{6.223840209606514}\OtherTok{,}\FloatTok{3.139218356430616}\OtherTok{,}\FloatTok{3.958748456002338}\OtherTok{,}\FloatTok{4.792913012966574}\OtherTok{,}\FloatTok{5.642107553854771}\OtherTok{,}\FloatTok{4.066714301530057}\OtherTok{,}\FloatTok{4.104023601011587}\OtherTok{,}\FloatTok{7.455641669165559}\OtherTok{,}\FloatTok{3.3445877426463047}\OtherTok{,}\FloatTok{0.8440361354971719}\OtherTok{,}\FloatTok{2.5562209872980572}\OtherTok{,}\FloatTok{6.8821309074465}\OtherTok{,}\FloatTok{3.4744746237804773}\OtherTok{,}\FloatTok{7.017074633838866}\OtherTok{,}\FloatTok{6.200731983638254}\OtherTok{,}\FloatTok{6.262739294441876}\OtherTok{,}\FloatTok{1.8074294592597804}\OtherTok{,}\FloatTok{6.39055028224039}\OtherTok{,}\FloatTok{4.61173777982975}\OtherTok{,}\FloatTok{4.659776707738745}\OtherTok{,}\FloatTok{4.708826982578159}\OtherTok{,}\FloatTok{0.9517854009537752}\OtherTok{,}\FloatTok{9.620182371315845}\OtherTok{,}\FloatTok{5.8348504557250385}\OtherTok{,}\FloatTok{2.949485687439731}\OtherTok{,}\FloatTok{2.9822577457727437}\OtherTok{,}\FloatTok{6.031530778555215}\OtherTok{,}\FloatTok{2.033358098509342}\OtherTok{,}\FloatTok{3.0850942035862996}\OtherTok{,}\FloatTok{4.161289267970764}\OtherTok{,}\FloatTok{6.315367478288135}\OtherTok{,}\FloatTok{3.1952761220121983}\OtherTok{,}\FloatTok{3.233773418279687}\OtherTok{,}\FloatTok{3.27320967310465}\OtherTok{,}\FloatTok{1.1045410479824804}\OtherTok{,}\FloatTok{3.355039901637411}\OtherTok{,}\FloatTok{3.3975087542366267}\OtherTok{,}\FloatTok{5.735109620775166}\OtherTok{,}\FloatTok{4.647673652080794}\OtherTok{,}\FloatTok{3.5316209210013483}\OtherTok{,}\FloatTok{2.3858067722585674}\OtherTok{,}\FloatTok{1.2090246398651403}\OtherTok{,}\FloatTok{4.902340660056316}\OtherTok{,}\FloatTok{1.242608651412787}\OtherTok{,}\FloatTok{1.2601101785310398}\OtherTok{,}\FloatTok{1.2781117492845049}\OtherTok{,}\FloatTok{1.2966351046010771}\OtherTok{,}\FloatTok{2.6314044842028794}\OtherTok{,}\FloatTok{5.341356163914958}\OtherTok{,}\FloatTok{5.422285788164206}\OtherTok{,}\FloatTok{5.5057055546551705}\OtherTok{,}\FloatTok{1.3979347034468044}\OtherTok{,}\DecValTok{0}\OtherTok{,}\FloatTok{5.772110610711956}\OtherTok{,}\DecValTok{0}\OtherTok{,}\FloatTok{1.4911303326074028}\OtherTok{,}\FloatTok{4.549206415167074}\OtherTok{,}\FloatTok{6.17018712197775}\OtherTok{,}\FloatTok{1.5696108603649468}\OtherTok{,}\FloatTok{3.1952767459743763}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\FloatTok{3.441067213039825}\OtherTok{,}\FloatTok{3.508539110757653}\OtherTok{,}\FloatTok{1.789356323579214}\OtherTok{,}\FloatTok{1.8258737889949115}\OtherTok{,}\FloatTok{3.7278227673019266}\OtherTok{,}\FloatTok{1.9035705218716905}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\FloatTok{6.100071845018958}\OtherTok{,}\FloatTok{2.0806467895025977}\OtherTok{,}\FloatTok{2.130185983382043}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\FloatTok{4.588089321799631}\OtherTok{,}\FloatTok{4.708828484473441}\OtherTok{,}\DecValTok{0}\OtherTok{,}\FloatTok{2.4852169125297707}\OtherTok{,}\FloatTok{5.112442250270646}\OtherTok{,}\DecValTok{0}\OtherTok{,}\FloatTok{5.422287153110956}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\FloatTok{3.0850966390603904}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\FloatTok{4.066717908538319}\OtherTok{,}\DecValTok{0}\OtherTok{,}\FloatTok{4.473389527719681}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\FloatTok{6.8821360327960415}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\FloatTok{11.183466191190988}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{,}\DecValTok{0}\OtherTok{]}\FunctionTok{\}}\OtherTok{]}\FunctionTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 2. lro + moments model}
+\KeywordTok{function}\NormalTok{ lro\_moment\_nv\_model(sample}\OperatorTok{::}\NormalTok{Sample)}
+\NormalTok{    h}\OperatorTok{,}\NormalTok{ b}\OperatorTok{,}\NormalTok{ N}\OperatorTok{,}\NormalTok{ n }\OperatorTok{=}\NormalTok{ sample.h}\OperatorTok{,}\NormalTok{ sample.b}\OperatorTok{,}\NormalTok{ sample.N}\OperatorTok{,}\NormalTok{ sample.n}
+\NormalTok{    H}\OperatorTok{,}\NormalTok{ u}\OperatorTok{,}\NormalTok{ sig }\OperatorTok{=}\NormalTok{ sample.H.weights}\OperatorTok{,}\NormalTok{ sample.mu}\OperatorTok{,}\NormalTok{ sample.sig }
+\NormalTok{    Hs }\OperatorTok{=}\NormalTok{ [i }\KeywordTok{for}\NormalTok{ i }\KeywordTok{in}\NormalTok{ H }\KeywordTok{if}\NormalTok{ i }\OperatorTok{\textgreater{}} \FloatTok{0}\NormalTok{]}
+\NormalTok{    gamma }\OperatorTok{=}\NormalTok{ sum(Hs }\OperatorTok{.*}\NormalTok{ (log.(Hs}\OperatorTok{./}\NormalTok{N))) }\OperatorTok{{-}} \FloatTok{1}\OperatorTok{/}\FloatTok{2} \OperatorTok{*}\NormalTok{ quantile.(Gamma(n}\OperatorTok{{-}}\FloatTok{1}\NormalTok{)}\OperatorTok{,}\NormalTok{ [}\FloatTok{0.95}\NormalTok{])[}\FloatTok{1}\NormalTok{]}
+\NormalTok{    model }\OperatorTok{=}\NormalTok{ JuMP.Model()}
+    \PreprocessorTok{@variable}\NormalTok{(model}\OperatorTok{,}\NormalTok{ theta)}
+    \PreprocessorTok{@variable}\NormalTok{(model}\OperatorTok{,}\NormalTok{ beta }\OperatorTok{\textgreater{}=} \FloatTok{0}\NormalTok{)}
+    \PreprocessorTok{@variable}\NormalTok{(model}\OperatorTok{,}\NormalTok{ q[}\FloatTok{1}\OperatorTok{:}\NormalTok{n] }\OperatorTok{\textgreater{}=} \FloatTok{0}\NormalTok{)}
+    \PreprocessorTok{@variable}\NormalTok{(model}\OperatorTok{,}\NormalTok{ x }\OperatorTok{\textgreater{}=} \FloatTok{0}\NormalTok{)}
+    \PreprocessorTok{@variable}\NormalTok{(model}\OperatorTok{,}\NormalTok{ a)}
+    \PreprocessorTok{@variable}\NormalTok{(model}\OperatorTok{,}\NormalTok{ w)}
+
+    \PreprocessorTok{@constraint}\NormalTok{(model}\OperatorTok{,}\NormalTok{ q .}\OperatorTok{+}\NormalTok{ b }\OperatorTok{*}\NormalTok{ (d .}\OperatorTok{{-}}\NormalTok{ x) .}\OperatorTok{+}\NormalTok{ theta .}\OperatorTok{+}\NormalTok{ (d }\OperatorTok{.*}\NormalTok{ a) .}\OperatorTok{+}\NormalTok{ (d }\OperatorTok{.*}\NormalTok{ d }\OperatorTok{.*}\NormalTok{ w) .}\OperatorTok{\textless{}=} \FloatTok{0}\NormalTok{)}
+    \PreprocessorTok{@constraint}\NormalTok{(model}\OperatorTok{,}\NormalTok{ q .}\OperatorTok{+}\NormalTok{ h }\OperatorTok{*}\NormalTok{ (x .}\OperatorTok{{-}}\NormalTok{ d) .}\OperatorTok{+}\NormalTok{ theta .}\OperatorTok{+}\NormalTok{ (d }\OperatorTok{.*}\NormalTok{ a) .}\OperatorTok{+}\NormalTok{ (d }\OperatorTok{.*}\NormalTok{ d }\OperatorTok{.*}\NormalTok{ w) .}\OperatorTok{\textless{}=} \FloatTok{0}\NormalTok{)}
+
+    \PreprocessorTok{@variable}\NormalTok{(model}\OperatorTok{,}\NormalTok{ t[}\FloatTok{1}\OperatorTok{:}\NormalTok{n])}
+    \PreprocessorTok{@constraint}\NormalTok{(model}\OperatorTok{,}\NormalTok{ KL\_DEV[i}\OperatorTok{=}\FloatTok{1}\OperatorTok{:}\NormalTok{n]}\OperatorTok{,}\NormalTok{ [t[i]}\OperatorTok{,}\NormalTok{ H[i] }\OperatorTok{*}\NormalTok{ beta}\OperatorTok{,}\NormalTok{ q[i]] }\KeywordTok{in}\NormalTok{ MOI.ExponentialCone())}
+\NormalTok{    obj\_expr }\OperatorTok{=} 
+    \KeywordTok{begin}
+\NormalTok{        theta }\OperatorTok{+}\NormalTok{ a }\OperatorTok{*}\NormalTok{ u }\OperatorTok{+}\NormalTok{ w }\OperatorTok{*}\NormalTok{ (u}\OperatorTok{\^{}}\FloatTok{2} \OperatorTok{+}\NormalTok{ sig}\OperatorTok{\^{}}\FloatTok{2}\NormalTok{) }\OperatorTok{+}\NormalTok{ beta }\OperatorTok{*}\NormalTok{ (gamma }\OperatorTok{+}\NormalTok{ N) }\OperatorTok{+}\NormalTok{ dot(ones(n)}\OperatorTok{,}\NormalTok{ t)}
+    \KeywordTok{end}
+    \PreprocessorTok{@objective}\NormalTok{(model}\OperatorTok{,}\NormalTok{ Max}\OperatorTok{,}\NormalTok{ obj\_expr)}
+\NormalTok{    set\_optimizer(model}\OperatorTok{,}\NormalTok{ Mosek.Optimizer)}
+\NormalTok{    optimize}\OperatorTok{!}\NormalTok{(model)}
+\NormalTok{    x\_sol }\OperatorTok{=}\NormalTok{ value.(x)}
+\NormalTok{    p\_sol }\OperatorTok{=}\NormalTok{ value.(beta) }\OperatorTok{.*}\NormalTok{ H }\OperatorTok{./}\NormalTok{ value.(q)}
+    \KeywordTok{return}\NormalTok{ Sol(x\_sol}\OperatorTok{,}\NormalTok{ model}\OperatorTok{,}\NormalTok{ p\_sol)}
+\KeywordTok{end}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+lro_moment_nv_model (generic function with 1 method)
+\end{verbatim}
+
+\hypertarget{wrap-up-results}{%
+\paragraph{Wrap up results}\label{wrap-up-results}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{samples }\OperatorTok{=} \DataTypeTok{Dict}\NormalTok{(}
+    \StringTok{"normal"} \OperatorTok{=\textgreater{}}\NormalTok{ sample1}\OperatorTok{,} 
+    \StringTok{"exp"} \OperatorTok{=\textgreater{}}\NormalTok{ sample2}
+\NormalTok{)}
+\NormalTok{models }\OperatorTok{=} \DataTypeTok{Dict}\NormalTok{(}
+    \StringTok{"lro"} \OperatorTok{=\textgreater{}}\NormalTok{ lro\_nv\_model}\OperatorTok{,}
+    \StringTok{"lro\_mm"} \OperatorTok{=\textgreater{}}\NormalTok{ lro\_moment\_nv\_model}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Dict{String,Function} with 2 entries:
+  "lro_mm" => lro_moment_nv_model
+  "lro"    => lro_nv_model
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OperatorTok{=}\NormalTok{ []}
+\NormalTok{results }\OperatorTok{=} \DataTypeTok{Dict}\NormalTok{()}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ [(v }\OperatorTok{=}\NormalTok{ samples[k]}\OperatorTok{;} 
+\NormalTok{        eval }\OperatorTok{=}\NormalTok{ Eval(models[m](v)}\OperatorTok{,}\NormalTok{ v}\OperatorTok{,}\NormalTok{ d)}\OperatorTok{;} 
+\NormalTok{        results[k}\OperatorTok{,}\NormalTok{ m] }\OperatorTok{=}\NormalTok{ eval}\OperatorTok{;}
+\NormalTok{        a }\OperatorTok{=}\NormalTok{ [eval.sol.x eval.obj\_true eval.obj\_worse]) }
+    \KeywordTok{for}\NormalTok{ k }\KeywordTok{in}\NormalTok{ [}\StringTok{"normal"}\OperatorTok{,} \StringTok{"exp"}\NormalTok{] }\KeywordTok{for}\NormalTok{ m }\KeywordTok{in}\NormalTok{ [}\StringTok{"lro"}\OperatorTok{,} \StringTok{"lro\_mm"}\NormalTok{]]}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ vcat(data}\OperatorTok{...}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1003            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer started.
+Presolve started.
+Linear dependency checker started.
+Linear dependency checker terminated.
+Eliminator started.
+Freed constraints in eliminator : 0
+Eliminator terminated.
+Eliminator - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - number                 : 0               
+Presolve terminated. Time: 0.00    
+Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1003            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer  - threads                : 12              
+Optimizer  - solved problem         : the primal      
+Optimizer  - Constraints            : 560
+Optimizer  - Cones                  : 201
+Optimizer  - Scalar variables       : 1003              conic                  : 602             
+Optimizer  - Semi-definite variables: 0                 scalarized             : 0               
+Factor     - setup time             : 0.00              dense det. time        : 0.00            
+Factor     - ML order time          : 0.00              GP order time          : 0.00            
+Factor     - nonzeros before factor : 1.49e+04          after factor           : 1.52e+04        
+Factor     - dense dim.             : 4                 flops                  : 1.58e+06        
+ITE PFEAS    DFEAS    GFEAS    PRSTATUS   POBJ              DOBJ              MU       TIME  
+0   2.0e+02  2.2e+01  1.8e+02  0.00e+00   -1.835571490e+02  0.000000000e+00   1.0e+00  0.00  
+1   1.3e+02  1.4e+01  1.5e+02  -1.00e+00  -3.989615636e+02  -2.159883074e+02  6.6e-01  0.00  
+2   7.2e+01  7.7e+00  1.1e+02  -9.98e-01  -7.824056883e+02  -6.008989258e+02  3.6e-01  0.01  
+3   2.3e+01  2.5e+00  6.2e+01  -9.94e-01  -3.609534082e+03  -3.435781177e+03  1.2e-01  0.01  
+4   1.2e+01  1.3e+00  4.3e+01  -9.29e-01  -6.403360798e+03  -6.245779702e+03  6.1e-02  0.01  
+5   2.8e+00  2.9e-01  1.3e+01  -7.15e-01  -9.520306839e+03  -9.448357156e+03  1.4e-02  0.01  
+6   6.0e-01  6.5e-02  1.8e+00  3.07e-01   -2.608706123e+03  -2.589949885e+03  3.0e-03  0.01  
+7   9.2e-02  9.9e-03  1.1e-01  8.07e-01   -4.567125634e+02  -4.534855206e+02  4.6e-04  0.01  
+8   2.6e-02  2.7e-03  1.5e-02  1.00e+00   -1.768516712e+02  -1.759347962e+02  1.3e-04  0.01  
+9   8.1e-03  8.7e-04  2.5e-03  1.11e+00   -9.201516567e+01  -9.173400712e+01  4.0e-05  0.01  
+10  3.4e-03  3.6e-04  6.9e-04  9.65e-01   -6.915641721e+01  -6.903698977e+01  1.7e-05  0.01  
+11  1.6e-03  1.7e-04  2.1e-04  9.79e-01   -5.895075108e+01  -5.889592367e+01  7.7e-06  0.01  
+12  7.7e-04  8.2e-05  7.4e-05  1.01e+00   -5.475841261e+01  -5.473144813e+01  3.8e-06  0.01  
+13  3.3e-04  3.6e-05  2.1e-05  9.96e-01   -5.259406247e+01  -5.258235916e+01  1.7e-06  0.01  
+14  8.6e-05  9.2e-06  2.8e-06  9.92e-01   -5.134501011e+01  -5.134197255e+01  4.3e-07  0.01  
+15  8.2e-06  8.8e-07  8.2e-08  9.98e-01   -5.094834719e+01  -5.094805872e+01  4.1e-08  0.01  
+16  4.9e-07  5.2e-08  1.2e-09  9.99e-01   -5.090962356e+01  -5.090960643e+01  2.4e-09  0.01  
+17  1.1e-08  1.2e-09  4.2e-12  1.00e+00   -5.090725476e+01  -5.090725436e+01  5.6e-11  0.02  
+Optimizer terminated. Time: 0.02    
+
+Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1005            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer started.
+Presolve started.
+Linear dependency checker started.
+Linear dependency checker terminated.
+Eliminator started.
+Freed constraints in eliminator : 0
+Eliminator terminated.
+Eliminator - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - number                 : 0               
+Presolve terminated. Time: 0.00    
+Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1005            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer  - threads                : 12              
+Optimizer  - solved problem         : the primal      
+Optimizer  - Constraints            : 560
+Optimizer  - Cones                  : 201
+Optimizer  - Scalar variables       : 1005              conic                  : 604             
+Optimizer  - Semi-definite variables: 0                 scalarized             : 0               
+Factor     - setup time             : 0.00              dense det. time        : 0.00            
+Factor     - ML order time          : 0.00              GP order time          : 0.00            
+Factor     - nonzeros before factor : 1.57e+04          after factor           : 1.64e+04        
+Factor     - dense dim.             : 6                 flops                  : 1.64e+06        
+ITE PFEAS    DFEAS    GFEAS    PRSTATUS   POBJ              DOBJ              MU       TIME  
+0   2.3e+00  4.9e+03  1.8e+02  0.00e+00   -1.835571490e+02  0.000000000e+00   1.0e+00  0.00  
+1   1.4e+00  3.0e+03  1.4e+02  -8.85e-01  -1.759083628e+02  1.253673382e-01   6.0e-01  0.00  
+2   5.2e-01  1.1e+03  7.3e+01  -8.12e-01  -1.493340599e+02  8.721907858e-02   2.3e-01  0.01  
+3   3.2e-01  6.9e+02  4.7e+01  -4.62e-01  -1.241687344e+02  4.918787713e-02   1.4e-01  0.01  
+4   9.8e-02  2.1e+02  1.3e+01  -1.80e-01  -6.145318972e+01  -4.546293609e-01  4.3e-02  0.01  
+5   4.9e-02  1.1e+02  5.0e+00  4.30e-01   -3.717216780e+01  -1.689709475e+00  2.1e-02  0.01  
+6   3.6e-02  7.9e+01  3.3e+00  6.52e-01   -3.036190665e+01  -2.821187711e+00  1.6e-02  0.01  
+7   1.3e-02  2.7e+01  7.3e-01  7.18e-01   -1.723287775e+01  -6.800197966e+00  5.5e-03  0.01  
+8   4.9e-03  1.1e+01  1.9e-01  8.55e-01   -1.694069638e+01  -1.262668888e+01  2.2e-03  0.01  
+9   1.6e-03  3.5e+00  3.8e-02  9.17e-01   -2.487301088e+01  -2.343371479e+01  7.0e-04  0.01  
+10  5.9e-04  1.3e+00  8.7e-03  9.65e-01   -3.437238333e+01  -3.383444163e+01  2.6e-04  0.01  
+11  3.3e-04  7.1e-01  3.7e-03  9.13e-01   -3.679711609e+01  -3.648876839e+01  1.4e-04  0.01  
+12  1.1e-04  2.4e-01  7.7e-04  9.28e-01   -3.906203099e+01  -3.895386696e+01  4.9e-05  0.01  
+13  4.2e-05  9.0e-02  1.8e-04  9.42e-01   -3.992301273e+01  -3.988173061e+01  1.8e-05  0.01  
+14  1.7e-05  3.6e-02  4.8e-05  9.38e-01   -4.021501176e+01  -4.019783292e+01  7.4e-06  0.01  
+15  8.5e-06  1.8e-02  1.8e-05  9.62e-01   -4.031308332e+01  -4.030427480e+01  3.7e-06  0.01  
+16  5.2e-06  1.1e-02  8.5e-06  9.86e-01   -4.035941179e+01  -4.035402228e+01  2.3e-06  0.02  
+17  4.4e-07  9.4e-04  2.1e-07  9.95e-01   -4.043109274e+01  -4.043064209e+01  1.9e-07  0.02  
+18  2.1e-08  5.4e-05  2.9e-09  9.95e-01   -4.043903227e+01  -4.043900654e+01  1.1e-08  0.02  
+19  7.1e-10  1.8e-06  1.8e-11  9.96e-01   -4.043952255e+01  -4.043952169e+01  3.6e-10  0.02  
+20  5.6e-11  1.8e-08  1.7e-14  1.00e+00   -4.043954026e+01  -4.043954025e+01  3.6e-12  0.02  
+Optimizer terminated. Time: 0.02    
+
+Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1003            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer started.
+Presolve started.
+Linear dependency checker started.
+Linear dependency checker terminated.
+Eliminator started.
+Freed constraints in eliminator : 0
+Eliminator terminated.
+Eliminator - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - number                 : 0               
+Presolve terminated. Time: 0.00    
+Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1003            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer  - threads                : 12              
+Optimizer  - solved problem         : the primal      
+Optimizer  - Constraints            : 557
+Optimizer  - Cones                  : 201
+Optimizer  - Scalar variables       : 1003              conic                  : 602             
+Optimizer  - Semi-definite variables: 0                 scalarized             : 0               
+Factor     - setup time             : 0.00              dense det. time        : 0.00            
+Factor     - ML order time          : 0.00              GP order time          : 0.00            
+Factor     - nonzeros before factor : 1.44e+04          after factor           : 1.47e+04        
+Factor     - dense dim.             : 4                 flops                  : 1.49e+06        
+ITE PFEAS    DFEAS    GFEAS    PRSTATUS   POBJ              DOBJ              MU       TIME  
+0   2.0e+02  2.7e+02  3.8e+02  0.00e+00   -3.813651763e+02  0.000000000e+00   1.0e+00  0.00  
+1   6.1e+01  8.1e+01  2.1e+02  -9.99e-01  -1.575752734e+03  -1.197478623e+03  3.0e-01  0.00  
+2   1.0e+01  1.3e+01  8.2e+01  -9.87e-01  -1.049503045e+04  -1.015257754e+04  4.9e-02  0.01  
+3   2.7e+00  3.6e+00  2.4e+01  -6.06e-01  -6.269265671e+03  -6.102343978e+03  1.3e-02  0.01  
+4   8.1e-01  1.1e+00  4.9e+00  2.50e-01   -2.625761751e+03  -2.561054962e+03  4.0e-03  0.01  
+5   1.5e-01  2.0e-01  4.2e-01  7.12e-01   -6.382790202e+02  -6.247756165e+02  7.5e-04  0.01  
+6   3.2e-02  4.3e-02  4.0e-02  9.79e-01   -1.945166950e+02  -1.916269352e+02  1.6e-04  0.01  
+7   1.0e-02  1.3e-02  7.2e-03  1.06e+00   -1.048601225e+02  -1.039728871e+02  5.0e-05  0.01  
+8   4.0e-03  5.3e-03  2.0e-03  9.06e-01   -7.478417327e+01  -7.440746021e+01  2.0e-05  0.01  
+9   1.9e-03  2.5e-03  6.8e-04  8.90e-01   -6.182279303e+01  -6.163627527e+01  9.5e-06  0.01  
+10  1.0e-03  1.3e-03  2.6e-04  9.74e-01   -5.611241508e+01  -5.601460415e+01  5.0e-06  0.01  
+11  4.8e-04  6.4e-04  8.6e-05  9.90e-01   -5.291059352e+01  -5.286350318e+01  2.4e-06  0.01  
+12  1.2e-04  1.7e-04  1.1e-05  9.95e-01   -5.071712829e+01  -5.070490733e+01  6.2e-07  0.01  
+13  3.5e-05  4.6e-05  1.7e-06  9.98e-01   -5.016046431e+01  -5.015705207e+01  1.7e-07  0.01  
+14  2.4e-06  3.2e-06  3.0e-08  1.00e+00   -4.995942500e+01  -4.995919178e+01  1.2e-08  0.01  
+15  1.8e-07  1.1e-07  1.9e-10  1.00e+00   -4.994518262e+01  -4.994517471e+01  4.0e-10  0.01  
+16  9.7e-08  2.7e-09  7.5e-13  1.00e+00   -4.994467663e+01  -4.994467643e+01  1.0e-11  0.02  
+17  6.4e-09  1.8e-10  1.3e-14  1.00e+00   -4.994466488e+01  -4.994466487e+01  6.7e-13  0.02  
+Optimizer terminated. Time: 0.02    
+
+Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1005            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer started.
+Presolve started.
+Linear dependency checker started.
+Linear dependency checker terminated.
+Eliminator started.
+Freed constraints in eliminator : 0
+Eliminator terminated.
+Eliminator - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - number                 : 0               
+Presolve terminated. Time: 0.00    
+Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1005            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer  - threads                : 12              
+Optimizer  - solved problem         : the primal      
+Optimizer  - Constraints            : 557
+Optimizer  - Cones                  : 201
+Optimizer  - Scalar variables       : 1005              conic                  : 604             
+Optimizer  - Semi-definite variables: 0                 scalarized             : 0               
+Factor     - setup time             : 0.00              dense det. time        : 0.00            
+Factor     - ML order time          : 0.00              GP order time          : 0.00            
+Factor     - nonzeros before factor : 1.52e+04          after factor           : 1.59e+04        
+Factor     - dense dim.             : 6                 flops                  : 1.56e+06        
+ITE PFEAS    DFEAS    GFEAS    PRSTATUS   POBJ              DOBJ              MU       TIME  
+0   2.3e+00  4.4e+03  3.8e+02  0.00e+00   -3.813651763e+02  0.000000000e+00   1.0e+00  0.00  
+1   1.3e+00  2.5e+03  2.7e+02  -8.67e-01  -3.612671151e+02  9.145486696e-02   5.6e-01  0.00  
+2   5.7e-01  1.1e+03  1.6e+02  -7.72e-01  -3.117447162e+02  9.139371151e-02   2.5e-01  0.01  
+3   3.5e-01  6.8e+02  1.0e+02  -4.54e-01  -2.612883875e+02  5.589665016e-02   1.5e-01  0.01  
+4   6.0e-02  1.2e+02  1.5e+01  -1.85e-01  -8.345479093e+01  -5.192001803e-01  2.6e-02  0.01  
+5   8.1e-03  1.6e+01  8.9e-01  6.33e-01   -1.739752790e+01  -4.162087409e+00  3.5e-03  0.01  
+6   3.5e-03  6.7e+00  2.5e-01  9.53e-01   -2.149219410e+01  -1.576260441e+01  1.5e-03  0.01  
+7   1.1e-03  2.2e+00  4.7e-02  9.50e-01   -3.092014255e+01  -2.897653521e+01  5.0e-04  0.01  
+8   5.7e-04  1.1e+00  1.8e-02  8.81e-01   -3.431858027e+01  -3.328082373e+01  2.5e-04  0.01  
+9   2.5e-04  4.8e-01  5.5e-03  8.11e-01   -3.619043680e+01  -3.569264375e+01  1.1e-04  0.01  
+10  1.2e-04  2.3e-01  1.9e-03  8.24e-01   -3.701229705e+01  -3.675630766e+01  5.2e-05  0.01  
+11  5.8e-05  1.1e-01  6.5e-04  8.95e-01   -3.750361361e+01  -3.737613872e+01  2.5e-05  0.01  
+12  2.6e-05  5.0e-02  2.0e-04  9.41e-01   -3.779593643e+01  -3.773809059e+01  1.1e-05  0.02  
+13  8.9e-06  1.7e-02  4.0e-05  9.84e-01   -3.798025224e+01  -3.796032417e+01  3.9e-06  0.02  
+14  4.7e-07  9.2e-04  5.0e-07  9.97e-01   -3.807826649e+01  -3.807719987e+01  2.1e-07  0.02  
+15  1.4e-08  4.0e-05  4.5e-09  9.96e-01   -3.808482943e+01  -3.808478334e+01  8.9e-09  0.02  
+16  5.0e-09  9.3e-07  1.6e-11  1.00e+00   -3.808514392e+01  -3.808514285e+01  2.1e-10  0.02  
+17  1.1e-09  8.0e-08  4.1e-13  1.00e+00   -3.808515040e+01  -3.808515030e+01  1.8e-11  0.02  
+Optimizer terminated. Time: 0.02    
+\end{verbatim}
+
+\begin{verbatim}
+4×3 Array{Float64,2}:
+ 59.8911  36.9653  42.6789
+ 53.9407  36.5232  40.4394
+ 47.0     31.793   49.9453
+ 32.0     30.645   38.0847
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{objective\_value(results[}\StringTok{"exp"}\OperatorTok{,} \StringTok{"lro\_mm"}\NormalTok{].sol.model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+-38.08515039579801
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{using}\NormalTok{ DataFrames}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+┌ Info: Precompiling DataFrames [a93c6f00-e57d-5684-b7b6-d8193f3e46c0]
+└ @ Base loading.jl:1260
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+4×3 Array{Float64,2}:
+ 59.8911  36.9653  42.6789
+ 53.9407  36.5232  40.4394
+ 47.0     31.793   49.9453
+ 32.0     30.645   38.0847
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OperatorTok{=}\NormalTok{ DataFrame(}
+\NormalTok{    Index}\OperatorTok{=}\NormalTok{[}\StringTok{"normal, LRO"}\OperatorTok{,} \StringTok{"normal, LRO\_mm"}\OperatorTok{,} \StringTok{"Exp, LRO"}\OperatorTok{,} \StringTok{"Exp, LRO\_mm"}\NormalTok{]}\OperatorTok{,} 
+\NormalTok{    Sol}\OperatorTok{=}\NormalTok{data[}\OperatorTok{:,} \FloatTok{1}\NormalTok{]}\OperatorTok{,}
+\NormalTok{    True\_obj}\OperatorTok{=}\NormalTok{data[}\OperatorTok{:,} \FloatTok{2}\NormalTok{]}\OperatorTok{,}
+\NormalTok{    Worst\_obj}\OperatorTok{=}\NormalTok{data[}\OperatorTok{:,} \FloatTok{3}\NormalTok{]}\OperatorTok{,}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}

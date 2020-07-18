@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Chuwen Zhang" />
+  <title>meta</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="assets/pandoc.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.0/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true });</script>
+  
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#newsvendor-problem-1-d">Newsvendor problem (1-d)</a></li>
+<li><a href="#parameters">Parameters</a></li>
+<li><a href="#the-models">The Models</a></li>
+</ul>
+</nav>
+<section id="newsvendor-problem-1-d" class="cell markdown">
+<h1>Newsvendor problem (1-d)</h1>
+</section>
+<section id="parameters" class="cell markdown">
+<h3>Parameters</h3>
+<ul>
+<li><span class="math inline">h=b=1</span></li>
+<li><span class="math inline">F</span> Underlying distribution
+<ul>
+<li><span class="math inline">F_1 \sim N(50, 50)</span></li>
+<li><span class="math inline">F_2 \sim \exp(1/50)</span></li>
+</ul></li>
+<li><span class="math inline">\mathbf N, |\mathbf N| = N</span> is # of realizations</li>
+</ul>
+</section>
+<section id="type-of-distribution-set" class="cell markdown">
+<h4>type of distribution set:</h4>
+<ul>
+<li><code>likelihood</code>, see <code>Wang, Zizhuo, Peter W Glynn, and Yinyu Ye. 2016. “Likelihood Robust Optimization for Data-Driven Problems.” Computational Management Science 13 (2): 241–61. https://doi.org/10.1007/s10287-015-0240-3.</code></li>
+</ul>
+</section>
+<section id="the-models" class="cell markdown">
+<h3>The Models</h3>
+<h4 id="newsvendor-primal">Newsvendor primal</h4>
+<p><span class="math display">\begin{aligned} 
+ \textsf{ minimize the worse-case expected cost: }  \\
+ &amp; \min_x \max_p \mathbb E_p(\mathbf h) \\
+ \textsf{ loss function: }  \\
+ &amp;  \mathbf h, \quad h_i = b(d_i - x)^+ + h(x-d_i)^+\\
+ \textbf {s.t. }  &amp; \\
+ &amp; \mathbf p \in \mathcal D_d, \quad \textsf{ where } \mathcal D_d \textsf{ is some valid distribution set }
+\end{aligned}</span></p>
+<h4 id="scarf-dro">Scarf (DRO)</h4>
+<p><span class="math display">x_{\text {scar } f}^{*}=\hat{\mu}+\frac{\hat{\sigma}}{2}(\sqrt{\frac{b}{h}}-\sqrt{\frac{h}{b}})</span></p>
+<p>we discuss the distribution set:</p>
+</section>
+<div class="cell markdown">
+<h4 id="lro-log-likelihood">LRO: log-likelihood</h4>
+<p>where</p>
+<p><span class="math display">\begin{aligned} 
+ \textsf{likehood: } &amp; \\
+ &amp; \sum_{i=0}^{n} N_{i} \log p_{i} \geq \gamma \\ 
+ &amp; \sum_{i=0}^{n} p_{i}=1, \quad p_{i} \geq 0, \forall i
+ \end{aligned}</span></p>
+<p>we have the following:</p>
+<p><span class="math display">\begin{aligned}
+  &amp; \max_{x, ...} 
+  \theta + \beta \gamma + \beta N + t \\
+  \textbf {s.t.} \\
+  &amp; (\mathbf q, \beta\mathbf N, t) \in \mathcal K_{\exp} \\
+  &amp; \beta \ge 0 \\
+  &amp; \mathbf q \equiv - \mathbf h - \theta \mathbf 1 \ge 0\\
+  &amp; \mathbf q + \theta \mathbf 1 +  b\cdot(d - x) \le 0\\
+  &amp; \mathbf q +  \theta \mathbf 1 + h\cdot(x - d) \le 0\\
+  &amp; x \in D 
+\end{aligned}</span></p>
+<p>using estimator:</p>
+<p><span class="math display">\gamma^{*}=\sum_{i=1}^{n} N_{i} \log \frac{N_{i}}{N}-\frac{1}{2} \chi_{n-1,1-\alpha}^{2}</span></p>
+<p>worst-case probability:</p>
+<p><span class="math display">p^\star = \frac{\beta \mathbf N}{q}</span></p>
+<h4 id="exact-moments">exact moments</h4>
+<p>where <span class="math display">\begin{aligned} 
+  \textsf{moments (exact): } &amp; \\
+ &amp; \sum_{i=0}^{n} d_{i} p_{i} = \mu \\ 
+ &amp; \sum_{i=0}^{n} d_{i}^2 p_{i} = \mu^2 +\sigma^2, \forall i, \quad \textsf{can use sample mean/var}
+ \end{aligned}</span></p>
+<p><span class="math display">\begin{aligned}
+  &amp; p^\star = \frac{\beta\mathbf N}{h - \theta \mathbf 1 - \alpha d - w(d\bullet d)}
+\end{aligned}</span></p>
+<p><span class="math display">\begin{aligned}
+  &amp; \max_{x, ...} 
+  \theta + \beta \gamma + \alpha \mu + w(\hat \mu^2 + \hat \sigma^2) +\beta N + t \\
+  \textbf {s.t.} \\
+  &amp; (\mathbf q, \beta\mathbf N, t) \in \mathcal K_{\exp} \\
+  &amp; \beta \ge 0 \\
+  &amp; \mathbf q \equiv - \mathbf h - \theta \mathbf 1 - ...\ge 0\\
+  &amp; \mathbf q + \theta \mathbf 1 + ...+  b\cdot(d - x) \le 0\\
+  &amp; \mathbf q +  \theta \mathbf 1 + ... + h\cdot(x - d) \le 0\\
+  &amp; x \in D 
+\end{aligned}</span></p>
+</div>
+<section id="jump-code" class="cell markdown">
+<h4>JuMP code</h4>
+<blockquote>
+<p>Remark Julia MathOptInterface uses slight different notation on Cones, refer to <a href="https://jump.dev/MathOptInterface.jl/v0.9.1/apireference/#MathOptInterface.ExponentialCone">MathOptInterface API</a></p>
+</blockquote>
+</section>
+<div class="cell code" data-execution_count="1">
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">using</span> JuMP</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> Distributions</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">using</span> StatsBase</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">using</span> MosekTools</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">using</span> Plots</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">using</span> LinearAlgebra</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">import</span> MathOptInterface</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">const</span> MOI <span class="op">=</span> MathOptInterface</span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a>plotly()</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co"># truncation @[0-200]</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>int_trunc <span class="op">=</span> x <span class="op">-&gt;</span> round(min(max(x<span class="op">,</span> <span class="fl">0</span>)<span class="op">,</span> <span class="fl">200</span>))</span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="co"># sample object</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="kw">struct</span> Sample</span>
+<span id="cb1-17"><a href="#cb1-17"></a>    h<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>    b<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>    N<span class="op">::</span><span class="dt">Int32</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>    n<span class="op">::</span><span class="dt">Int32</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>    S</span>
+<span id="cb1-22"><a href="#cb1-22"></a>    H</span>
+<span id="cb1-23"><a href="#cb1-23"></a>    mu<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a>    sig<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="kw">end</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a></span>
+<span id="cb1-27"><a href="#cb1-27"></a><span class="co"># solution object</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a><span class="kw">struct</span> Sol</span>
+<span id="cb1-29"><a href="#cb1-29"></a>    x<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb1-30"><a href="#cb1-30"></a>    model<span class="op">::</span>JuMP.Model</span>
+<span id="cb1-31"><a href="#cb1-31"></a>    p<span class="op">::</span><span class="dt">Array</span>{<span class="dt">Float64</span><span class="op">,</span><span class="fl">1</span>}</span>
+<span id="cb1-32"><a href="#cb1-32"></a><span class="kw">end</span> </span>
+<span id="cb1-33"><a href="#cb1-33"></a></span>
+<span id="cb1-34"><a href="#cb1-34"></a>h <span class="op">=</span> b <span class="op">=</span> <span class="fl">1</span></span>
+<span id="cb1-35"><a href="#cb1-35"></a>N<span class="op">,</span> n <span class="op">=</span> <span class="fl">1000</span><span class="op">,</span> <span class="fl">200</span></span>
+<span id="cb1-36"><a href="#cb1-36"></a>S1 <span class="op">=</span> int_trunc.(rand(Normal(<span class="fl">50</span><span class="op">,</span> <span class="fl">50</span>)<span class="op">,</span> N))</span>
+<span id="cb1-37"><a href="#cb1-37"></a>H1 <span class="op">=</span> fit(Histogram<span class="op">,</span> S1<span class="op">,</span> <span class="fl">0</span><span class="op">:</span>n)</span>
+<span id="cb1-38"><a href="#cb1-38"></a>mu1<span class="op">,</span> sig1 <span class="op">=</span> mean_and_std(S1)</span>
+<span id="cb1-39"><a href="#cb1-39"></a>S2 <span class="op">=</span> int_trunc.(rand(Exponential(<span class="fl">50</span>)<span class="op">,</span> N))</span>
+<span id="cb1-40"><a href="#cb1-40"></a>H2 <span class="op">=</span> fit(Histogram<span class="op">,</span> S2<span class="op">,</span> <span class="fl">0</span><span class="op">:</span>n)</span>
+<span id="cb1-41"><a href="#cb1-41"></a>mu2<span class="op">,</span> sig2 <span class="op">=</span> mean_and_std(S2)</span>
+<span id="cb1-42"><a href="#cb1-42"></a>d <span class="op">=</span> <span class="dt">Array</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">200</span>)</span>
+<span id="cb1-43"><a href="#cb1-43"></a></span>
+<span id="cb1-44"><a href="#cb1-44"></a>sample1 <span class="op">=</span> Sample(h<span class="op">,</span>b<span class="op">,</span>N<span class="op">,</span>n<span class="op">,</span>S1<span class="op">,</span> H1<span class="op">,</span> mu1<span class="op">,</span> sig1)</span>
+<span id="cb1-45"><a href="#cb1-45"></a>sample2 <span class="op">=</span> Sample(h<span class="op">,</span>b<span class="op">,</span>N<span class="op">,</span>n<span class="op">,</span>S2<span class="op">,</span> H2<span class="op">,</span> mu2<span class="op">,</span> sig2)</span>
+<span id="cb1-46"><a href="#cb1-46"></a></span>
+<span id="cb1-47"><a href="#cb1-47"></a><span class="co"># simple lambda function</span></span>
+<span id="cb1-48"><a href="#cb1-48"></a>x_scarf <span class="op">=</span> s <span class="op">-&gt;</span> s.mu</span>
+<span id="cb1-49"><a href="#cb1-49"></a>x_ro_1 <span class="op">=</span> x_scarf(sample1)</span>
+<span id="cb1-50"><a href="#cb1-50"></a>x_ro_2 <span class="op">=</span> x_scarf(sample2)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="1">
+<pre><code>48.497</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="2">
+<div class="sourceCode" id="cb3"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># solution evaluation</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">mutable struct</span> Eval</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    sol<span class="op">::</span>Sol</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    sample<span class="op">::</span>Sample</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    d<span class="op">::</span><span class="dt">Array</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>    </span>
+<span id="cb3-7"><a href="#cb3-7"></a>    <span class="co"># objectives</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>    obj_worse<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>    obj_true<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>    </span>
+<span id="cb3-11"><a href="#cb3-11"></a>    <span class="kw">function</span> Eval(sol<span class="op">::</span>Sol<span class="op">,</span> sample<span class="op">::</span>Sample<span class="op">,</span> d<span class="op">::</span><span class="dt">Array</span>)</span>
+<span id="cb3-12"><a href="#cb3-12"></a>        x <span class="op">=</span> <span class="kw">new</span>(sol<span class="op">,</span> sample<span class="op">,</span> d<span class="op">,</span> <span class="fl">0</span><span class="op">,</span> <span class="fl">0</span>)</span>
+<span id="cb3-13"><a href="#cb3-13"></a>        h <span class="op">=</span> max.(</span>
+<span id="cb3-14"><a href="#cb3-14"></a>            (d .<span class="op">-</span> sol.x) <span class="op">.*</span> sample.b<span class="op">,</span> </span>
+<span id="cb3-15"><a href="#cb3-15"></a>            (sol.x .<span class="op">-</span> d) <span class="op">.*</span> sample.h</span>
+<span id="cb3-16"><a href="#cb3-16"></a>        )</span>
+<span id="cb3-17"><a href="#cb3-17"></a>        x.obj_true <span class="op">=</span> sum(sample.H.weights <span class="op">.*</span> h) <span class="op">/</span> sample.N</span>
+<span id="cb3-18"><a href="#cb3-18"></a>        x.obj_worse <span class="op">=</span> sum(sol.p <span class="op">.*</span> h)</span>
+<span id="cb3-19"><a href="#cb3-19"></a>        x</span>
+<span id="cb3-20"><a href="#cb3-20"></a>    <span class="kw">end</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="kw">end</span></span></code></pre></div>
+</div>
+<div class="cell code" data-execution_count="3" data-scrolled="true">
+<div class="sourceCode" id="cb4"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># 1. pure lro model</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">function</span> lro_nv_model(sample)</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    h<span class="op">,</span> b<span class="op">,</span> N<span class="op">,</span> n <span class="op">=</span> sample.h<span class="op">,</span> sample.b<span class="op">,</span> sample.N<span class="op">,</span> sample.n</span>
+<span id="cb4-4"><a href="#cb4-4"></a>    H <span class="op">=</span> sample.H.weights</span>
+<span id="cb4-5"><a href="#cb4-5"></a>    Hs <span class="op">=</span> [i <span class="kw">for</span> i <span class="kw">in</span> H <span class="kw">if</span> i <span class="op">&gt;</span> <span class="fl">0</span>]</span>
+<span id="cb4-6"><a href="#cb4-6"></a>    gamma <span class="op">=</span> sum(Hs <span class="op">.*</span> (log.(Hs<span class="op">./</span>N))) <span class="op">-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span> <span class="op">*</span> quantile.(Gamma(n<span class="op">-</span><span class="fl">1</span>)<span class="op">,</span> [<span class="fl">0.95</span>])[<span class="fl">1</span>]</span>
+<span id="cb4-7"><a href="#cb4-7"></a>    model <span class="op">=</span> JuMP.Model()</span>
+<span id="cb4-8"><a href="#cb4-8"></a>    <span class="pp">@variable</span>(model<span class="op">,</span> theta)</span>
+<span id="cb4-9"><a href="#cb4-9"></a>    <span class="pp">@variable</span>(model<span class="op">,</span> beta <span class="op">&gt;=</span> <span class="fl">0</span>)</span>
+<span id="cb4-10"><a href="#cb4-10"></a>    <span class="pp">@variable</span>(model<span class="op">,</span> q[<span class="fl">1</span><span class="op">:</span>n] <span class="op">&gt;=</span> <span class="fl">0</span>)</span>
+<span id="cb4-11"><a href="#cb4-11"></a>    <span class="pp">@variable</span>(model<span class="op">,</span> x <span class="op">&gt;=</span> <span class="fl">0</span>)</span>
+<span id="cb4-12"><a href="#cb4-12"></a></span>
+<span id="cb4-13"><a href="#cb4-13"></a>    <span class="pp">@constraint</span>(model<span class="op">,</span> q .<span class="op">+</span> b <span class="op">*</span> (d .<span class="op">-</span> x) .<span class="op">+</span> theta .<span class="op">&lt;=</span> <span class="fl">0</span>)</span>
+<span id="cb4-14"><a href="#cb4-14"></a>    <span class="pp">@constraint</span>(model<span class="op">,</span> q .<span class="op">+</span> h <span class="op">*</span> (x .<span class="op">-</span> d) .<span class="op">+</span> theta .<span class="op">&lt;=</span> <span class="fl">0</span>)</span>
+<span id="cb4-15"><a href="#cb4-15"></a></span>
+<span id="cb4-16"><a href="#cb4-16"></a>    <span class="pp">@variable</span>(model<span class="op">,</span> t[<span class="fl">1</span><span class="op">:</span>n])</span>
+<span id="cb4-17"><a href="#cb4-17"></a>    <span class="pp">@constraint</span>(model<span class="op">,</span> KL_DEV[i<span class="op">=</span><span class="fl">1</span><span class="op">:</span>n]<span class="op">,</span> [t[i]<span class="op">,</span> H[i] <span class="op">*</span> beta<span class="op">,</span> q[i]] <span class="kw">in</span> MOI.ExponentialCone())</span>
+<span id="cb4-18"><a href="#cb4-18"></a>    obj_expr <span class="op">=</span> </span>
+<span id="cb4-19"><a href="#cb4-19"></a>    <span class="kw">begin</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a>        theta <span class="op">+</span> beta <span class="op">*</span> (gamma <span class="op">+</span> N) <span class="op">+</span> dot(ones(n)<span class="op">,</span> t)</span>
+<span id="cb4-21"><a href="#cb4-21"></a>    <span class="kw">end</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a>    <span class="pp">@objective</span>(model<span class="op">,</span> Max<span class="op">,</span> obj_expr)</span>
+<span id="cb4-23"><a href="#cb4-23"></a>    set_optimizer(model<span class="op">,</span> Mosek.Optimizer)</span>
+<span id="cb4-24"><a href="#cb4-24"></a>    optimize<span class="op">!</span>(model)</span>
+<span id="cb4-25"><a href="#cb4-25"></a>    x_sol <span class="op">=</span> value.(x)</span>
+<span id="cb4-26"><a href="#cb4-26"></a>    p_sol <span class="op">=</span> value.(beta)<span class="op">.*</span>H <span class="op">./</span> value.(q)</span>
+<span id="cb4-27"><a href="#cb4-27"></a>    <span class="kw">return</span> Sol(x_sol<span class="op">,</span> model<span class="op">,</span> p_sol)</span>
+<span id="cb4-28"><a href="#cb4-28"></a><span class="kw">end</span></span></code></pre></div>
+<div class="output execute_result" data-execution_count="3">
+<pre><code>lro_nv_model (generic function with 1 method)</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="4" data-scrolled="true">
+<div class="sourceCode" id="cb6"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1"></a>lro_sol1 <span class="op">=</span> lro_nv_model(sample1)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># lro_sol2 = lro_nv_model(sample2)</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co"># plot sampling distribution and worse-case</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a>lro_p1 <span class="op">=</span> plot(<span class="fl">1</span><span class="op">:</span>n<span class="op">,</span> [sample1.H.weights lro_sol1.p <span class="op">*</span> N]<span class="op">,</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>    label<span class="op">=</span>reshape([<span class="st">&quot;@true&quot;</span><span class="op">,</span> <span class="st">&quot;@worst-case&quot;</span>]<span class="op">,</span> <span class="fl">1</span><span class="op">,</span> <span class="fl">2</span>)<span class="op">,</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>    title<span class="op">=</span><span class="st">&quot;normal&quot;</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>)</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1003            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer started.
+Presolve started.
+Linear dependency checker started.
+Linear dependency checker terminated.
+Eliminator started.
+Freed constraints in eliminator : 0
+Eliminator terminated.
+Eliminator - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - number                 : 0               
+Presolve terminated. Time: 0.00    
+Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1003            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer  - threads                : 12              
+Optimizer  - solved problem         : the primal      
+Optimizer  - Constraints            : 560
+Optimizer  - Cones                  : 201
+Optimizer  - Scalar variables       : 1003              conic                  : 602             
+Optimizer  - Semi-definite variables: 0                 scalarized             : 0               
+Factor     - setup time             : 0.00              dense det. time        : 0.00            
+Factor     - ML order time          : 0.00              GP order time          : 0.00            
+Factor     - nonzeros before factor : 1.49e+04          after factor           : 1.52e+04        
+Factor     - dense dim.             : 4                 flops                  : 1.58e+06        
+ITE PFEAS    DFEAS    GFEAS    PRSTATUS   POBJ              DOBJ              MU       TIME  
+0   2.0e+02  2.2e+01  1.8e+02  0.00e+00   -1.835571490e+02  0.000000000e+00   1.0e+00  0.00  
+1   1.3e+02  1.4e+01  1.5e+02  -1.00e+00  -3.989615636e+02  -2.159883074e+02  6.6e-01  0.01  
+2   7.2e+01  7.7e+00  1.1e+02  -9.98e-01  -7.824056883e+02  -6.008989258e+02  3.6e-01  0.01  
+3   2.3e+01  2.5e+00  6.2e+01  -9.94e-01  -3.609534082e+03  -3.435781177e+03  1.2e-01  0.01  
+4   1.2e+01  1.3e+00  4.3e+01  -9.29e-01  -6.403360798e+03  -6.245779702e+03  6.1e-02  0.01  
+5   2.8e+00  2.9e-01  1.3e+01  -7.15e-01  -9.520306839e+03  -9.448357156e+03  1.4e-02  0.01  
+6   6.0e-01  6.5e-02  1.8e+00  3.07e-01   -2.608706123e+03  -2.589949885e+03  3.0e-03  0.01  
+7   9.2e-02  9.9e-03  1.1e-01  8.07e-01   -4.567125634e+02  -4.534855206e+02  4.6e-04  0.01  
+8   2.6e-02  2.7e-03  1.5e-02  1.00e+00   -1.768516712e+02  -1.759347962e+02  1.3e-04  0.01  
+9   8.1e-03  8.7e-04  2.5e-03  1.11e+00   -9.201516567e+01  -9.173400712e+01  4.0e-05  0.01  
+10  3.4e-03  3.6e-04  6.9e-04  9.65e-01   -6.915641721e+01  -6.903698977e+01  1.7e-05  0.01  
+11  1.6e-03  1.7e-04  2.1e-04  9.79e-01   -5.895075108e+01  -5.889592367e+01  7.7e-06  0.01  
+12  7.7e-04  8.2e-05  7.4e-05  1.01e+00   -5.475841261e+01  -5.473144813e+01  3.8e-06  0.02  
+13  3.3e-04  3.6e-05  2.1e-05  9.96e-01   -5.259406247e+01  -5.258235916e+01  1.7e-06  0.02  
+14  8.6e-05  9.2e-06  2.8e-06  9.92e-01   -5.134501011e+01  -5.134197255e+01  4.3e-07  0.02  
+15  8.2e-06  8.8e-07  8.2e-08  9.98e-01   -5.094834719e+01  -5.094805872e+01  4.1e-08  0.02  
+16  4.9e-07  5.2e-08  1.2e-09  9.99e-01   -5.090962356e+01  -5.090960643e+01  2.4e-09  0.02  
+17  1.1e-08  1.2e-09  4.2e-12  1.00e+00   -5.090725476e+01  -5.090725436e+01  5.6e-11  0.02  
+Optimizer terminated. Time: 0.04    </code></pre>
+</div>
+<div class="output display_data">
+    <script type="text/javascript">
+        requirejs(["https://cdn.plot.ly/plotly-latest.min.js"], function(p) {
+            window.Plotly = p
+        });
+    </script>
+</div>
+<div class="output execute_result" data-execution_count="4">
+<div class="sourceCode" id="cb8"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">{</span><span class="dt">&quot;layout&quot;</span><span class="fu">:{</span><span class="dt">&quot;annotations&quot;</span><span class="fu">:</span><span class="ot">[</span><span class="fu">{</span><span class="dt">&quot;rotation&quot;</span><span class="fu">:</span><span class="dv">0</span><span class="fu">,</span><span class="dt">&quot;showarrow&quot;</span><span class="fu">:</span><span class="kw">false</span><span class="fu">,</span><span class="dt">&quot;text&quot;</span><span class="fu">:</span><span class="st">&quot;normal&quot;</span><span class="fu">,</span><span class="dt">&quot;xref&quot;</span><span class="fu">:</span><span class="st">&quot;paper&quot;</span><span class="fu">,</span><span class="dt">&quot;x&quot;</span><span class="fu">:</span><span class="fl">0.5222222222222223</span><span class="fu">,</span><span class="dt">&quot;yanchor&quot;</span><span class="fu">:</span><span class="st">&quot;top&quot;</span><span class="fu">,</span><span class="dt">&quot;yref&quot;</span><span class="fu">:</span><span class="st">&quot;paper&quot;</span><span class="fu">,</span><span class="dt">&quot;font&quot;</span><span class="fu">:{</span><span class="dt">&quot;color&quot;</span><span class="fu">:</span><span class="st">&quot;rgba(0, 0, 0, 1.000)&quot;</span><span class="fu">,</span><span class="dt">&quot;size&quot;</span><span class="fu">:</span><span class="dv">20</span><span class="fu">,</span><span class="dt">&quot;family&quot;</span><span class="fu">:</span><span class="st">&quot;sans-serif&quot;</span><span class="fu">},</span><span class="dt">&quot;xanchor&quot;</span><span class="fu">:</span><span class="st">&quot;center&quot;</span><span class="fu">,</span><span class="dt">&quot;y&quot;</span><span class="fu">:</span><span class="dv">1</span><span class="fu">}</span><span class="ot">]</span><span class="fu">,</span><span class="dt">&quot;height&quot;</span><span class="fu">:</span><span class="dv">400</span><span class="fu">,</span><span class="dt">&quot;yaxis&quot;</span><span class="fu">:{</span><span class="dt">&quot;zeroline&quot;</span><span class="fu">:</span><span class="kw">false</span><span class="fu">,</span><span class="dt">&quot;showline&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span><span class="dt">&quot;ticktext&quot;</span><span class="fu">:</span><span class="ot">[</span><span class="st">&quot;0&quot;</span><span class="ot">,</span><span class="st">&quot;50&quot;</span><span class="ot">,</span><span class="st">&quot;100&quot;</span><span class="ot">,</span><span class="st">&quot;150&quot;</span><span class="ot">]</span><span class="fu">,</span><span class="dt">&quot;domain&quot;</span><span class="fu">:</span><span class="ot">[</span><span class="fl">3.762029746281716e-2</span><span class="ot">,</span><span class="fl">0.9415463692038496</span><span class="ot">]</span><span class="fu">,</span><span class="dt">&quot;showgrid&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span><span class="dt">&quot;titlefont&quot;</span><span class="fu">:{</span><span class="dt">&quot;color&quot;</span><span class="fu">:</span><span class="st">&quot;rgba(0, 0, 0, 1.000)&quot;</span><span class="fu">,</span><span class="dt">&quot;size&quot;</span><span class="fu">:</span><span class="dv">15</span><span class="fu">,</span><span class="dt">&quot;family&quot;</span><span class="fu">:</span><span class="st">&quot;sans-serif&quot;</span><span class="fu">},</span><span class="dt">&quot;showticklabels&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span><span class="dt">&quot;visible&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span><span class="dt">&quot;tickfont&quot;</span><span class="fu">:{</span><span class="dt">&quot;color&quot;</span><span class="fu">:</span><span class="st">&quot;rgba(0, 0, 0, 1.000)&quot;</span><span class="fu">,</span><span class="dt">&quot;size&quot;</span><span class="fu">:</span><span class="dv">11</span><span class="fu">,</span><span class="dt">&quot;family&quot;</span><span class="fu">:</span><span class="st">&quot;sans-serif&quot;</span><span class="fu">},</span><span class="dt">&quot;zerolinecolor&quot;</span><span class="fu">:</span><span class="st">&quot;rgba(0, 0, 0, 1.000)&quot;</span><span class="fu">,</span><span class="dt">&quot;anchor&quot;</span><span class="fu">:</span><span class="st">&quot;x1&quot;</span><span class="fu">,</span><span class="dt">&quot;tickangle&quot;</span><span class="fu">:</span><span class="dv">0</span><span class="fu">,</span><span class="dt">&quot;range&quot;</span><span class="fu">:</span><span class="ot">[</span><span class="fl">-5.38671427660452</span><span class="ot">,</span><span class="fl">184.94385683008855</span><span class="ot">]</span><span class="fu">,</span><span class="dt">&quot;gridcolor&quot;</span><span class="fu">:</span><span class="st">&quot;rgba(0, 0, 0, 0.100)&quot;</span><span class="fu">,</span><span class="dt">&quot;tickvals&quot;</span><span class="fu">:</span><span class="ot">[</span><span class="dv">0</span><span class="ot">,</span><span class="dv">50</span><span class="ot">,</span><span class="dv">100</span><span class="ot">,</span><span class="dv">150</span><span class="ot">]</span><span class="fu">,</span><span class="dt">&quot;title&quot;</span><span class="fu">:</span><span class="st">&quot;&quot;</span><span class="fu">,</span><span class="dt">&quot;tickcolor&quot;</span><span class="fu">:</span><span class="st">&quot;rgb(0, 0, 0)&quot;</span><span class="fu">,</span><span class="dt">&quot;type&quot;</span><span class="fu">:</span><span class="st">&quot;-&quot;</span><span class="fu">,</span><span class="dt">&quot;linecolor&quot;</span><span class="fu">:</span><span class="st">&quot;rgba(0, 0, 0, 1.000)&quot;</span><span class="fu">,</span><span class="dt">&quot;ticks&quot;</span><span class="fu">:</span><span class="st">&quot;inside&quot;</span><span class="fu">,</span><span class="dt">&quot;tickmode&quot;</span><span class="fu">:</span><span class="st">&quot;array&quot;</span><span class="fu">,</span><span class="dt">&quot;gridwidth&quot;</span><span class="fu">:</span><span class="fl">0.5</span><span class="fu">,</span><span class="dt">&quot;mirror&quot;</span><span class="fu">:</span><span class="kw">false</span><span class="fu">},</span><span class="dt">&quot;showlegend&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span><span class="dt">&quot;xaxis&quot;</span><span class="fu">:{</span><span class="dt">&quot;zeroline&quot;</span><span class="fu">:</span><span class="kw">false</span><span class="fu">,</span><span class="dt">&quot;showline&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span><span class="dt">&quot;ticktext&quot;</span><span class="fu">:</span><span class="ot">[</span><span class="st">&quot;0&quot;</span><span class="ot">,</span><span class="st">&quot;50&quot;</span><span class="ot">,</span><span class="st">&quot;100&quot;</span><span class="ot">,</span><span class="st">&quot;150&quot;</span><span class="ot">,</span><span class="st">&quot;200&quot;</span><span class="ot">]</span><span class="fu">,</span><span class="dt">&quot;domain&quot;</span><span class="fu">:</span><span class="ot">[</span><span class="fl">5.100612423447069e-2</span><span class="ot">,</span><span class="fl">0.9934383202099737</span><span class="ot">]</span><span class="fu">,</span><span class="dt">&quot;showgrid&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span><span class="dt">&quot;titlefont&quot;</span><span class="fu">:{</span><span class="dt">&quot;color&quot;</span><span class="fu">:</span><span class="st">&quot;rgba(0, 0, 0, 1.000)&quot;</span><span class="fu">,</span><span class="dt">&quot;size&quot;</span><span class="fu">:</span><span class="dv">15</span><span class="fu">,</span><span class="dt">&quot;family&quot;</span><span class="fu">:</span><span class="st">&quot;sans-serif&quot;</span><span class="fu">},</span><span class="dt">&quot;showticklabels&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span><span class="dt">&quot;visible&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span><span class="dt">&quot;tickfont&quot;</span><span class="fu">:{</span><span class="dt">&quot;color&quot;</span><span class="fu">:</span><span class="st">&quot;rgba(0, 0, 0, 1.000)&quot;</span><span class="fu">,</span><span class="dt">&quot;size&quot;</span><span class="fu">:</span><span class="dv">11</span><span class="fu">,</span><span class="dt">&quot;family&quot;</span><span class="fu">:</span><span class="st">&quot;sans-serif&quot;</span><span class="fu">},</span><span class="dt">&quot;zerolinecolor&quot;</span><span class="fu">:</span><span class="st">&quot;rgba(0, 0, 0, 1.000)&quot;</span><span class="fu">,</span><span class="dt">&quot;anchor&quot;</span><span class="fu">:</span><span class="st">&quot;y1&quot;</span><span class="fu">,</span><span class="dt">&quot;tickangle&quot;</span><span class="fu">:</span><span class="dv">0</span><span class="fu">,</span><span class="dt">&quot;range&quot;</span><span class="fu">:</span><span class="ot">[</span><span class="fl">-4.97</span><span class="ot">,</span><span class="fl">205.97</span><span class="ot">]</span><span class="fu">,</span><span class="dt">&quot;gridcolor&quot;</span><span class="fu">:</span><span class="st">&quot;rgba(0, 0, 0, 0.100)&quot;</span><span class="fu">,</span><span class="dt">&quot;tickvals&quot;</span><span class="fu">:</span><span class="ot">[</span><span class="dv">0</span><span class="ot">,</span><span class="dv">50</span><span class="ot">,</span><span class="dv">100</span><span class="ot">,</span><span class="dv">150</span><span class="ot">,</span><span class="dv">200</span><span class="ot">]</span><span class="fu">,</span><span class="dt">&quot;title&quot;</span><span class="fu">:</span><span class="st">&quot;&quot;</span><span class="fu">,</span><span class="dt">&quot;tickcolor&quot;</span><span class="fu">:</span><span class="st">&quot;rgb(0, 0, 0)&quot;</span><span class="fu">,</span><span class="dt">&quot;type&quot;</span><span class="fu">:</span><span class="st">&quot;-&quot;</span><span class="fu">,</span><span class="dt">&quot;linecolor&quot;</span><span class="fu">:</span><span class="st">&quot;rgba(0, 0, 0, 1.000)&quot;</span><span class="fu">,</span><span class="dt">&quot;ticks&quot;</span><span class="fu">:</span><span class="st">&quot;inside&quot;</span><span class="fu">,</span><span class="dt">&quot;tickmode&quot;</span><span class="fu">:</span><span class="st">&quot;array&quot;</span><span class="fu">,</span><span class="dt">&quot;gridwidth&quot;</span><span class="fu">:</span><span class="fl">0.5</span><span class="fu">,</span><span class="dt">&quot;mirror&quot;</span><span class="fu">:</span><span class="kw">false</span><span class="fu">},</span><span class="dt">&quot;width&quot;</span><span class="fu">:</span><span class="dv">600</span><span class="fu">,</span><span class="dt">&quot;margin&quot;</span><span class="fu">:{</span><span class="dt">&quot;l&quot;</span><span class="fu">:</span><span class="dv">0</span><span class="fu">,</span><span class="dt">&quot;t&quot;</span><span class="fu">:</span><span class="dv">20</span><span class="fu">,</span><span class="dt">&quot;b&quot;</span><span class="fu">:</span><span class="dv">20</span><span class="fu">,</span><span class="dt">&quot;r&quot;</span><span class="fu">:</span><span class="dv">0</span><span class="fu">},</span><span class="dt">&quot;paper_bgcolor&quot;</span><span class="fu">:</span><span class="st">&quot;rgba(255, 255, 255, 1.000)&quot;</span><span class="fu">,</span><span class="dt">&quot;plot_bgcolor&quot;</span><span class="fu">:</span><span class="st">&quot;rgba(255, 255, 255, 1.000)&quot;</span><span class="fu">,</span><span class="dt">&quot;legend&quot;</span><span class="fu">:{</span><span class="dt">&quot;bgcolor&quot;</span><span class="fu">:</span><span class="st">&quot;rgba(255, 255, 255, 1.000)&quot;</span><span class="fu">,</span><span class="dt">&quot;x&quot;</span><span class="fu">:</span><span class="dv">1</span><span class="fu">,</span><span class="dt">&quot;tracegroupgap&quot;</span><span class="fu">:</span><span class="dv">0</span><span class="fu">,</span><span class="dt">&quot;font&quot;</span><span class="fu">:{</span><span class="dt">&quot;color&quot;</span><span class="fu">:</span><span class="st">&quot;rgba(0, 0, 0, 1.000)&quot;</span><span class="fu">,</span><span class="dt">&quot;size&quot;</span><span class="fu">:</span><span class="dv">11</span><span class="fu">,</span><span class="dt">&quot;family&quot;</span><span class="fu">:</span><span class="st">&quot;sans-serif&quot;</span><span class="fu">},</span><span class="dt">&quot;bordercolor&quot;</span><span class="fu">:</span><span class="st">&quot;rgba(0, 0, 0, 1.000)&quot;</span><span class="fu">,</span><span class="dt">&quot;y&quot;</span><span class="fu">:</span><span class="dv">1</span><span class="fu">}},</span><span class="dt">&quot;data&quot;</span><span class="fu">:</span><span class="ot">[</span><span class="fu">{</span><span class="dt">&quot;colorbar&quot;</span><span class="fu">:{</span><span class="dt">&quot;title&quot;</span><span class="fu">:</span><span class="st">&quot;&quot;</span><span class="fu">},</span><span class="dt">&quot;yaxis&quot;</span><span class="fu">:</span><span class="st">&quot;y1&quot;</span><span class="fu">,</span><span class="dt">&quot;showlegend&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span><span class="dt">&quot;mode&quot;</span><span class="fu">:</span><span class="st">&quot;lines&quot;</span><span class="fu">,</span><span class="dt">&quot;xaxis&quot;</span><span class="fu">:</span><span class="st">&quot;x1&quot;</span><span class="fu">,</span><span class="dt">&quot;line&quot;</span><span class="fu">:{</span><span class="dt">&quot;color&quot;</span><span class="fu">:</span><span class="st">&quot;rgba(0, 154, 250, 1.000)&quot;</span><span class="fu">,</span><span class="dt">&quot;width&quot;</span><span class="fu">:</span><span class="dv">1</span><span class="fu">,</span><span class="dt">&quot;shape&quot;</span><span class="fu">:</span><span class="st">&quot;linear&quot;</span><span class="fu">,</span><span class="dt">&quot;dash&quot;</span><span class="fu">:</span><span class="st">&quot;solid&quot;</span><span class="fu">},</span><span class="dt">&quot;name&quot;</span><span class="fu">:</span><span class="st">&quot;@true&quot;</span><span class="fu">,</span><span class="dt">&quot;x&quot;</span><span class="fu">:</span><span class="ot">[</span><span class="dv">1</span><span class="ot">,</span><span class="dv">2</span><span class="ot">,</span><span class="dv">3</span><span class="ot">,</span><span class="dv">4</span><span class="ot">,</span><span class="dv">5</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">8</span><span class="ot">,</span><span class="dv">9</span><span class="ot">,</span><span class="dv">10</span><span class="ot">,</span><span class="dv">11</span><span class="ot">,</span><span class="dv">12</span><span class="ot">,</span><span class="dv">13</span><span class="ot">,</span><span class="dv">14</span><span class="ot">,</span><span class="dv">15</span><span class="ot">,</span><span class="dv">16</span><span class="ot">,</span><span class="dv">17</span><span class="ot">,</span><span class="dv">18</span><span class="ot">,</span><span class="dv">19</span><span class="ot">,</span><span class="dv">20</span><span class="ot">,</span><span class="dv">21</span><span class="ot">,</span><span class="dv">22</span><span class="ot">,</span><span class="dv">23</span><span class="ot">,</span><span class="dv">24</span><span class="ot">,</span><span class="dv">25</span><span class="ot">,</span><span class="dv">26</span><span class="ot">,</span><span class="dv">27</span><span class="ot">,</span><span class="dv">28</span><span class="ot">,</span><span class="dv">29</span><span class="ot">,</span><span class="dv">30</span><span class="ot">,</span><span class="dv">31</span><span class="ot">,</span><span class="dv">32</span><span class="ot">,</span><span class="dv">33</span><span class="ot">,</span><span class="dv">34</span><span class="ot">,</span><span class="dv">35</span><span class="ot">,</span><span class="dv">36</span><span class="ot">,</span><span class="dv">37</span><span class="ot">,</span><span class="dv">38</span><span class="ot">,</span><span class="dv">39</span><span class="ot">,</span><span class="dv">40</span><span class="ot">,</span><span class="dv">41</span><span class="ot">,</span><span class="dv">42</span><span class="ot">,</span><span class="dv">43</span><span class="ot">,</span><span class="dv">44</span><span class="ot">,</span><span class="dv">45</span><span class="ot">,</span><span class="dv">46</span><span class="ot">,</span><span class="dv">47</span><span class="ot">,</span><span class="dv">48</span><span class="ot">,</span><span class="dv">49</span><span class="ot">,</span><span class="dv">50</span><span class="ot">,</span><span class="dv">51</span><span class="ot">,</span><span class="dv">52</span><span class="ot">,</span><span class="dv">53</span><span class="ot">,</span><span class="dv">54</span><span class="ot">,</span><span class="dv">55</span><span class="ot">,</span><span class="dv">56</span><span class="ot">,</span><span class="dv">57</span><span class="ot">,</span><span class="dv">58</span><span class="ot">,</span><span class="dv">59</span><span class="ot">,</span><span class="dv">60</span><span class="ot">,</span><span class="dv">61</span><span class="ot">,</span><span class="dv">62</span><span class="ot">,</span><span class="dv">63</span><span class="ot">,</span><span class="dv">64</span><span class="ot">,</span><span class="dv">65</span><span class="ot">,</span><span class="dv">66</span><span class="ot">,</span><span class="dv">67</span><span class="ot">,</span><span class="dv">68</span><span class="ot">,</span><span class="dv">69</span><span class="ot">,</span><span class="dv">70</span><span class="ot">,</span><span class="dv">71</span><span class="ot">,</span><span class="dv">72</span><span class="ot">,</span><span class="dv">73</span><span class="ot">,</span><span class="dv">74</span><span class="ot">,</span><span class="dv">75</span><span class="ot">,</span><span class="dv">76</span><span class="ot">,</span><span class="dv">77</span><span class="ot">,</span><span class="dv">78</span><span class="ot">,</span><span class="dv">79</span><span class="ot">,</span><span class="dv">80</span><span class="ot">,</span><span class="dv">81</span><span class="ot">,</span><span class="dv">82</span><span class="ot">,</span><span class="dv">83</span><span class="ot">,</span><span class="dv">84</span><span class="ot">,</span><span class="dv">85</span><span class="ot">,</span><span class="dv">86</span><span class="ot">,</span><span class="dv">87</span><span class="ot">,</span><span class="dv">88</span><span class="ot">,</span><span class="dv">89</span><span class="ot">,</span><span class="dv">90</span><span class="ot">,</span><span class="dv">91</span><span class="ot">,</span><span class="dv">92</span><span class="ot">,</span><span class="dv">93</span><span class="ot">,</span><span class="dv">94</span><span class="ot">,</span><span class="dv">95</span><span class="ot">,</span><span class="dv">96</span><span class="ot">,</span><span class="dv">97</span><span class="ot">,</span><span class="dv">98</span><span class="ot">,</span><span class="dv">99</span><span class="ot">,</span><span class="dv">100</span><span class="ot">,</span><span class="dv">101</span><span class="ot">,</span><span class="dv">102</span><span class="ot">,</span><span class="dv">103</span><span class="ot">,</span><span class="dv">104</span><span class="ot">,</span><span class="dv">105</span><span class="ot">,</span><span class="dv">106</span><span class="ot">,</span><span class="dv">107</span><span class="ot">,</span><span class="dv">108</span><span class="ot">,</span><span class="dv">109</span><span class="ot">,</span><span class="dv">110</span><span class="ot">,</span><span class="dv">111</span><span class="ot">,</span><span class="dv">112</span><span class="ot">,</span><span class="dv">113</span><span class="ot">,</span><span class="dv">114</span><span class="ot">,</span><span class="dv">115</span><span class="ot">,</span><span class="dv">116</span><span class="ot">,</span><span class="dv">117</span><span class="ot">,</span><span class="dv">118</span><span class="ot">,</span><span class="dv">119</span><span class="ot">,</span><span class="dv">120</span><span class="ot">,</span><span class="dv">121</span><span class="ot">,</span><span class="dv">122</span><span class="ot">,</span><span class="dv">123</span><span class="ot">,</span><span class="dv">124</span><span class="ot">,</span><span class="dv">125</span><span class="ot">,</span><span class="dv">126</span><span class="ot">,</span><span class="dv">127</span><span class="ot">,</span><span class="dv">128</span><span class="ot">,</span><span class="dv">129</span><span class="ot">,</span><span class="dv">130</span><span class="ot">,</span><span class="dv">131</span><span class="ot">,</span><span class="dv">132</span><span class="ot">,</span><span class="dv">133</span><span class="ot">,</span><span class="dv">134</span><span class="ot">,</span><span class="dv">135</span><span class="ot">,</span><span class="dv">136</span><span class="ot">,</span><span class="dv">137</span><span class="ot">,</span><span class="dv">138</span><span class="ot">,</span><span class="dv">139</span><span class="ot">,</span><span class="dv">140</span><span class="ot">,</span><span class="dv">141</span><span class="ot">,</span><span class="dv">142</span><span class="ot">,</span><span class="dv">143</span><span class="ot">,</span><span class="dv">144</span><span class="ot">,</span><span class="dv">145</span><span class="ot">,</span><span class="dv">146</span><span class="ot">,</span><span class="dv">147</span><span class="ot">,</span><span class="dv">148</span><span class="ot">,</span><span class="dv">149</span><span class="ot">,</span><span class="dv">150</span><span class="ot">,</span><span class="dv">151</span><span class="ot">,</span><span class="dv">152</span><span class="ot">,</span><span class="dv">153</span><span class="ot">,</span><span class="dv">154</span><span class="ot">,</span><span class="dv">155</span><span class="ot">,</span><span class="dv">156</span><span class="ot">,</span><span class="dv">157</span><span class="ot">,</span><span class="dv">158</span><span class="ot">,</span><span class="dv">159</span><span class="ot">,</span><span class="dv">160</span><span class="ot">,</span><span class="dv">161</span><span class="ot">,</span><span class="dv">162</span><span class="ot">,</span><span class="dv">163</span><span class="ot">,</span><span class="dv">164</span><span class="ot">,</span><span class="dv">165</span><span class="ot">,</span><span class="dv">166</span><span class="ot">,</span><span class="dv">167</span><span class="ot">,</span><span class="dv">168</span><span class="ot">,</span><span class="dv">169</span><span class="ot">,</span><span class="dv">170</span><span class="ot">,</span><span class="dv">171</span><span class="ot">,</span><span class="dv">172</span><span class="ot">,</span><span class="dv">173</span><span class="ot">,</span><span class="dv">174</span><span class="ot">,</span><span class="dv">175</span><span class="ot">,</span><span class="dv">176</span><span class="ot">,</span><span class="dv">177</span><span class="ot">,</span><span class="dv">178</span><span class="ot">,</span><span class="dv">179</span><span class="ot">,</span><span class="dv">180</span><span class="ot">,</span><span class="dv">181</span><span class="ot">,</span><span class="dv">182</span><span class="ot">,</span><span class="dv">183</span><span class="ot">,</span><span class="dv">184</span><span class="ot">,</span><span class="dv">185</span><span class="ot">,</span><span class="dv">186</span><span class="ot">,</span><span class="dv">187</span><span class="ot">,</span><span class="dv">188</span><span class="ot">,</span><span class="dv">189</span><span class="ot">,</span><span class="dv">190</span><span class="ot">,</span><span class="dv">191</span><span class="ot">,</span><span class="dv">192</span><span class="ot">,</span><span class="dv">193</span><span class="ot">,</span><span class="dv">194</span><span class="ot">,</span><span class="dv">195</span><span class="ot">,</span><span class="dv">196</span><span class="ot">,</span><span class="dv">197</span><span class="ot">,</span><span class="dv">198</span><span class="ot">,</span><span class="dv">199</span><span class="ot">,</span><span class="dv">200</span><span class="ot">]</span><span class="fu">,</span><span class="dt">&quot;zmin&quot;</span><span class="fu">:</span><span class="kw">null</span><span class="fu">,</span><span class="dt">&quot;type&quot;</span><span class="fu">:</span><span class="st">&quot;scatter&quot;</span><span class="fu">,</span><span class="dt">&quot;zmax&quot;</span><span class="fu">:</span><span class="kw">null</span><span class="fu">,</span><span class="dt">&quot;legendgroup&quot;</span><span class="fu">:</span><span class="st">&quot;@true&quot;</span><span class="fu">,</span><span class="dt">&quot;y&quot;</span><span class="fu">:</span><span class="ot">[</span><span class="dv">163</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">5</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">5</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">5</span><span class="ot">,</span><span class="dv">8</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">5</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">9</span><span class="ot">,</span><span class="dv">11</span><span class="ot">,</span><span class="dv">10</span><span class="ot">,</span><span class="dv">5</span><span class="ot">,</span><span class="dv">9</span><span class="ot">,</span><span class="dv">5</span><span class="ot">,</span><span class="dv">8</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">3</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">8</span><span class="ot">,</span><span class="dv">4</span><span class="ot">,</span><span class="dv">3</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">5</span><span class="ot">,</span><span class="dv">3</span><span class="ot">,</span><span class="dv">4</span><span class="ot">,</span><span class="dv">8</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">9</span><span class="ot">,</span><span class="dv">5</span><span class="ot">,</span><span class="dv">8</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">10</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">9</span><span class="ot">,</span><span class="dv">3</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">9</span><span class="ot">,</span><span class="dv">12</span><span class="ot">,</span><span class="dv">4</span><span class="ot">,</span><span class="dv">8</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">10</span><span class="ot">,</span><span class="dv">8</span><span class="ot">,</span><span class="dv">8</span><span class="ot">,</span><span class="dv">2</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">14</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">3</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">10</span><span class="ot">,</span><span class="dv">11</span><span class="ot">,</span><span class="dv">4</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">11</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">11</span><span class="ot">,</span><span class="dv">8</span><span class="ot">,</span><span class="dv">10</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">11</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">5</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">4</span><span class="ot">,</span><span class="dv">8</span><span class="ot">,</span><span class="dv">13</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">4</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">11</span><span class="ot">,</span><span class="dv">5</span><span class="ot">,</span><span class="dv">11</span><span class="ot">,</span><span class="dv">8</span><span class="ot">,</span><span class="dv">4</span><span class="ot">,</span><span class="dv">5</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">5</span><span class="ot">,</span><span class="dv">5</span><span class="ot">,</span><span class="dv">9</span><span class="ot">,</span><span class="dv">4</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">3</span><span class="ot">,</span><span class="dv">8</span><span class="ot">,</span><span class="dv">4</span><span class="ot">,</span><span class="dv">8</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">2</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">5</span><span class="ot">,</span><span class="dv">5</span><span class="ot">,</span><span class="dv">5</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">10</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">3</span><span class="ot">,</span><span class="dv">3</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">2</span><span class="ot">,</span><span class="dv">3</span><span class="ot">,</span><span class="dv">4</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">3</span><span class="ot">,</span><span class="dv">3</span><span class="ot">,</span><span class="dv">3</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">3</span><span class="ot">,</span><span class="dv">3</span><span class="ot">,</span><span class="dv">5</span><span class="ot">,</span><span class="dv">4</span><span class="ot">,</span><span class="dv">3</span><span class="ot">,</span><span class="dv">2</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">4</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">2</span><span class="ot">,</span><span class="dv">4</span><span class="ot">,</span><span class="dv">4</span><span class="ot">,</span><span class="dv">4</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">4</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">3</span><span class="ot">,</span><span class="dv">4</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">2</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">2</span><span class="ot">,</span><span class="dv">2</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">2</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">3</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">2</span><span class="ot">,</span><span class="dv">2</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">2</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">2</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">1</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">]</span><span class="fu">}</span><span class="ot">,</span><span class="fu">{</span><span class="dt">&quot;colorbar&quot;</span><span class="fu">:{</span><span class="dt">&quot;title&quot;</span><span class="fu">:</span><span class="st">&quot;&quot;</span><span class="fu">},</span><span class="dt">&quot;yaxis&quot;</span><span class="fu">:</span><span class="st">&quot;y1&quot;</span><span class="fu">,</span><span class="dt">&quot;showlegend&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">,</span><span class="dt">&quot;mode&quot;</span><span class="fu">:</span><span class="st">&quot;lines&quot;</span><span class="fu">,</span><span class="dt">&quot;xaxis&quot;</span><span class="fu">:</span><span class="st">&quot;x1&quot;</span><span class="fu">,</span><span class="dt">&quot;line&quot;</span><span class="fu">:{</span><span class="dt">&quot;color&quot;</span><span class="fu">:</span><span class="st">&quot;rgba(227, 111, 71, 1.000)&quot;</span><span class="fu">,</span><span class="dt">&quot;width&quot;</span><span class="fu">:</span><span class="dv">1</span><span class="fu">,</span><span class="dt">&quot;shape&quot;</span><span class="fu">:</span><span class="st">&quot;linear&quot;</span><span class="fu">,</span><span class="dt">&quot;dash&quot;</span><span class="fu">:</span><span class="st">&quot;solid&quot;</span><span class="fu">},</span><span class="dt">&quot;name&quot;</span><span class="fu">:</span><span class="st">&quot;@worst-case&quot;</span><span class="fu">,</span><span class="dt">&quot;x&quot;</span><span class="fu">:</span><span class="ot">[</span><span class="dv">1</span><span class="ot">,</span><span class="dv">2</span><span class="ot">,</span><span class="dv">3</span><span class="ot">,</span><span class="dv">4</span><span class="ot">,</span><span class="dv">5</span><span class="ot">,</span><span class="dv">6</span><span class="ot">,</span><span class="dv">7</span><span class="ot">,</span><span class="dv">8</span><span class="ot">,</span><span class="dv">9</span><span class="ot">,</span><span class="dv">10</span><span class="ot">,</span><span class="dv">11</span><span class="ot">,</span><span class="dv">12</span><span class="ot">,</span><span class="dv">13</span><span class="ot">,</span><span class="dv">14</span><span class="ot">,</span><span class="dv">15</span><span class="ot">,</span><span class="dv">16</span><span class="ot">,</span><span class="dv">17</span><span class="ot">,</span><span class="dv">18</span><span class="ot">,</span><span class="dv">19</span><span class="ot">,</span><span class="dv">20</span><span class="ot">,</span><span class="dv">21</span><span class="ot">,</span><span class="dv">22</span><span class="ot">,</span><span class="dv">23</span><span class="ot">,</span><span class="dv">24</span><span class="ot">,</span><span class="dv">25</span><span class="ot">,</span><span class="dv">26</span><span class="ot">,</span><span class="dv">27</span><span class="ot">,</span><span class="dv">28</span><span class="ot">,</span><span class="dv">29</span><span class="ot">,</span><span class="dv">30</span><span class="ot">,</span><span class="dv">31</span><span class="ot">,</span><span class="dv">32</span><span class="ot">,</span><span class="dv">33</span><span class="ot">,</span><span class="dv">34</span><span class="ot">,</span><span class="dv">35</span><span class="ot">,</span><span class="dv">36</span><span class="ot">,</span><span class="dv">37</span><span class="ot">,</span><span class="dv">38</span><span class="ot">,</span><span class="dv">39</span><span class="ot">,</span><span class="dv">40</span><span class="ot">,</span><span class="dv">41</span><span class="ot">,</span><span class="dv">42</span><span class="ot">,</span><span class="dv">43</span><span class="ot">,</span><span class="dv">44</span><span class="ot">,</span><span class="dv">45</span><span class="ot">,</span><span class="dv">46</span><span class="ot">,</span><span class="dv">47</span><span class="ot">,</span><span class="dv">48</span><span class="ot">,</span><span class="dv">49</span><span class="ot">,</span><span class="dv">50</span><span class="ot">,</span><span class="dv">51</span><span class="ot">,</span><span class="dv">52</span><span class="ot">,</span><span class="dv">53</span><span class="ot">,</span><span class="dv">54</span><span class="ot">,</span><span class="dv">55</span><span class="ot">,</span><span class="dv">56</span><span class="ot">,</span><span class="dv">57</span><span class="ot">,</span><span class="dv">58</span><span class="ot">,</span><span class="dv">59</span><span class="ot">,</span><span class="dv">60</span><span class="ot">,</span><span class="dv">61</span><span class="ot">,</span><span class="dv">62</span><span class="ot">,</span><span class="dv">63</span><span class="ot">,</span><span class="dv">64</span><span class="ot">,</span><span class="dv">65</span><span class="ot">,</span><span class="dv">66</span><span class="ot">,</span><span class="dv">67</span><span class="ot">,</span><span class="dv">68</span><span class="ot">,</span><span class="dv">69</span><span class="ot">,</span><span class="dv">70</span><span class="ot">,</span><span class="dv">71</span><span class="ot">,</span><span class="dv">72</span><span class="ot">,</span><span class="dv">73</span><span class="ot">,</span><span class="dv">74</span><span class="ot">,</span><span class="dv">75</span><span class="ot">,</span><span class="dv">76</span><span class="ot">,</span><span class="dv">77</span><span class="ot">,</span><span class="dv">78</span><span class="ot">,</span><span class="dv">79</span><span class="ot">,</span><span class="dv">80</span><span class="ot">,</span><span class="dv">81</span><span class="ot">,</span><span class="dv">82</span><span class="ot">,</span><span class="dv">83</span><span class="ot">,</span><span class="dv">84</span><span class="ot">,</span><span class="dv">85</span><span class="ot">,</span><span class="dv">86</span><span class="ot">,</span><span class="dv">87</span><span class="ot">,</span><span class="dv">88</span><span class="ot">,</span><span class="dv">89</span><span class="ot">,</span><span class="dv">90</span><span class="ot">,</span><span class="dv">91</span><span class="ot">,</span><span class="dv">92</span><span class="ot">,</span><span class="dv">93</span><span class="ot">,</span><span class="dv">94</span><span class="ot">,</span><span class="dv">95</span><span class="ot">,</span><span class="dv">96</span><span class="ot">,</span><span class="dv">97</span><span class="ot">,</span><span class="dv">98</span><span class="ot">,</span><span class="dv">99</span><span class="ot">,</span><span class="dv">100</span><span class="ot">,</span><span class="dv">101</span><span class="ot">,</span><span class="dv">102</span><span class="ot">,</span><span class="dv">103</span><span class="ot">,</span><span class="dv">104</span><span class="ot">,</span><span class="dv">105</span><span class="ot">,</span><span class="dv">106</span><span class="ot">,</span><span class="dv">107</span><span class="ot">,</span><span class="dv">108</span><span class="ot">,</span><span class="dv">109</span><span class="ot">,</span><span class="dv">110</span><span class="ot">,</span><span class="dv">111</span><span class="ot">,</span><span class="dv">112</span><span class="ot">,</span><span class="dv">113</span><span class="ot">,</span><span class="dv">114</span><span class="ot">,</span><span class="dv">115</span><span class="ot">,</span><span class="dv">116</span><span class="ot">,</span><span class="dv">117</span><span class="ot">,</span><span class="dv">118</span><span class="ot">,</span><span class="dv">119</span><span class="ot">,</span><span class="dv">120</span><span class="ot">,</span><span class="dv">121</span><span class="ot">,</span><span class="dv">122</span><span class="ot">,</span><span class="dv">123</span><span class="ot">,</span><span class="dv">124</span><span class="ot">,</span><span class="dv">125</span><span class="ot">,</span><span class="dv">126</span><span class="ot">,</span><span class="dv">127</span><span class="ot">,</span><span class="dv">128</span><span class="ot">,</span><span class="dv">129</span><span class="ot">,</span><span class="dv">130</span><span class="ot">,</span><span class="dv">131</span><span class="ot">,</span><span class="dv">132</span><span class="ot">,</span><span class="dv">133</span><span class="ot">,</span><span class="dv">134</span><span class="ot">,</span><span class="dv">135</span><span class="ot">,</span><span class="dv">136</span><span class="ot">,</span><span class="dv">137</span><span class="ot">,</span><span class="dv">138</span><span class="ot">,</span><span class="dv">139</span><span class="ot">,</span><span class="dv">140</span><span class="ot">,</span><span class="dv">141</span><span class="ot">,</span><span class="dv">142</span><span class="ot">,</span><span class="dv">143</span><span class="ot">,</span><span class="dv">144</span><span class="ot">,</span><span class="dv">145</span><span class="ot">,</span><span class="dv">146</span><span class="ot">,</span><span class="dv">147</span><span class="ot">,</span><span class="dv">148</span><span class="ot">,</span><span class="dv">149</span><span class="ot">,</span><span class="dv">150</span><span class="ot">,</span><span class="dv">151</span><span class="ot">,</span><span class="dv">152</span><span class="ot">,</span><span class="dv">153</span><span class="ot">,</span><span class="dv">154</span><span class="ot">,</span><span class="dv">155</span><span class="ot">,</span><span class="dv">156</span><span class="ot">,</span><span class="dv">157</span><span class="ot">,</span><span class="dv">158</span><span class="ot">,</span><span class="dv">159</span><span class="ot">,</span><span class="dv">160</span><span class="ot">,</span><span class="dv">161</span><span class="ot">,</span><span class="dv">162</span><span class="ot">,</span><span class="dv">163</span><span class="ot">,</span><span class="dv">164</span><span class="ot">,</span><span class="dv">165</span><span class="ot">,</span><span class="dv">166</span><span class="ot">,</span><span class="dv">167</span><span class="ot">,</span><span class="dv">168</span><span class="ot">,</span><span class="dv">169</span><span class="ot">,</span><span class="dv">170</span><span class="ot">,</span><span class="dv">171</span><span class="ot">,</span><span class="dv">172</span><span class="ot">,</span><span class="dv">173</span><span class="ot">,</span><span class="dv">174</span><span class="ot">,</span><span class="dv">175</span><span class="ot">,</span><span class="dv">176</span><span class="ot">,</span><span class="dv">177</span><span class="ot">,</span><span class="dv">178</span><span class="ot">,</span><span class="dv">179</span><span class="ot">,</span><span class="dv">180</span><span class="ot">,</span><span class="dv">181</span><span class="ot">,</span><span class="dv">182</span><span class="ot">,</span><span class="dv">183</span><span class="ot">,</span><span class="dv">184</span><span class="ot">,</span><span class="dv">185</span><span class="ot">,</span><span class="dv">186</span><span class="ot">,</span><span class="dv">187</span><span class="ot">,</span><span class="dv">188</span><span class="ot">,</span><span class="dv">189</span><span class="ot">,</span><span class="dv">190</span><span class="ot">,</span><span class="dv">191</span><span class="ot">,</span><span class="dv">192</span><span class="ot">,</span><span class="dv">193</span><span class="ot">,</span><span class="dv">194</span><span class="ot">,</span><span class="dv">195</span><span class="ot">,</span><span class="dv">196</span><span class="ot">,</span><span class="dv">197</span><span class="ot">,</span><span class="dv">198</span><span class="ot">,</span><span class="dv">199</span><span class="ot">,</span><span class="dv">200</span><span class="ot">]</span><span class="fu">,</span><span class="dt">&quot;zmin&quot;</span><span class="fu">:</span><span class="kw">null</span><span class="fu">,</span><span class="dt">&quot;type&quot;</span><span class="fu">:</span><span class="st">&quot;scatter&quot;</span><span class="fu">,</span><span class="dt">&quot;zmax&quot;</span><span class="fu">:</span><span class="kw">null</span><span class="fu">,</span><span class="dt">&quot;legendgroup&quot;</span><span class="fu">:</span><span class="st">&quot;@worst-case&quot;</span><span class="fu">,</span><span class="dt">&quot;y&quot;</span><span class="fu">:</span><span class="ot">[</span><span class="fl">179.55714255348403</span><span class="ot">,</span><span class="fl">7.617256615599037</span><span class="ot">,</span><span class="fl">7.525722622553834</span><span class="ot">,</span><span class="fl">5.31168790526836</span><span class="ot">,</span><span class="fl">6.299228255323154</span><span class="ot">,</span><span class="fl">5.188472316530552</span><span class="ot">,</span><span class="fl">7.18057639984486</span><span class="ot">,</span><span class="fl">6.085011997998033</span><span class="ot">,</span><span class="fl">5.014006923259489</span><span class="ot">,</span><span class="fl">7.933487381343173</span><span class="ot">,</span><span class="fl">6.865700258436011</span><span class="ot">,</span><span class="fl">4.850892835965498</span><span class="ot">,</span><span class="fl">6.718395752727454</span><span class="ot">,</span><span class="fl">8.546256424361605</span><span class="ot">,</span><span class="fl">10.335723833942598</span><span class="ot">,</span><span class="fl">9.298458083083922</span><span class="ot">,</span><span class="fl">4.6014069762813765</span><span class="ot">,</span><span class="fl">8.198203129294868</span><span class="ot">,</span><span class="fl">4.508653309479396</span><span class="ot">,</span><span class="fl">7.141862724068933</span><span class="ot">,</span><span class="fl">5.30347788585389</span><span class="ot">,</span><span class="fl">2.625797607787855</span><span class="ot">,</span><span class="fl">6.067500618604502</span><span class="ot">,</span><span class="fl">6.867749726481849</span><span class="ot">,</span><span class="fl">3.401239698228746</span><span class="ot">,</span><span class="fl">2.526914076850712</span><span class="ot">,</span><span class="fl">5.006690693602237</span><span class="ot">,</span><span class="fl">4.960425743782115</span><span class="ot">,</span><span class="fl">5.73417577036943</span><span class="ot">,</span><span class="fl">4.058678897855441</span><span class="ot">,</span><span class="fl">2.4133120189114927</span><span class="ot">,</span><span class="fl">3.18907479083044</span><span class="ot">,</span><span class="fl">6.321813023687475</span><span class="ot">,</span><span class="fl">5.48315639419722</span><span class="ot">,</span><span class="fl">6.988585642917328</span><span class="ot">,</span><span class="fl">3.8491406469801577</span><span class="ot">,</span><span class="fl">6.106084234020931</span><span class="ot">,</span><span class="fl">5.297629112676372</span><span class="ot">,</span><span class="fl">7.504560233744957</span><span class="ot">,</span><span class="fl">5.209495252332997</span><span class="ot">,</span><span class="fl">6.642666833464777</span><span class="ot">,</span><span class="fl">2.1961060772747567</span><span class="ot">,</span><span class="fl">4.356565018801954</span><span class="ot">,</span><span class="fl">4.321493031513662</span><span class="ot">,</span><span class="fl">5.00147788234246</span><span class="ot">,</span><span class="fl">6.379523787945341</span><span class="ot">,</span><span class="fl">8.439169301562073</span><span class="ot">,</span><span class="fl">2.7911175798753143</span><span class="ot">,</span><span class="fl">5.539033759345165</span><span class="ot">,</span><span class="fl">4.122373105124852</span><span class="ot">,</span><span class="fl">6.8182605870374005</span><span class="ot">,</span><span class="fl">5.413353995585297</span><span class="ot">,</span><span class="fl">5.372718628464775</span><span class="ot">,</span><span class="fl">1.333173023263332</span><span class="ot">,</span><span class="fl">3.9699385423799494</span><span class="ot">,</span><span class="fl">9.195185514202164</span><span class="ot">,</span><span class="fl">3.912075205838232</span><span class="ot">,</span><span class="fl">4.5310665303541064</span><span class="ot">,</span><span class="fl">1.927936930139333</span><span class="ot">,</span><span class="fl">4.4733875840358</span><span class="ot">,</span><span class="fl">6.436525965947942</span><span class="ot">,</span><span class="fl">7.131483915480636</span><span class="ot">,</span><span class="fl">2.6121965608814928</span><span class="ot">,</span><span class="fl">0.6578518249228695</span><span class="ot">,</span><span class="fl">7.289961035314904</span><span class="ot">,</span><span class="fl">4.006017120294695</span><span class="ot">,</span><span class="fl">4.036137531189118</span><span class="ot">,</span><span class="fl">7.455641551258222</span><span class="ot">,</span><span class="fl">5.463676724370931</span><span class="ot">,</span><span class="fl">6.882130821616819</span><span class="ot">,</span><span class="fl">4.854836907077882</span><span class="ot">,</span><span class="fl">7.688630547380946</span><span class="ot">,</span><span class="fl">4.931291009382499</span><span class="ot">,</span><span class="fl">3.550306252760962</span><span class="ot">,</span><span class="fl">4.29445017212763</span><span class="ot">,</span><span class="fl">2.886055649166049</span><span class="ot">,</span><span class="fl">5.81903773101223</span><span class="ot">,</span><span class="fl">9.533442709673649</span><span class="ot">,</span><span class="fl">4.43641543575403</span><span class="ot">,</span><span class="fl">2.982257473625129</span><span class="ot">,</span><span class="fl">4.510977018634206</span><span class="ot">,</span><span class="fl">8.340208998455415</span><span class="ot">,</span><span class="fl">3.823406657593347</span><span class="ot">,</span><span class="fl">8.484005712842535</span><span class="ot">,</span><span class="fl">6.223840209606514</span><span class="ot">,</span><span class="fl">3.139218356430616</span><span class="ot">,</span><span class="fl">3.958748456002338</span><span class="ot">,</span><span class="fl">4.792913012966574</span><span class="ot">,</span><span class="fl">5.642107553854771</span><span class="ot">,</span><span class="fl">4.066714301530057</span><span class="ot">,</span><span class="fl">4.104023601011587</span><span class="ot">,</span><span class="fl">7.455641669165559</span><span class="ot">,</span><span class="fl">3.3445877426463047</span><span class="ot">,</span><span class="fl">0.8440361354971719</span><span class="ot">,</span><span class="fl">2.5562209872980572</span><span class="ot">,</span><span class="fl">6.8821309074465</span><span class="ot">,</span><span class="fl">3.4744746237804773</span><span class="ot">,</span><span class="fl">7.017074633838866</span><span class="ot">,</span><span class="fl">6.200731983638254</span><span class="ot">,</span><span class="fl">6.262739294441876</span><span class="ot">,</span><span class="fl">1.8074294592597804</span><span class="ot">,</span><span class="fl">6.39055028224039</span><span class="ot">,</span><span class="fl">4.61173777982975</span><span class="ot">,</span><span class="fl">4.659776707738745</span><span class="ot">,</span><span class="fl">4.708826982578159</span><span class="ot">,</span><span class="fl">0.9517854009537752</span><span class="ot">,</span><span class="fl">9.620182371315845</span><span class="ot">,</span><span class="fl">5.8348504557250385</span><span class="ot">,</span><span class="fl">2.949485687439731</span><span class="ot">,</span><span class="fl">2.9822577457727437</span><span class="ot">,</span><span class="fl">6.031530778555215</span><span class="ot">,</span><span class="fl">2.033358098509342</span><span class="ot">,</span><span class="fl">3.0850942035862996</span><span class="ot">,</span><span class="fl">4.161289267970764</span><span class="ot">,</span><span class="fl">6.315367478288135</span><span class="ot">,</span><span class="fl">3.1952761220121983</span><span class="ot">,</span><span class="fl">3.233773418279687</span><span class="ot">,</span><span class="fl">3.27320967310465</span><span class="ot">,</span><span class="fl">1.1045410479824804</span><span class="ot">,</span><span class="fl">3.355039901637411</span><span class="ot">,</span><span class="fl">3.3975087542366267</span><span class="ot">,</span><span class="fl">5.735109620775166</span><span class="ot">,</span><span class="fl">4.647673652080794</span><span class="ot">,</span><span class="fl">3.5316209210013483</span><span class="ot">,</span><span class="fl">2.3858067722585674</span><span class="ot">,</span><span class="fl">1.2090246398651403</span><span class="ot">,</span><span class="fl">4.902340660056316</span><span class="ot">,</span><span class="fl">1.242608651412787</span><span class="ot">,</span><span class="fl">1.2601101785310398</span><span class="ot">,</span><span class="fl">1.2781117492845049</span><span class="ot">,</span><span class="fl">1.2966351046010771</span><span class="ot">,</span><span class="fl">2.6314044842028794</span><span class="ot">,</span><span class="fl">5.341356163914958</span><span class="ot">,</span><span class="fl">5.422285788164206</span><span class="ot">,</span><span class="fl">5.5057055546551705</span><span class="ot">,</span><span class="fl">1.3979347034468044</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="fl">5.772110610711956</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="fl">1.4911303326074028</span><span class="ot">,</span><span class="fl">4.549206415167074</span><span class="ot">,</span><span class="fl">6.17018712197775</span><span class="ot">,</span><span class="fl">1.5696108603649468</span><span class="ot">,</span><span class="fl">3.1952767459743763</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="fl">3.441067213039825</span><span class="ot">,</span><span class="fl">3.508539110757653</span><span class="ot">,</span><span class="fl">1.789356323579214</span><span class="ot">,</span><span class="fl">1.8258737889949115</span><span class="ot">,</span><span class="fl">3.7278227673019266</span><span class="ot">,</span><span class="fl">1.9035705218716905</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="fl">6.100071845018958</span><span class="ot">,</span><span class="fl">2.0806467895025977</span><span class="ot">,</span><span class="fl">2.130185983382043</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="fl">4.588089321799631</span><span class="ot">,</span><span class="fl">4.708828484473441</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="fl">2.4852169125297707</span><span class="ot">,</span><span class="fl">5.112442250270646</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="fl">5.422287153110956</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="fl">3.0850966390603904</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="fl">4.066717908538319</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="fl">4.473389527719681</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="fl">6.8821360327960415</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="fl">11.183466191190988</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">,</span><span class="dv">0</span><span class="ot">]</span><span class="fu">}</span><span class="ot">]</span><span class="fu">}</span></span></code></pre></div>
+</div>
+</div>
+<div class="cell code" data-execution_count="5">
+<div class="sourceCode" id="cb9"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># 2. lro + moments model</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">function</span> lro_moment_nv_model(sample<span class="op">::</span>Sample)</span>
+<span id="cb9-3"><a href="#cb9-3"></a>    h<span class="op">,</span> b<span class="op">,</span> N<span class="op">,</span> n <span class="op">=</span> sample.h<span class="op">,</span> sample.b<span class="op">,</span> sample.N<span class="op">,</span> sample.n</span>
+<span id="cb9-4"><a href="#cb9-4"></a>    H<span class="op">,</span> u<span class="op">,</span> sig <span class="op">=</span> sample.H.weights<span class="op">,</span> sample.mu<span class="op">,</span> sample.sig </span>
+<span id="cb9-5"><a href="#cb9-5"></a>    Hs <span class="op">=</span> [i <span class="kw">for</span> i <span class="kw">in</span> H <span class="kw">if</span> i <span class="op">&gt;</span> <span class="fl">0</span>]</span>
+<span id="cb9-6"><a href="#cb9-6"></a>    gamma <span class="op">=</span> sum(Hs <span class="op">.*</span> (log.(Hs<span class="op">./</span>N))) <span class="op">-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span> <span class="op">*</span> quantile.(Gamma(n<span class="op">-</span><span class="fl">1</span>)<span class="op">,</span> [<span class="fl">0.95</span>])[<span class="fl">1</span>]</span>
+<span id="cb9-7"><a href="#cb9-7"></a>    model <span class="op">=</span> JuMP.Model()</span>
+<span id="cb9-8"><a href="#cb9-8"></a>    <span class="pp">@variable</span>(model<span class="op">,</span> theta)</span>
+<span id="cb9-9"><a href="#cb9-9"></a>    <span class="pp">@variable</span>(model<span class="op">,</span> beta <span class="op">&gt;=</span> <span class="fl">0</span>)</span>
+<span id="cb9-10"><a href="#cb9-10"></a>    <span class="pp">@variable</span>(model<span class="op">,</span> q[<span class="fl">1</span><span class="op">:</span>n] <span class="op">&gt;=</span> <span class="fl">0</span>)</span>
+<span id="cb9-11"><a href="#cb9-11"></a>    <span class="pp">@variable</span>(model<span class="op">,</span> x <span class="op">&gt;=</span> <span class="fl">0</span>)</span>
+<span id="cb9-12"><a href="#cb9-12"></a>    <span class="pp">@variable</span>(model<span class="op">,</span> a)</span>
+<span id="cb9-13"><a href="#cb9-13"></a>    <span class="pp">@variable</span>(model<span class="op">,</span> w)</span>
+<span id="cb9-14"><a href="#cb9-14"></a></span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="pp">@constraint</span>(model<span class="op">,</span> q .<span class="op">+</span> b <span class="op">*</span> (d .<span class="op">-</span> x) .<span class="op">+</span> theta .<span class="op">+</span> (d <span class="op">.*</span> a) .<span class="op">+</span> (d <span class="op">.*</span> d <span class="op">.*</span> w) .<span class="op">&lt;=</span> <span class="fl">0</span>)</span>
+<span id="cb9-16"><a href="#cb9-16"></a>    <span class="pp">@constraint</span>(model<span class="op">,</span> q .<span class="op">+</span> h <span class="op">*</span> (x .<span class="op">-</span> d) .<span class="op">+</span> theta .<span class="op">+</span> (d <span class="op">.*</span> a) .<span class="op">+</span> (d <span class="op">.*</span> d <span class="op">.*</span> w) .<span class="op">&lt;=</span> <span class="fl">0</span>)</span>
+<span id="cb9-17"><a href="#cb9-17"></a></span>
+<span id="cb9-18"><a href="#cb9-18"></a>    <span class="pp">@variable</span>(model<span class="op">,</span> t[<span class="fl">1</span><span class="op">:</span>n])</span>
+<span id="cb9-19"><a href="#cb9-19"></a>    <span class="pp">@constraint</span>(model<span class="op">,</span> KL_DEV[i<span class="op">=</span><span class="fl">1</span><span class="op">:</span>n]<span class="op">,</span> [t[i]<span class="op">,</span> H[i] <span class="op">*</span> beta<span class="op">,</span> q[i]] <span class="kw">in</span> MOI.ExponentialCone())</span>
+<span id="cb9-20"><a href="#cb9-20"></a>    obj_expr <span class="op">=</span> </span>
+<span id="cb9-21"><a href="#cb9-21"></a>    <span class="kw">begin</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a>        theta <span class="op">+</span> a <span class="op">*</span> u <span class="op">+</span> w <span class="op">*</span> (u<span class="op">^</span><span class="fl">2</span> <span class="op">+</span> sig<span class="op">^</span><span class="fl">2</span>) <span class="op">+</span> beta <span class="op">*</span> (gamma <span class="op">+</span> N) <span class="op">+</span> dot(ones(n)<span class="op">,</span> t)</span>
+<span id="cb9-23"><a href="#cb9-23"></a>    <span class="kw">end</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a>    <span class="pp">@objective</span>(model<span class="op">,</span> Max<span class="op">,</span> obj_expr)</span>
+<span id="cb9-25"><a href="#cb9-25"></a>    set_optimizer(model<span class="op">,</span> Mosek.Optimizer)</span>
+<span id="cb9-26"><a href="#cb9-26"></a>    optimize<span class="op">!</span>(model)</span>
+<span id="cb9-27"><a href="#cb9-27"></a>    x_sol <span class="op">=</span> value.(x)</span>
+<span id="cb9-28"><a href="#cb9-28"></a>    p_sol <span class="op">=</span> value.(beta) <span class="op">.*</span> H <span class="op">./</span> value.(q)</span>
+<span id="cb9-29"><a href="#cb9-29"></a>    <span class="kw">return</span> Sol(x_sol<span class="op">,</span> model<span class="op">,</span> p_sol)</span>
+<span id="cb9-30"><a href="#cb9-30"></a><span class="kw">end</span></span></code></pre></div>
+<div class="output execute_result" data-execution_count="5">
+<pre><code>lro_moment_nv_model (generic function with 1 method)</code></pre>
+</div>
+</div>
+<section id="wrap-up-results" class="cell markdown">
+<h4>Wrap up results</h4>
+</section>
+<div class="cell code" data-execution_count="6">
+<div class="sourceCode" id="cb11"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1"></a>samples <span class="op">=</span> <span class="dt">Dict</span>(</span>
+<span id="cb11-2"><a href="#cb11-2"></a>    <span class="st">&quot;normal&quot;</span> <span class="op">=&gt;</span> sample1<span class="op">,</span> </span>
+<span id="cb11-3"><a href="#cb11-3"></a>    <span class="st">&quot;exp&quot;</span> <span class="op">=&gt;</span> sample2</span>
+<span id="cb11-4"><a href="#cb11-4"></a>)</span>
+<span id="cb11-5"><a href="#cb11-5"></a>models <span class="op">=</span> <span class="dt">Dict</span>(</span>
+<span id="cb11-6"><a href="#cb11-6"></a>    <span class="st">&quot;lro&quot;</span> <span class="op">=&gt;</span> lro_nv_model<span class="op">,</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>    <span class="st">&quot;lro_mm&quot;</span> <span class="op">=&gt;</span> lro_moment_nv_model</span>
+<span id="cb11-8"><a href="#cb11-8"></a>)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="6">
+<pre><code>Dict{String,Function} with 2 entries:
+  &quot;lro_mm&quot; =&gt; lro_moment_nv_model
+  &quot;lro&quot;    =&gt; lro_nv_model</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="7" data-scrolled="true">
+<div class="sourceCode" id="cb13"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1"></a>data <span class="op">=</span> []</span>
+<span id="cb13-2"><a href="#cb13-2"></a>results <span class="op">=</span> <span class="dt">Dict</span>()</span>
+<span id="cb13-3"><a href="#cb13-3"></a>data <span class="op">=</span> [(v <span class="op">=</span> samples[k]<span class="op">;</span> </span>
+<span id="cb13-4"><a href="#cb13-4"></a>        eval <span class="op">=</span> Eval(models[m](v)<span class="op">,</span> v<span class="op">,</span> d)<span class="op">;</span> </span>
+<span id="cb13-5"><a href="#cb13-5"></a>        results[k<span class="op">,</span> m] <span class="op">=</span> eval<span class="op">;</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>        a <span class="op">=</span> [eval.sol.x eval.obj_true eval.obj_worse]) </span>
+<span id="cb13-7"><a href="#cb13-7"></a>    <span class="kw">for</span> k <span class="kw">in</span> [<span class="st">&quot;normal&quot;</span><span class="op">,</span> <span class="st">&quot;exp&quot;</span>] <span class="kw">for</span> m <span class="kw">in</span> [<span class="st">&quot;lro&quot;</span><span class="op">,</span> <span class="st">&quot;lro_mm&quot;</span>]]</span>
+<span id="cb13-8"><a href="#cb13-8"></a>data <span class="op">=</span> vcat(data<span class="op">...</span>)</span></code></pre></div>
+<div class="output stream stdout">
+<pre><code>Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1003            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer started.
+Presolve started.
+Linear dependency checker started.
+Linear dependency checker terminated.
+Eliminator started.
+Freed constraints in eliminator : 0
+Eliminator terminated.
+Eliminator - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - number                 : 0               
+Presolve terminated. Time: 0.00    
+Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1003            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer  - threads                : 12              
+Optimizer  - solved problem         : the primal      
+Optimizer  - Constraints            : 560
+Optimizer  - Cones                  : 201
+Optimizer  - Scalar variables       : 1003              conic                  : 602             
+Optimizer  - Semi-definite variables: 0                 scalarized             : 0               
+Factor     - setup time             : 0.00              dense det. time        : 0.00            
+Factor     - ML order time          : 0.00              GP order time          : 0.00            
+Factor     - nonzeros before factor : 1.49e+04          after factor           : 1.52e+04        
+Factor     - dense dim.             : 4                 flops                  : 1.58e+06        
+ITE PFEAS    DFEAS    GFEAS    PRSTATUS   POBJ              DOBJ              MU       TIME  
+0   2.0e+02  2.2e+01  1.8e+02  0.00e+00   -1.835571490e+02  0.000000000e+00   1.0e+00  0.00  
+1   1.3e+02  1.4e+01  1.5e+02  -1.00e+00  -3.989615636e+02  -2.159883074e+02  6.6e-01  0.00  
+2   7.2e+01  7.7e+00  1.1e+02  -9.98e-01  -7.824056883e+02  -6.008989258e+02  3.6e-01  0.01  
+3   2.3e+01  2.5e+00  6.2e+01  -9.94e-01  -3.609534082e+03  -3.435781177e+03  1.2e-01  0.01  
+4   1.2e+01  1.3e+00  4.3e+01  -9.29e-01  -6.403360798e+03  -6.245779702e+03  6.1e-02  0.01  
+5   2.8e+00  2.9e-01  1.3e+01  -7.15e-01  -9.520306839e+03  -9.448357156e+03  1.4e-02  0.01  
+6   6.0e-01  6.5e-02  1.8e+00  3.07e-01   -2.608706123e+03  -2.589949885e+03  3.0e-03  0.01  
+7   9.2e-02  9.9e-03  1.1e-01  8.07e-01   -4.567125634e+02  -4.534855206e+02  4.6e-04  0.01  
+8   2.6e-02  2.7e-03  1.5e-02  1.00e+00   -1.768516712e+02  -1.759347962e+02  1.3e-04  0.01  
+9   8.1e-03  8.7e-04  2.5e-03  1.11e+00   -9.201516567e+01  -9.173400712e+01  4.0e-05  0.01  
+10  3.4e-03  3.6e-04  6.9e-04  9.65e-01   -6.915641721e+01  -6.903698977e+01  1.7e-05  0.01  
+11  1.6e-03  1.7e-04  2.1e-04  9.79e-01   -5.895075108e+01  -5.889592367e+01  7.7e-06  0.01  
+12  7.7e-04  8.2e-05  7.4e-05  1.01e+00   -5.475841261e+01  -5.473144813e+01  3.8e-06  0.01  
+13  3.3e-04  3.6e-05  2.1e-05  9.96e-01   -5.259406247e+01  -5.258235916e+01  1.7e-06  0.01  
+14  8.6e-05  9.2e-06  2.8e-06  9.92e-01   -5.134501011e+01  -5.134197255e+01  4.3e-07  0.01  
+15  8.2e-06  8.8e-07  8.2e-08  9.98e-01   -5.094834719e+01  -5.094805872e+01  4.1e-08  0.01  
+16  4.9e-07  5.2e-08  1.2e-09  9.99e-01   -5.090962356e+01  -5.090960643e+01  2.4e-09  0.01  
+17  1.1e-08  1.2e-09  4.2e-12  1.00e+00   -5.090725476e+01  -5.090725436e+01  5.6e-11  0.02  
+Optimizer terminated. Time: 0.02    
+
+Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1005            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer started.
+Presolve started.
+Linear dependency checker started.
+Linear dependency checker terminated.
+Eliminator started.
+Freed constraints in eliminator : 0
+Eliminator terminated.
+Eliminator - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - number                 : 0               
+Presolve terminated. Time: 0.00    
+Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1005            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer  - threads                : 12              
+Optimizer  - solved problem         : the primal      
+Optimizer  - Constraints            : 560
+Optimizer  - Cones                  : 201
+Optimizer  - Scalar variables       : 1005              conic                  : 604             
+Optimizer  - Semi-definite variables: 0                 scalarized             : 0               
+Factor     - setup time             : 0.00              dense det. time        : 0.00            
+Factor     - ML order time          : 0.00              GP order time          : 0.00            
+Factor     - nonzeros before factor : 1.57e+04          after factor           : 1.64e+04        
+Factor     - dense dim.             : 6                 flops                  : 1.64e+06        
+ITE PFEAS    DFEAS    GFEAS    PRSTATUS   POBJ              DOBJ              MU       TIME  
+0   2.3e+00  4.9e+03  1.8e+02  0.00e+00   -1.835571490e+02  0.000000000e+00   1.0e+00  0.00  
+1   1.4e+00  3.0e+03  1.4e+02  -8.85e-01  -1.759083628e+02  1.253673382e-01   6.0e-01  0.00  
+2   5.2e-01  1.1e+03  7.3e+01  -8.12e-01  -1.493340599e+02  8.721907858e-02   2.3e-01  0.01  
+3   3.2e-01  6.9e+02  4.7e+01  -4.62e-01  -1.241687344e+02  4.918787713e-02   1.4e-01  0.01  
+4   9.8e-02  2.1e+02  1.3e+01  -1.80e-01  -6.145318972e+01  -4.546293609e-01  4.3e-02  0.01  
+5   4.9e-02  1.1e+02  5.0e+00  4.30e-01   -3.717216780e+01  -1.689709475e+00  2.1e-02  0.01  
+6   3.6e-02  7.9e+01  3.3e+00  6.52e-01   -3.036190665e+01  -2.821187711e+00  1.6e-02  0.01  
+7   1.3e-02  2.7e+01  7.3e-01  7.18e-01   -1.723287775e+01  -6.800197966e+00  5.5e-03  0.01  
+8   4.9e-03  1.1e+01  1.9e-01  8.55e-01   -1.694069638e+01  -1.262668888e+01  2.2e-03  0.01  
+9   1.6e-03  3.5e+00  3.8e-02  9.17e-01   -2.487301088e+01  -2.343371479e+01  7.0e-04  0.01  
+10  5.9e-04  1.3e+00  8.7e-03  9.65e-01   -3.437238333e+01  -3.383444163e+01  2.6e-04  0.01  
+11  3.3e-04  7.1e-01  3.7e-03  9.13e-01   -3.679711609e+01  -3.648876839e+01  1.4e-04  0.01  
+12  1.1e-04  2.4e-01  7.7e-04  9.28e-01   -3.906203099e+01  -3.895386696e+01  4.9e-05  0.01  
+13  4.2e-05  9.0e-02  1.8e-04  9.42e-01   -3.992301273e+01  -3.988173061e+01  1.8e-05  0.01  
+14  1.7e-05  3.6e-02  4.8e-05  9.38e-01   -4.021501176e+01  -4.019783292e+01  7.4e-06  0.01  
+15  8.5e-06  1.8e-02  1.8e-05  9.62e-01   -4.031308332e+01  -4.030427480e+01  3.7e-06  0.01  
+16  5.2e-06  1.1e-02  8.5e-06  9.86e-01   -4.035941179e+01  -4.035402228e+01  2.3e-06  0.02  
+17  4.4e-07  9.4e-04  2.1e-07  9.95e-01   -4.043109274e+01  -4.043064209e+01  1.9e-07  0.02  
+18  2.1e-08  5.4e-05  2.9e-09  9.95e-01   -4.043903227e+01  -4.043900654e+01  1.1e-08  0.02  
+19  7.1e-10  1.8e-06  1.8e-11  9.96e-01   -4.043952255e+01  -4.043952169e+01  3.6e-10  0.02  
+20  5.6e-11  1.8e-08  1.7e-14  1.00e+00   -4.043954026e+01  -4.043954025e+01  3.6e-12  0.02  
+Optimizer terminated. Time: 0.02    
+
+Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1003            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer started.
+Presolve started.
+Linear dependency checker started.
+Linear dependency checker terminated.
+Eliminator started.
+Freed constraints in eliminator : 0
+Eliminator terminated.
+Eliminator - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - number                 : 0               
+Presolve terminated. Time: 0.00    
+Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1003            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer  - threads                : 12              
+Optimizer  - solved problem         : the primal      
+Optimizer  - Constraints            : 557
+Optimizer  - Cones                  : 201
+Optimizer  - Scalar variables       : 1003              conic                  : 602             
+Optimizer  - Semi-definite variables: 0                 scalarized             : 0               
+Factor     - setup time             : 0.00              dense det. time        : 0.00            
+Factor     - ML order time          : 0.00              GP order time          : 0.00            
+Factor     - nonzeros before factor : 1.44e+04          after factor           : 1.47e+04        
+Factor     - dense dim.             : 4                 flops                  : 1.49e+06        
+ITE PFEAS    DFEAS    GFEAS    PRSTATUS   POBJ              DOBJ              MU       TIME  
+0   2.0e+02  2.7e+02  3.8e+02  0.00e+00   -3.813651763e+02  0.000000000e+00   1.0e+00  0.00  
+1   6.1e+01  8.1e+01  2.1e+02  -9.99e-01  -1.575752734e+03  -1.197478623e+03  3.0e-01  0.00  
+2   1.0e+01  1.3e+01  8.2e+01  -9.87e-01  -1.049503045e+04  -1.015257754e+04  4.9e-02  0.01  
+3   2.7e+00  3.6e+00  2.4e+01  -6.06e-01  -6.269265671e+03  -6.102343978e+03  1.3e-02  0.01  
+4   8.1e-01  1.1e+00  4.9e+00  2.50e-01   -2.625761751e+03  -2.561054962e+03  4.0e-03  0.01  
+5   1.5e-01  2.0e-01  4.2e-01  7.12e-01   -6.382790202e+02  -6.247756165e+02  7.5e-04  0.01  
+6   3.2e-02  4.3e-02  4.0e-02  9.79e-01   -1.945166950e+02  -1.916269352e+02  1.6e-04  0.01  
+7   1.0e-02  1.3e-02  7.2e-03  1.06e+00   -1.048601225e+02  -1.039728871e+02  5.0e-05  0.01  
+8   4.0e-03  5.3e-03  2.0e-03  9.06e-01   -7.478417327e+01  -7.440746021e+01  2.0e-05  0.01  
+9   1.9e-03  2.5e-03  6.8e-04  8.90e-01   -6.182279303e+01  -6.163627527e+01  9.5e-06  0.01  
+10  1.0e-03  1.3e-03  2.6e-04  9.74e-01   -5.611241508e+01  -5.601460415e+01  5.0e-06  0.01  
+11  4.8e-04  6.4e-04  8.6e-05  9.90e-01   -5.291059352e+01  -5.286350318e+01  2.4e-06  0.01  
+12  1.2e-04  1.7e-04  1.1e-05  9.95e-01   -5.071712829e+01  -5.070490733e+01  6.2e-07  0.01  
+13  3.5e-05  4.6e-05  1.7e-06  9.98e-01   -5.016046431e+01  -5.015705207e+01  1.7e-07  0.01  
+14  2.4e-06  3.2e-06  3.0e-08  1.00e+00   -4.995942500e+01  -4.995919178e+01  1.2e-08  0.01  
+15  1.8e-07  1.1e-07  1.9e-10  1.00e+00   -4.994518262e+01  -4.994517471e+01  4.0e-10  0.01  
+16  9.7e-08  2.7e-09  7.5e-13  1.00e+00   -4.994467663e+01  -4.994467643e+01  1.0e-11  0.02  
+17  6.4e-09  1.8e-10  1.3e-14  1.00e+00   -4.994466488e+01  -4.994466487e+01  6.7e-13  0.02  
+Optimizer terminated. Time: 0.02    
+
+Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1005            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer started.
+Presolve started.
+Linear dependency checker started.
+Linear dependency checker terminated.
+Eliminator started.
+Freed constraints in eliminator : 0
+Eliminator terminated.
+Eliminator - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - tries                  : 1                 time                   : 0.00            
+Lin. dep.  - number                 : 0               
+Presolve terminated. Time: 0.00    
+Problem
+  Name                   :                 
+  Objective sense        : max             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 1000            
+  Cones                  : 200             
+  Scalar variables       : 1005            
+  Matrix variables       : 0               
+  Integer variables      : 0               
+
+Optimizer  - threads                : 12              
+Optimizer  - solved problem         : the primal      
+Optimizer  - Constraints            : 557
+Optimizer  - Cones                  : 201
+Optimizer  - Scalar variables       : 1005              conic                  : 604             
+Optimizer  - Semi-definite variables: 0                 scalarized             : 0               
+Factor     - setup time             : 0.00              dense det. time        : 0.00            
+Factor     - ML order time          : 0.00              GP order time          : 0.00            
+Factor     - nonzeros before factor : 1.52e+04          after factor           : 1.59e+04        
+Factor     - dense dim.             : 6                 flops                  : 1.56e+06        
+ITE PFEAS    DFEAS    GFEAS    PRSTATUS   POBJ              DOBJ              MU       TIME  
+0   2.3e+00  4.4e+03  3.8e+02  0.00e+00   -3.813651763e+02  0.000000000e+00   1.0e+00  0.00  
+1   1.3e+00  2.5e+03  2.7e+02  -8.67e-01  -3.612671151e+02  9.145486696e-02   5.6e-01  0.00  
+2   5.7e-01  1.1e+03  1.6e+02  -7.72e-01  -3.117447162e+02  9.139371151e-02   2.5e-01  0.01  
+3   3.5e-01  6.8e+02  1.0e+02  -4.54e-01  -2.612883875e+02  5.589665016e-02   1.5e-01  0.01  
+4   6.0e-02  1.2e+02  1.5e+01  -1.85e-01  -8.345479093e+01  -5.192001803e-01  2.6e-02  0.01  
+5   8.1e-03  1.6e+01  8.9e-01  6.33e-01   -1.739752790e+01  -4.162087409e+00  3.5e-03  0.01  
+6   3.5e-03  6.7e+00  2.5e-01  9.53e-01   -2.149219410e+01  -1.576260441e+01  1.5e-03  0.01  
+7   1.1e-03  2.2e+00  4.7e-02  9.50e-01   -3.092014255e+01  -2.897653521e+01  5.0e-04  0.01  
+8   5.7e-04  1.1e+00  1.8e-02  8.81e-01   -3.431858027e+01  -3.328082373e+01  2.5e-04  0.01  
+9   2.5e-04  4.8e-01  5.5e-03  8.11e-01   -3.619043680e+01  -3.569264375e+01  1.1e-04  0.01  
+10  1.2e-04  2.3e-01  1.9e-03  8.24e-01   -3.701229705e+01  -3.675630766e+01  5.2e-05  0.01  
+11  5.8e-05  1.1e-01  6.5e-04  8.95e-01   -3.750361361e+01  -3.737613872e+01  2.5e-05  0.01  
+12  2.6e-05  5.0e-02  2.0e-04  9.41e-01   -3.779593643e+01  -3.773809059e+01  1.1e-05  0.02  
+13  8.9e-06  1.7e-02  4.0e-05  9.84e-01   -3.798025224e+01  -3.796032417e+01  3.9e-06  0.02  
+14  4.7e-07  9.2e-04  5.0e-07  9.97e-01   -3.807826649e+01  -3.807719987e+01  2.1e-07  0.02  
+15  1.4e-08  4.0e-05  4.5e-09  9.96e-01   -3.808482943e+01  -3.808478334e+01  8.9e-09  0.02  
+16  5.0e-09  9.3e-07  1.6e-11  1.00e+00   -3.808514392e+01  -3.808514285e+01  2.1e-10  0.02  
+17  1.1e-09  8.0e-08  4.1e-13  1.00e+00   -3.808515040e+01  -3.808515030e+01  1.8e-11  0.02  
+Optimizer terminated. Time: 0.02    </code></pre>
+</div>
+<div class="output execute_result" data-execution_count="7">
+<pre><code>4×3 Array{Float64,2}:
+ 59.8911  36.9653  42.6789
+ 53.9407  36.5232  40.4394
+ 47.0     31.793   49.9453
+ 32.0     30.645   38.0847</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="8">
+<div class="sourceCode" id="cb16"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1"></a>objective_value(results[<span class="st">&quot;exp&quot;</span><span class="op">,</span> <span class="st">&quot;lro_mm&quot;</span>].sol.model)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="8">
+<pre><code>-38.08515039579801</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="11">
+<div class="sourceCode" id="cb18"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">using</span> DataFrames</span></code></pre></div>
+<div class="output stream stderr">
+<pre><code>┌ Info: Precompiling DataFrames [a93c6f00-e57d-5684-b7b6-d8193f3e46c0]
+└ @ Base loading.jl:1260</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="12">
+<div class="sourceCode" id="cb20"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1"></a>data</span></code></pre></div>
+<div class="output execute_result" data-execution_count="12">
+<pre><code>4×3 Array{Float64,2}:
+ 59.8911  36.9653  42.6789
+ 53.9407  36.5232  40.4394
+ 47.0     31.793   49.9453
+ 32.0     30.645   38.0847</code></pre>
+</div>
+</div>
+<div class="cell code" data-execution_count="17">
+<div class="sourceCode" id="cb22"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb22-1"><a href="#cb22-1"></a>df <span class="op">=</span> DataFrame(</span>
+<span id="cb22-2"><a href="#cb22-2"></a>    Index<span class="op">=</span>[<span class="st">&quot;normal, LRO&quot;</span><span class="op">,</span> <span class="st">&quot;normal, LRO_mm&quot;</span><span class="op">,</span> <span class="st">&quot;Exp, LRO&quot;</span><span class="op">,</span> <span class="st">&quot;Exp, LRO_mm&quot;</span>]<span class="op">,</span> </span>
+<span id="cb22-3"><a href="#cb22-3"></a>    Sol<span class="op">=</span>data[<span class="op">:,</span> <span class="fl">1</span>]<span class="op">,</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>    True_obj<span class="op">=</span>data[<span class="op">:,</span> <span class="fl">2</span>]<span class="op">,</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a>    Worst_obj<span class="op">=</span>data[<span class="op">:,</span> <span class="fl">3</span>]<span class="op">,</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a>)</span></code></pre></div>
+<div class="output execute_result" data-execution_count="17">
+<table class="data-frame"><thead><tr><th></th><th>Index</th><th>Sol</th><th>True_obj</th><th>Worst_obj</th></tr><tr><th></th><th>String</th><th>Float64</th><th>Float64</th><th>Float64</th></tr></thead><tbody><p>4 rows × 4 columns</p><tr><th>1</th><td>normal, LRO</td><td>59.8911</td><td>36.9653</td><td>42.6789</td></tr><tr><th>2</th><td>normal, LRO_mm</td><td>53.9407</td><td>36.5232</td><td>40.4394</td></tr><tr><th>3</th><td>Exp, LRO</td><td>47.0</td><td>31.793</td><td>49.9453</td></tr><tr><th>4</th><td>Exp, LRO_mm</td><td>32.0</td><td>30.645</td><td>38.0847</td></tr></tbody></table>
+</div>
+</div>
+</body>
+</html>
