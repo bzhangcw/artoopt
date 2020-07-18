@@ -3,13 +3,23 @@
 ARTO-optimization
 =================
 
-A collection of optimization models & implementations.
+-  A collection of optimization models & implementations.
 
--  `lr-outlier <./lr-outlier/lr-outlier.md>`__, a simple regression
-   model with outlier selection.
--  `lro-example <./lro-example/lro-example.md>`__, a 1-D newsvendor
-   problem. Reproduce computational experiments in paper Wang et al.
-   (2016)
+-  优化模型 & 优化理论: 论文选读及代码复现
+
+Contents
+--------
+
+-  RO/SP/DRO
+
+   -  `lro-example <./lro-example/lro-example.md>`__, a 1-D newsvendor
+      problem. Reproduce computational experiments in paper Wang et al.
+      (2016)
+
+-  Miscellanea 啥也不是、杂七杂八
+
+   -  `lr-outlier <./lr-outlier/lr-outlier.md>`__, a simple regression
+      model with outlier selection.
 
 Reference
 =========
