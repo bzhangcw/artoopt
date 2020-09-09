@@ -10,6 +10,11 @@ ARTO-optimization
 Contents
 --------
 
+-  Optimization Methods
+
+   -  `qap_lp <./qap_lp/assets/ieee.csl>`__, reading notes for L_p
+      regularization for QAP. Jiang et al. (2016)
+
 -  RO/SP/DRO
 
    -  `lro-example <./lro-example/lro-example.md>`__, a 1-D newsvendor
@@ -26,6 +31,13 @@ Reference
 
 .. container:: references hanging-indent
    :name: refs
+
+   .. container::
+      :name: ref-jiang_l_p-norm_2016
+
+      Jiang B, Liu YF, Wen Z (2016) L_p-norm regularization algorithms
+      for optimization over permutation matrices. *SIAM Journal on
+      Optimization* 26(4):2284–2313.
 
    .. container::
       :name: ref-Wang2016

@@ -9,6 +9,7 @@
 # mathematical programming
 *.lp
 *.mps
+*.dat
 
 # reference
 ref/*.pdf
@@ -176,3 +177,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 \[*\]*
+
+# specific
+qapdata
