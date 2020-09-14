@@ -8,7 +8,7 @@
         "editor.tabSize": 2
     },
     "autoDocstring.docstringFormat": "google",
-    "editor.fontFamily": "'fira code', 'fira code', 'roboto mono'",
+    "editor.fontFamily": "'roboto mono'",
     "editor.fontLigatures": true,
     "editor.fontSize": 13,
     "editor.fontWeight": "400",
