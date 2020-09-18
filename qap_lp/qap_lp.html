@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Chuwen Zhang" />
+  <title>QAP</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="assets/pandoc.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.0/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true });</script>
+  
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">QAP</h1>
+<p class="author">Chuwen Zhang</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#qap-the-problem">QAP, the problem</a>
+<ul>
+<li><a href="#differentiation">Differentiation</a></li>
+</ul></li>
+<li><a href="#mathscr-l_p-regularization"><span class="math inline">\mathscr L_p</span> regularization</a>
+<ul>
+<li><a href="#l_2"><span class="math inline">L_2</span></a>
+<ul>
+<li><a href="#naive">naive</a></li>
+<li><a href="#exact-penalty">exact penalty</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#reference">Reference</a></li>
+</ul>
+</nav>
+<h1 id="qap-the-problem">QAP, the problem</h1>
+<p>QAP, and alternative descriptions, see <span class="citation" data-cites="jiang_l_p-norm_2016"><a href="#ref-jiang_l_p-norm_2016" role="doc-biblioref">1</a></span></p>
+<p><span class="math display">\begin{aligned}
+&amp;\min_X f(X) = \textrm{tr}(A^\top XB X^\top)  \\
+&amp; = \textrm{tr}(X^\top A^\top XB) &amp; x = \textrm{vec}(X)\\
+&amp; = \left &lt;\textrm{vec}(X),  \textrm{vec}(A^\top X B )  \right &gt; \\
+&amp; = \left &lt;\textrm{vec}(X), B^\top \otimes A^\top \cdot \textrm{vec}(X)  \right &gt; \\ 
+&amp; = x^\top (B^\top \otimes A^\top) x\\ 
+\mathbf{s.t.} &amp; \\ 
+&amp;X \in \Pi_{n}
+\end{aligned}</span></p>
+<p>is the optimization problem on permutation matrices:</p>
+<p><span class="math display"> \Pi_{n}=\left\{X \in \mathbb R ^{n \times n} \mid X e =X^{\top} e = e , X_{i j} \in\{0,1\}\right\}</span></p>
+<p>The convex hull of permutation matrices, the Birkhoﬀ polytope, is defined:</p>
+<p><span class="math display">D _{n}=\left\{X \in \mathbb R ^{n \times n} \mid X e =X^{\top} e = e , X \geq 0 \right\}</span></p>
+<p>for the constraints, also equivalently: <span class="math display">\begin{aligned}
+&amp; \textrm{tr}(XX^\top) = \left &lt;x, x \right &gt;_F= n, X \in D_{n}
+\end{aligned}</span></p>
+<h2 id="differentiation">Differentiation</h2>
+<p><span class="math display">\begin{aligned}
+&amp;  \nabla f = A^\top XB + AXB^\top \\
+&amp; \nabla \textrm{tr}(XX^\top) = 2X
+\end{aligned}</span></p>
+<h1 id="mathscr-l_p-regularization"><span class="math inline">\mathscr L_p</span> regularization</h1>
+<p>various form of regularized problem:</p>
+<ul>
+<li><p><span class="math inline">\mathscr L_0</span>: <span class="math inline">f(X) + \sigma ||X||_0</span> is exact to the original problem for efficiently large <span class="math inline">\sigma</span> <span class="citation" data-cites="jiang_l_p-norm_2016"><a href="#ref-jiang_l_p-norm_2016" role="doc-biblioref">1</a></span>, but the problem itself is still NP-hard.</p></li>
+<li><p><span class="math inline">\mathscr L_p</span>: also suggested by <span class="citation" data-cites="jiang_l_p-norm_2016"><a href="#ref-jiang_l_p-norm_2016" role="doc-biblioref">1</a></span>, good in the sense:</p>
+<ul>
+<li>strongly concave and the global optimizer must be at vertices</li>
+<li><strong>local optimizer is a permutation matrix</strong> if <span class="math inline">\sigma, \epsilon</span> satisfies some condition. Also, there is a lower bound for nonzero entries of the KKT points</li>
+</ul></li>
+</ul>
+<p><span class="math display">\min _{X \in D _{n}} F_{\sigma, p, \epsilon}(X):=f(X)+\sigma\|X+\epsilon 1 \|_{p}^{p}</span></p>
+<ul>
+<li><span class="math inline">\mathscr L_2</span>, and is based on the fact that <span class="math inline">\Pi_n = D_n \bigcap \{X:\textrm{tr}(XX^\top) = n\}</span>, <span class="citation" data-cites="xia_efficient_2010"><a href="#ref-xia_efficient_2010" role="doc-biblioref">2</a></span></li>
+</ul>
+<p><span class="math display">\min_Xf(X)+\mu_{0} \cdot \textrm{tr} \left(X X^{\top}\right)</span></p>
+<h2 id="l_2"><span class="math inline">L_2</span></h2>
+<h3 id="naive">naive</h3>
+<p><span class="math display">\begin{aligned}
+&amp;\textrm{tr}(A^\top XB X^\top) + \mu_0 \cdot \textrm{tr}(X X^{\top}) \\
+= &amp; x^\top (B^\top \otimes A^\top + \mu\cdot  \mathbf e_{n\times n}) x\\ 
+\end{aligned} </span> this implies a LD-like method. (but not exactly)</p>
+<h3 id="exact-penalty">exact penalty</h3>
+<p><span class="math display">\begin{aligned}
+L_D &amp; =  f  + \mu_0\cdot | \textrm{tr}(XX^T) -  n| \\
+ &amp;= f  + \mu_0\cdot n - \mu_0\cdot \textrm{tr}(XX^T)
+\end{aligned}</span></p>
+<p>very likely to become a concave function, cannot be solved by conic solver.</p>
+<h1 class="unnumbered" id="reference">Reference</h1>
+<div id="refs" class="references" role="doc-bibliography">
+<div id="ref-jiang_l_p-norm_2016">
+<p>[1] B. Jiang, Y.-F. Liu, and Z. Wen, “L_p-norm regularization algorithms for optimization over permutation matrices,” <em>SIAM Journal on Optimization</em>, vol. 26, no. 4, pp. 2284–2313, 2016.</p>
+</div>
+<div id="ref-xia_efficient_2010">
+<p>[2] Y. Xia, “An efficient continuation method for quadratic assignment problems,” <em>Computers &amp; Operations Research</em>, vol. 37, no. 6, pp. 1027–1032, 2010.</p>
+</div>
+</div>
+</body>
+</html>

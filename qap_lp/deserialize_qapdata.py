@@ -11,7 +11,7 @@ import numpy as np
 import re
 
 
-def main(path):
+def parse(path):
   try:
     f = open(path, 'r')
   except:
@@ -24,9 +24,10 @@ def main(path):
   arr = np.fromiter(data, dtype=np.float).reshape((2, dim, dim))
 
   A, B = arr
+  return A, B
 
 
 if __name__ == "__main__":
   import sys
 
-  main(sys.argv[1])
+  parse(sys.argv[1])

@@ -1,22 +1,18 @@
 ---
-# @license: %MIT License%:~ http://www.opensource.org/licenses/MIT
-# @project: qap_lp
-# @file: /model.md
-# @created: Wednesday, 9th September 2020
-# @author: brentian (chuwzhang@gmail.com)
-# @modified: brentian (chuwzhang@gmail.com>)
-#    Wednesday, 9th September 2020 2:42:09 pm
-# @description: 
-
-
+bibliography: [../ref.bib]
+title: QAP
 ---
 
-## the problem
+# QAP, the problem
 
-QAP,
+QAP, and alternative descriptions, see @jiang_l_p-norm_2016
 
 $$\begin{aligned}
-&\min_X \textrm{tr}(A^\top XB^\top X)  \\
+&\min_X f(X) = \textrm{tr}(A^\top XB X^\top)  \\
+& = \textrm{tr}(X^\top A^\top XB) & x = \textrm{vec}(X)\\
+& = \left <\textrm{vec}(X),  \textrm{vec}(A^\top X B )  \right > \\
+& = \left <\textrm{vec}(X), B^\top \otimes A^\top \cdot \textrm{vec}(X)  \right > \\ 
+& = x^\top (B^\top \otimes A^\top) x\\ 
 \mathbf{s.t.} & \\ 
 &X \in \Pi_{n}
 \end{aligned}$$
@@ -29,3 +25,51 @@ The convex hull of permutation matrices, the Birkhoﬀ polytope, is defined:
 
 $$D _{n}=\left\{X \in \mathbb R ^{n \times n} \mid X e =X^{\top} e = e , X \geq 0 \right\}$$
 
+for the constraints, also equivalently:
+$$\begin{aligned}
+& \textrm{tr}(XX^\top) = \left <x, x \right >_F= n, X \in D_{n}
+\end{aligned}$$
+
+## Differentiation
+
+$$\begin{aligned}
+&  \nabla f = A^\top XB + AXB^\top \\
+& \nabla \textrm{tr}(XX^\top) = 2X
+\end{aligned}$$
+
+# $\mathscr L_p$ regularization
+
+various form of regularized problem:
+
+- $\mathscr L_0$: $f(X) + \sigma ||X||_0$ is exact to the original problem for efficiently large $\sigma$ @jiang_l_p-norm_2016, but the problem itself is still NP-hard.
+  
+- $\mathscr L_p$: also suggested by @jiang_l_p-norm_2016, good in the sense:
+  - strongly concave and the global optimizer must be at vertices
+  - **local optimizer is a permutation matrix** if $\sigma, \epsilon$ satisfies some condition. Also, there is a lower bound for nonzero entries of the KKT points 
+
+$$\min _{X \in D _{n}} F_{\sigma, p, \epsilon}(X):=f(X)+\sigma\|X+\epsilon 1 \|_{p}^{p}$$
+
+- $\mathscr L_2$, and is based on the fact that $\Pi_n =  D_n  \bigcap \{X:\textrm{tr}(XX^\top) = n\}$, @xia_efficient_2010
+
+$$\min_Xf(X)+\mu_{0} \cdot \textrm{tr} \left(X X^{\top}\right)$$
+
+## $L_2$
+
+### naive 
+$$\begin{aligned}
+&\textrm{tr}(A^\top XB X^\top) + \mu_0 \cdot \textrm{tr}(X X^{\top}) \\
+= & x^\top (B^\top \otimes A^\top + \mu\cdot  \mathbf e_{n\times n}) x\\ 
+\end{aligned} $$
+this implies a LD-like method. (but not exactly)
+
+### exact penalty
+
+$$\begin{aligned}
+L_D & =  f  + \mu_0\cdot | \textrm{tr}(XX^T) -  n| \\
+ &= f  + \mu_0\cdot n - \mu_0\cdot \textrm{tr}(XX^T)
+\end{aligned}$$
+
+very likely to become a concave function, cannot be solved by conic solver.
+
+
+# Reference

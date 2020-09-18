@@ -352,7 +352,3 @@ table td {
 .katex {
   font-size: 1em;
 }
-
-.katex .mathdefault {
-  font-family: "Libertinus Serif", "Libertinus Math";
-}
