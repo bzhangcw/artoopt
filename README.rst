@@ -13,7 +13,7 @@ Contents
 -  Optimization Methods
 
    -  `qap_lp <./qap_lp/assets/ieee.csl>`__, reading notes for L_p
-      regularization for QAP. Jiang et al. (2016)
+      regularization for *QAP*. Jiang et al. (2016)
 
 -  RO/SP/DRO
 
