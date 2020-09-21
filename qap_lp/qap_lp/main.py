@@ -29,24 +29,11 @@ if __name__ == "__main__":
   param = QAPParam(A, B, n, m, e, E, ab)
 
   tests = [
-      QAPTest('co_l2_exact', co_gm, *(param, False, 1000)),
+      QAPTest('co_l2_exact', co_gm, *(param, False, 20000)),
       QAPTest('co_l2_georounding', co_gm, *(param, True, 60)),
       QAPTest('co_l2_naive', l2_naive, *(10, param, True))
   ]
-  # # x_co = co_gm(param, False, 60)
-  # # check_obj_val(x_co)
-  # # import pickle as pk
-  # # pk.dump(x_co, open("x_co.pk", 'wb'))
-  # # print(x_co)
-  # x_co_gm = co_gm(param, True, 60)
-  # check_obj_val(x_co_gm)
-  # import pickle as pk
-  # pk.dump(x_co_gm, open("x_co_gm.pk", 'wb'))
-  # print(x_co_gm)
-  # # x_l2_naive = l2_naive(10, param, rd=True)
-  # # check_obj_val(x_l2_naive)
-  # # pk.dump(x_l2_naive, open("x_l2_naive.pk", 'wb'))
-  # # print(x_l2_naive)
+
   objectives = {}
   for t in tests:
     x_sol = t.model(*t.args, **t.kwargs)
