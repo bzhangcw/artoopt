@@ -9,6 +9,10 @@
 # ===
 # geometric rounding
 # ===
+
+import numpy as np
+
+
 def geo_round(x, u, domain=None):
   x_selected = set()
   x_int = []

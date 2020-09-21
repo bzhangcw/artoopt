@@ -53,7 +53,7 @@ $$\min _{X \in D _{n}} F_{\sigma, p, \epsilon}(X):=f(X)+\sigma\|X+\epsilon 1 \|_
 
 $$\min_Xf(X)+\mu_{0} \cdot \textrm{tr} \left(X X^{\top}\right)$$
 
-## $L_2$
+## $\mathscr L_2$
 
 ### naive 
 $$\begin{aligned}
@@ -65,11 +65,32 @@ this implies a LD-like method. (but not exactly)
 ### exact penalty
 
 $$\begin{aligned}
-L_D & =  f  + \mu_0\cdot | \textrm{tr}(XX^T) -  n| \\
- &= f  + \mu_0\cdot n - \mu_0\cdot \textrm{tr}(XX^T)
+F_{\mu} & =  f  + \mu\cdot | \textrm{tr}(XX^T) -  n| \\
+ &= f  + \mu\cdot n - \mu\cdot \textrm{tr}(XX^T)
 \end{aligned}$$
 
-very likely to become a concave function, cannot be solved by conic solver.
+very likely to become a concave function, cannot be directly solved by conic solver.
 
+#### Derivatives
+
+$$\begin{aligned}
+\nabla F_\mu  = A^TXB + AXB^T - 2\mu X
+\end{aligned}$$
+
+Then, 
+
+> projected gradient
+
+by solving:
+
+$$\begin{aligned}
+&\min_D ||\nabla F_\mu - D ||_F^2  \\
+\mathsf{s.t.} & \\
+&D e = D^\top e = 0
+\end{aligned}$$
+
+then $\forall \alpha \gt 0 ,X + \alpha D \in D_n$
+
+alternatively compute a new point then project onto $D_n$.
 
 # Reference
