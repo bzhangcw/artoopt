@@ -69,3 +69,30 @@ class QAPTest(object):
     self.model = model
     self.args = args
     self.kwargs = kwargs
+
+
+def set_mosek_model_params(model, **kwargs):
+  """set template parameters
+  """
+  # unpacking
+  mioMaxTime = kwargs.get('mioMaxTime', 60)
+
+  # settings
+  model.setLogHandler(sys.stdout)
+  model.setSolverParam("mioMaxTime", mioMaxTime)
+  model.acceptedSolutionStatus(mf.AccSolutionStatus.Anything)
+  userCallback = makeUserCallback(model=model)
+  model.setDataCallbackHandler(userCallback)
+  return userCallback
+
+
+def makeUserCallback(model):
+
+  def userCallback(caller, douinf, intinf, lintinf):
+    if caller == callbackcode.new_int_mio:
+      print(f"new mip primal solution found @{douinf[dinfitem.optimizer_time]}")
+    else:
+      pass
+    return 0
+
+  return userCallback
