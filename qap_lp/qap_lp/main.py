@@ -32,13 +32,14 @@ def main(instance_name, **kwargs):
 
   param = QAPParam(A, B, n, m, e, E, ab)
 
+  # running tests
   tests = [
       QAPTest('l2_conic_exact', l2_conic_georound, *(param, False),
               **msk_params),
       QAPTest('l2_conic_georound', l2_conic_georound, *(param, True),
               **msk_params),
       QAPTest('l2_naive_exact', l2_naive, *(10, param, True), **msk_params),
-      QAPTest('l2_naive_georound', l2_naive, *(10, param, True), **msk_params),
+      QAPTest('l2_naive_georound', l2_naive, *(10, param, False), **msk_params),
   ]
 
   objectives = {}
@@ -48,6 +49,7 @@ def main(instance_name, **kwargs):
     objectives[t.name] = obj
 
   print(objectives)
+  return objectives
 
 
 if __name__ == "__main__":

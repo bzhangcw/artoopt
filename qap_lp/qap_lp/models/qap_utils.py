@@ -39,13 +39,13 @@ class QAPDerivative(object):
 
   def __init__(
       self,
-      A,
-      B,
-      n,
-      m,
-      e,
-      E,
-      ab,  # args
+      A=None,
+      B=None,
+      n=None,
+      m=None,
+      e=None,
+      E=None,
+      ab=None,  # args
       param: QAPParam = None):
     if param is None:
       self.A, self.B, self.n, self.m, self.e, self.E, self.ab = A, B, n, m, e, E, ab
