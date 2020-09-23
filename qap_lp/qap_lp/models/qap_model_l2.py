@@ -10,6 +10,14 @@
 from .qap_utils import *
 
 
+class QAPDerivativeL2Penalty(QAPDerivative):
+
+  def partial_f(self, X, mu=1):
+    df = super().partial_f(X)
+    # return df - 2*
+    return df - 2 * mu * X
+
+
 def l2_naive(mu, param=None, rd=False, **kwargs):
   A, B, n, m, e, E, ab = param.A, param.B, param.n, param.m, param.e, param.E, param.ab
   # do Cholesky

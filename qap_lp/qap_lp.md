@@ -71,7 +71,7 @@ F_{\mu} & =  f  + \mu\cdot | \textrm{tr}(XX^T) -  n| \\
 
 very likely to become a concave function, cannot be directly solved by conic solver.
 
-#### Derivatives
+#### derivatives
 
 $$\begin{aligned}
 \nabla F_\mu  = A^TXB + AXB^T - 2\mu X
