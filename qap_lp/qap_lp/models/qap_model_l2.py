@@ -17,6 +17,13 @@ class QAPDerivativeL2Penalty(QAPDerivative):
     # return df - 2*
     return df - 2 * mu * X
 
+  def obj(self, X, mu=1):
+    obj = super().obj(X)
+    return obj - mu * X.dot(X.T).trace() + mu * X.shape[0]
+
+  def original_obj(self, X):
+    return super().obj(X)
+
 
 def l2_naive(mu, param=None, rd=False, **kwargs):
   A, B, n, m, e, E, ab = param.A, param.B, param.n, param.m, param.e, param.E, param.ab

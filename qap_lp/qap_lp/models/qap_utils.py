@@ -52,6 +52,9 @@ class QAPDerivative(object):
     """
     return self.A.T.dot(X).dot(self.B) + self.A.dot(X).dot(self.B.T)
 
+  def obj(self, X):
+    return self.A.T.dot(X).dot(self.B).dot(X.T).trace()
+
 
 class QAPTest(object):
 
