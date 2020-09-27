@@ -180,3 +180,5 @@ dmypy.json
 
 # specific
 qapdata
+qapsoln
+log

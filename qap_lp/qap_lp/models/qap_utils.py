@@ -6,33 +6,56 @@
 # @modified: brentian (chuwzhang@gmail.com>)
 #    Monday, 21st September 2020 5:09:55 pm
 # @description:
+import logging
+import os
 import pickle as pk
 import sys
+from logging.handlers import TimedRotatingFileHandler as TRFH
 
 import mosek.fusion as mf
+import pandas as pd
 from mosek import callbackcode, dinfitem, iinfitem, liinfitem
-
 from qap_lp.deserialize_qapdata import *
 from qap_lp.qap_georounding import *
 
 expr = mf.Expr
 dom = mf.Domain
 mat = mf.Matrix
+LOG_PATH = 'log'
+FORMAT = '[%(name)s:%(levelname)s] [%(asctime)s] %(message)s'
+logging.basicConfig(format=FORMAT)
+if LOG_PATH is not None:
+  if not os.path.exists(LOG_PATH):
+    os.makedirs(LOG_PATH)
+handler = TRFH(
+    f'{LOG_PATH}/qap.log', when='M', interval=1, backupCount=7, encoding='utf8')
+handler.setFormatter(logging.Formatter(FORMAT))
+log = logging.getLogger()
+log.addHandler(handler)
+log.setLevel(logging.INFO)
 
 
 class QAPParam(object):
 
   def __init__(
       self,
-      A,
-      B,
+      A,  # matrix A
+      B,  # matrix B
       n,
       m,
       e,
       E,
       ab,
+      obj,  # known best objective
+      arr  # known best solution
   ):
     self.A, self.B, self.n, self.m, self.e, self.E, self.ab = A, B, n, m, e, E, ab
+    self.best_obj = obj
+
+    self.xo = np.zeros((n, n))
+
+    for idx, v in enumerate(arr):
+      self.xo[idx, v - 1] = 1
 
 
 class QAPDerivative(object):

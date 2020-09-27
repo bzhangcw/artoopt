@@ -21,25 +21,31 @@ def main(instance_name, **kwargs):
 
   # mosek params
   msk_params = {**MSK_DEFAULT, **kwargs}
+
   # coefficients
   A0, B0 = parse(f'qapdata/{instance_name}.dat')
-  A = A0 / np.linalg.norm(A0)
-  B = B0 / np.linalg.norm(B0)
+  A = A0 / A0.max()
+  B = B0 / B0.max()
   n, m = A.shape
   e = np.ones(shape=n)
   E = np.ones(shape=(n, n))
   ab = np.kron(B.T, A.T)
 
-  param = QAPParam(A, B, n, m, e, E, ab)
+  # parse known solution
+  _, obj, arr = parse_sol(f'qapsoln/{instance_name}.sln')
+
+  param = QAPParam(A, B, n, m, e, E, ab, obj, arr)
 
   # running tests
   tests = [
+      QAPTest('l2_exact_penalty_gradient_proj', l2_exact_penalty_gradient_proj,
+              *(param,)),
       QAPTest('l2_conic_exact', l2_conic_georound, *(param, False),
               **msk_params),
       QAPTest('l2_conic_georound', l2_conic_georound, *(param, True),
               **msk_params),
-      QAPTest('l2_naive_exact', l2_naive, *(10, param, True), **msk_params),
-      QAPTest('l2_naive_georound', l2_naive, *(10, param, False), **msk_params),
+      # QAPTest('l2_naive_exact', l2_naive, *(10, param, True), **msk_params),
+      # QAPTest('l2_naive_georound', l2_naive, *(10, param, False), **msk_params),
   ]
 
   objectives = {}

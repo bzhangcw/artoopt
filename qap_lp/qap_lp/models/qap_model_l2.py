@@ -8,21 +8,10 @@
 # @description:
 
 from .qap_utils import *
+from .qap_gradient_proj import *
 
 
-class QAPDerivativeL2Penalty(QAPDerivative):
 
-  def partial_f(self, X, mu=1):
-    df = super().partial_f(X)
-    # return df - 2*
-    return df - 2 * mu * X
-
-  def obj(self, X, mu=1):
-    obj = super().obj(X)
-    return obj - mu * X.dot(X.T).trace() + mu * X.shape[0]
-
-  def original_obj(self, X):
-    return super().obj(X)
 
 
 def l2_naive(mu, param=None, rd=False, **kwargs):
@@ -92,3 +81,23 @@ def l2_conic_georound(param, rd=True, **kwargs):
     x, _ = extract_sol_rounding(X_sol, A, B)
     return x
   return X_sol
+
+
+def l2_exact_penalty_gradient_proj(param, **kwargs):
+  A, B, n, m, e, E, ab = \
+    param.A, param.B, param.n, param.m, param.e, param.E, param.ab
+
+  # hyper parameters
+  mu = kwargs.get('mu', 0.1)
+
+  # known best
+  xo = param.xo
+  opt = param.best_obj
+  # initialize
+  x = x0 = np.ones((n, n)) / n
+
+  # 𝛁F
+  nabla = QAPDerivativeL2Penalty(param, mu)
+
+  x_sol = run_gradient_projection(x, mu, param, nabla, **kwargs)
+  return x_sol

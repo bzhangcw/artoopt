@@ -27,6 +27,21 @@ def parse(path):
   return A, B
 
 
+def parse_sol(path):
+  try:
+    f = open(path, 'r')
+  except:
+    raise ValueError("cannot open data file")
+
+  n, obj = map(int, f.readline().strip().split())
+
+  data = (int(a) for line in f for a in re.findall('\d+', line))
+
+  arr = np.fromiter(data, dtype=np.int)
+
+  return n, obj, arr
+
+
 if __name__ == "__main__":
   import sys
 

@@ -5,15 +5,15 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Python: Current File",
+      "name": "qap_main",
       "type": "python",
       "request": "launch",
-      "program": "${file}",
+      "module": "qap_lp.main",
       "console": "integratedTerminal",
       "args": [
         "qapdata/bur26a.dat"
       ],
-      "cwd": "${fileDirname}"
+      "cwd": "${workspaceFolder}/qap_lp"
     }
   ]
 }
