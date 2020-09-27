@@ -11,7 +11,7 @@
       "module": "qap_lp.main",
       "console": "integratedTerminal",
       "args": [
-        "qapdata/bur26a.dat"
+        "chr12a"
       ],
       "cwd": "${workspaceFolder}/qap_lp"
     }

@@ -179,6 +179,7 @@ dmypy.json
 \[*\]*
 
 # specific
-qapdata
-qapsoln
+qap_lp/qapsoln/*
+qap_lp/qapdata/*
 log
+result

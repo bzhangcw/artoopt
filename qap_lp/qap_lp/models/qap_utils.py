@@ -39,23 +39,42 @@ class QAPParam(object):
 
   def __init__(
       self,
-      A,  # matrix A
-      B,  # matrix B
-      n,
-      m,
-      e,
-      E,
-      ab,
+      A0,  # matrix A
+      B0,  # matrix B
       obj,  # known best objective
-      arr  # known best solution
-  ):
-    self.A, self.B, self.n, self.m, self.e, self.E, self.ab = A, B, n, m, e, E, ab
+      arr,  # known best solution
+      scaling='l1',
+      **kwargs):
+    self.A0, self.B0 = A0, B0
+    n, m = A0.shape
+    self.n = n
+    self.m = m
     self.best_obj = obj
-
     self.xo = np.zeros((n, n))
 
     for idx, v in enumerate(arr):
       self.xo[idx, v - 1] = 1
+
+    e = np.ones(shape=n)
+    E = np.ones(shape=(n, n))
+
+    # scale the input matrix
+    if scaling is None:
+      A, B = A0, B0
+    else:
+      _scl = scaling.lower()
+      if _scl == 'l1':
+        A = A0 / A0.max()
+        B = B0 / B0.max()
+      else:
+        A, B = A0, B0
+
+    ab = np.kron(B.T, A.T)
+    self.A = A
+    self.B = B
+    self.e = e
+    self.E = E
+    self.ab = ab
 
 
 class QAPDerivative(object):

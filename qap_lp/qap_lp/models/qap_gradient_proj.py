@@ -38,18 +38,18 @@ def msk_pd_on_dc(
     ub_indices=None,
     **kwargs):
   """The Mosek model to compute the projected gradient 
-      onto orthogonal constraints.
-     The model:
-      min ||D + F||_F
-  Args:
-      param (QAPParam): QAP params
-      dF: gradient, dF
-      lb_indices: the indices of `active` lower bound 
-        inequality constraints
-      ub_indices: not used
-  Returns:
-      solution, model, variable, and lb constraints
-  """
+			onto orthogonal constraints.
+		 The model:
+			min ||D + F||_F
+	Args:
+			param (QAPParam): QAP params
+			dF: gradient, dF
+			lb_indices: the indices of `active` lower bound 
+				inequality constraints
+			ub_indices: not used
+	Returns:
+			solution, model, variable, and lb constraints
+	"""
 
   A, B, n, m, e, E, ab = param.A, param.B, param.n, param.m, param.e, param.E, param.ab
 
@@ -78,15 +78,15 @@ def msk_pd_on_dc(
 
 def msk_st(dp, x, param):
   """The Mosek model to compute the maximum stepsize 
-      of the line search
+			of the line search
 
-  Args:
-      dp: given computed gradient
-      x: current point
+	Args:
+			dp: given computed gradient
+			x: current point
 
-  Returns:
-      float: maximum stepsize
-  """
+	Returns:
+			float: maximum stepsize
+	"""
   n = param.n
   model = mf.Model('step_size')
   v = model.variable(1, dom.greaterThan(0))
@@ -109,6 +109,7 @@ def run_gradient_projection(x, mu, param: QAPParam, nabla: QAPDerivative,
   gd_method = kwargs.get('gd_method', msk_pd_on_dc)
   st_method = kwargs.get('st_method', msk_st)
   st_line_grids = kwargs.get('st_line_grids', 10)
+  logging_interval = kwargs.get('logging_interval', 50)
 
   # unpacking params
   n = param.n
@@ -117,7 +118,7 @@ def run_gradient_projection(x, mu, param: QAPParam, nabla: QAPDerivative,
 
   # start iterations
   for i in range(max_iter):
-    logger.info(f'=====iteration: {i}====')
+
     _obj = nabla.obj(x)
     d0 = nabla.partial_f(x)
 
@@ -138,8 +139,9 @@ def run_gradient_projection(x, mu, param: QAPParam, nabla: QAPDerivative,
 
     # fetch maximum stepsize
     stp = st_method(dp, x, param)
-
-    logger.info(f"gradient norm: {ndf}")
+    if i % logging_interval == 0:
+      logger.info(f'=====iteration: {i}====')
+      logger.info(f"gradient norm: {ndf}")
 
     if stp <= 1e-6:
       #
@@ -162,10 +164,11 @@ def run_gradient_projection(x, mu, param: QAPParam, nabla: QAPDerivative,
     objs = [(i, nabla.obj(x + i / st_line_grids * stp * dp))
             for i in range(1, st_line_grids + 1)]
     i_s, vs = min(objs, key=lambda x: x[-1])
-    logger.info(f"steps: {i_s}, {vs}, {stp}")
-    # update solution
     x = x + i_s / st_line_grids * stp * dp
-    logger.info(f"obj: {vs, vs - _obj}, gap: {(vs - best_obj)/best_obj}")
-    logger.info(f"trace deficiency: {n - x.dot(x.T).trace()}")
+    if i % logging_interval == 0:
+      logger.info(f"steps: {i_s}, {vs}, {stp}")
+      # update solution
+      logger.info(f"obj: {vs, vs - _obj}, gap: {(vs - best_obj)/best_obj}")
+      logger.info(f"trace deficiency: {n - x.dot(x.T).trace()}")
 
   return x

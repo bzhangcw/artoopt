@@ -62,35 +62,45 @@ $$\begin{aligned}
 \end{aligned} $$
 this implies a LD-like method. (but not exactly)
 
-### exact penalty
+## $\mathscr L_1$ exact penalty
+
+Motivated by the formulation using trace:
 
 $$\begin{aligned}
-F_{\mu} & =  f  + \mu\cdot | \textrm{tr}(XX^T) -  n| \\
- &= f  + \mu\cdot n - \mu\cdot \textrm{tr}(XX^T)
+& \min_X  f \\
+\mathbf{s.t.} &\\
+&   \textrm{tr}(XX^\top ) -  n = 0 \\
+& X \in D_n
 \end{aligned}$$
 
-very likely to become a concave function, cannot be directly solved by conic solver.
+using $\mathscr L_1$ and by the factor that $\forall X \in D_n ,\; \textrm{tr}(XX^\top)\le n$, we have:
+
+$$\begin{aligned}
+F_{\mu} & =  f  + \mu\cdot | \textrm{tr}(XX^\top ) -  n| \\
+ &= f  + \mu\cdot n - \mu\cdot \textrm{tr}(XX^\top )
+\end{aligned}$$
+
+For sufficiently large penalty parameter $\mu$, the problem solves the original problem.
+
+The penalty method is very likely to become a concave function (even if the original one is convex), and thus it cannot be directly solved by conic solver.
+
+
 
 #### derivatives
 
 $$\begin{aligned}
-\nabla F_\mu  = A^TXB + AXB^T - 2\mu X
+& \nabla_X F_\mu  = A^\top XB + AXB^\top - 2\mu X \quad (-\Lambda)\\
+& \nabla_\mu F_\mu  = n - \textrm{tr}(XX^\top) \\
+& \nabla_\Lambda F_\mu  = - X
 \end{aligned}$$
 
-Then, 
-
-> projected gradient
-
-by solving:
+#### projected derivative
 
 $$\begin{aligned}
-&\min_D ||\nabla F_\mu - D ||_F^2  \\
-\mathsf{s.t.} & \\
-&D e = D^\top e = 0
+&\min_D ||\nabla F_\mu + D ||_F^2  \\
+\mathbf{s.t.} & \\
+&D e = D^\top e = 0 \\ 
+&D_{ij} \ge 0 \quad \textsf{if: } X_{ij} = 0\\
 \end{aligned}$$
-
-then $\forall \alpha \gt 0 ,X + \alpha D \in D_n$
-
-alternatively compute a new point then project onto $D_n$.
 
 # Reference
