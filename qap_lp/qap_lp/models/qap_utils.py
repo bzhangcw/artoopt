@@ -13,10 +13,11 @@ import sys
 from logging.handlers import TimedRotatingFileHandler as TRFH
 
 import mosek.fusion as mf
-import pandas as pd
 from mosek import callbackcode, dinfitem, iinfitem, liinfitem
-from qap_lp.deserialize_qapdata import *
-from qap_lp.qap_georounding import *
+
+from ..conf import *
+from ..deserialize_qapdata import *
+from ..qap_georounding import *
 
 expr = mf.Expr
 dom = mf.Domain
@@ -105,6 +106,11 @@ class QAPTest(object):
     self.model = model
     self.args = args
     self.kwargs = kwargs
+
+
+def check_obj_val(param, x_sol):
+  _obj = param.A0.T.dot(x_sol).dot(param.B0).dot(x_sol.T).trace()
+  return _obj
 
 
 def set_mosek_model_params(model, **kwargs):

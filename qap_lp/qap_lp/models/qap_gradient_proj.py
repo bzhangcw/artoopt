@@ -102,14 +102,13 @@ def msk_st(dp, x, param):
     return 0
 
 
-def run_gradient_projection(x, mu, param: QAPParam, nabla: QAPDerivative,
-                            **kwargs):
+def run_gradient_projection(x, param: QAPParam, nabla: QAPDerivative, **kwargs):
   # unpacking solver parameters
   max_iter = kwargs.get('max_iteration', 1000)
   gd_method = kwargs.get('gd_method', msk_pd_on_dc)
   st_method = kwargs.get('st_method', msk_st)
   st_line_grids = kwargs.get('st_line_grids', 10)
-  logging_interval = kwargs.get('logging_interval', 50)
+  logging_interval = kwargs.get('logging_interval', 1)
 
   # unpacking params
   n = param.n
@@ -120,6 +119,8 @@ def run_gradient_projection(x, mu, param: QAPParam, nabla: QAPDerivative,
   for i in range(max_iter):
 
     _obj = nabla.obj(x)
+    _logging = i % logging_interval == 0
+    _ac = False
     d0 = nabla.partial_f(x)
 
     # indices of active lower bound constraints
@@ -127,48 +128,61 @@ def run_gradient_projection(x, mu, param: QAPParam, nabla: QAPDerivative,
     lb_x = lb_x.tolist()
     lb_y = lb_y.tolist()
 
-    # do projection
-    dp, m, D, constrs_lb = gd_method(
-        param,
-        d0,
-        (lb_x, lb_y),
-    )
-
-    # evaluate norm of the projected gradient
-    ndf = np.abs(dp).max()
-
-    # fetch maximum stepsize
-    stp = st_method(dp, x, param)
-    if i % logging_interval == 0:
+    if _logging:
       logger.info(f'=====iteration: {i}====')
+
+    # do projection
+    while True:
+      # compute gradient projection
+      dp, m, D, constrs_lb = gd_method(
+          param,
+          d0,
+          (lb_x, lb_y),
+      )
+
+      # evaluate norm of the projected gradient
+      ndf = np.abs(dp).max()
+
+      # fetch maximum stepsize
+      stp = st_method(dp, x, param)
+
+      # active set tuning if ||P(dF)|| < eps
+      if ndf <= 1e-6 and stp <= 1e-6:
+        _ac = True
+        logger.info(f"start active set tuning @{i}")
+        try:
+          dv = constrs_lb.dual()
+          idx = dv.argmin()
+          # this pops most negative dual variables
+          if dv[idx] < 0:
+            lb_x.pop(idx)
+            lb_y.pop(idx)
+            continue
+          break
+        except Exception as e:
+          logger.info(f"finish active set tuning @{i}")
+          break
+      elif _ac:
+        logger.info(f"finish active set tuning @{i}")
+        break
+      else:
+        break
+
+    if _logging:
       logger.info(f"gradient norm: {ndf}")
 
     if stp <= 1e-6:
-      #
-      #         try:
-      #             idx = constrs_lb.dual().argmax()
-      #             lb_x.pop(idx)
-      #             lb_y.pop(idx)
-      #         except Exception as e:
-      #             logging.exception(e)
-      #             lb_x, lb_y = np.where(x <= 1e-5)
-      #             lb_x = lb_x.tolist()
-      #             lb_y = lb_y.tolist()
-      #         logger.info(f"change active set @{i}")
-      #         dp, m, D, constrs_lb = pd_on_dc(
-      #             param, d0,
-      #             (lb_x, lb_y)
-      #         )
       break
 
     objs = [(i, nabla.obj(x + i / st_line_grids * stp * dp))
             for i in range(1, st_line_grids + 1)]
+
     i_s, vs = min(objs, key=lambda x: x[-1])
     x = x + i_s / st_line_grids * stp * dp
-    if i % logging_interval == 0:
+    if _logging:
       logger.info(f"steps: {i_s}, {vs}, {stp}")
       # update solution
-      logger.info(f"obj: {vs, vs - _obj}, gap: {(vs - best_obj)/best_obj}")
+      logger.info(f"obj: {vs}, {vs - _obj}, gap: {(vs - best_obj)/best_obj}")
       logger.info(f"trace deficiency: {n - x.dot(x.T).trace()}")
-
+      
   return x

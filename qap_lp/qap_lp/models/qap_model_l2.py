@@ -11,9 +11,6 @@ from .qap_utils import *
 from .qap_gradient_proj import *
 
 
-
-
-
 def l2_naive(mu, param=None, rd=False, **kwargs):
   A, B, n, m, e, E, ab = param.A, param.B, param.n, param.m, param.e, param.E, param.ab
   # do Cholesky
@@ -93,11 +90,28 @@ def l2_exact_penalty_gradient_proj(param, **kwargs):
   # known best
   xo = param.xo
   opt = param.best_obj
+
   # initialize
   x = x0 = np.ones((n, n)) / n
 
   # 𝛁F
   nabla = QAPDerivativeL2Penalty(param, mu)
 
-  x_sol = run_gradient_projection(x, mu, param, nabla, **kwargs)
+  x_sol = run_gradient_projection(x, param, nabla, **kwargs)
   return x_sol
+
+
+if __name__ == "__main__":
+  kwargs = {}
+  instance_name = 'esc16h'
+  # mosek params
+  msk_params = {**MSK_DEFAULT, **kwargs}
+  qap_params = {**QAP_DEFAULT, **kwargs}
+
+  # coefficients
+  A0, B0 = parse(f'{QAP_INSTANCE}/{instance_name}.dat')
+
+  # parse known solution
+  _, best_obj, arr = parse_sol(f'{QAP_SOL}/{instance_name}.sln')
+
+  param = QAPParam(A0, B0, best_obj, arr, **qap_params)

@@ -5,6 +5,14 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "dev_gp",
+      "type": "python",
+      "request": "launch",
+      "module": "qap_lp.dev_gradient_proj",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/qap_lp"
+    },
+    {
       "name": "qap_main",
       "type": "python",
       "request": "launch",

@@ -9,6 +9,6 @@
 
 QAP_INSTANCE = 'qapdata'
 QAP_SOL = 'qapsoln'
-QAP_DEFAULT = {'scaling': 'L1'}
+QAP_DEFAULT = {'scaling': 'L1', 'mu': 1}
 MSK_DEFAULT = {'mioMaxTime': 60}
 RESULT_DIR = 'result'

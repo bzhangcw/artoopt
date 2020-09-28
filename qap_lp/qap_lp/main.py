@@ -17,11 +17,6 @@ from .conf import *
 
 def main_single(instance_name, **kwargs):
 
-  def check_obj_val(x_sol):
-    _obj = A0.T.dot(x_sol).dot(B0).dot(x_sol.T).trace()
-    print(f'original obj {_obj}')
-    return _obj
-
   # mosek params
   msk_params = {**MSK_DEFAULT, **kwargs}
   qap_params = {**QAP_DEFAULT, **kwargs}
@@ -36,18 +31,22 @@ def main_single(instance_name, **kwargs):
   # running tests
   tests = [
       QAPTest('l2_exact_penalty_gradient_proj', l2_exact_penalty_gradient_proj,
-              *(param,)),
+              *(param,), **qap_params),
       # QAPTest('l2_conic_exact', l2_conic_georound, *(param, False), **msk_params),
       # QAPTest('l2_conic_georound', l2_conic_georound, *(param, True),**msk_params),
       # QAPTest('l2_naive_exact', l2_naive, *(10, param, True), **msk_params),
       # QAPTest('l2_naive_georound', l2_naive, *(10, param, False), **msk_params),
   ]
 
-  objectives = {'best': {'value': best_obj, 'gap': 0}}
+  objectives = {'best': {'value': best_obj, 'rel_gap': 0, 'trace_res': 0}}
   for t in tests:
     x_sol = t.model(*t.args, **t.kwargs)
-    obj = check_obj_val(x_sol)
-    objectives[t.name] = {'value': obj, 'rel_gap': (obj - best_obj) / best_obj}
+    obj = check_obj_val(param, x_sol)
+    objectives[t.name] = {
+        'value': obj,
+        'rel_gap': (obj - best_obj) / best_obj,
+        'trace_res': param.n - x_sol.dot(x_sol.T).trace()
+    }
 
   import json
   format_obj_str = json.dumps(objectives, indent=2)
@@ -74,5 +73,7 @@ def main(**kwargs):
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()
   parser.add_argument('--instance', default=None)
+  parser.add_argument('--logging_interval', type=int, default=50)
+  parser.add_argument('--max_iteration', type=int, default=1000)
   kwargs = parser.parse_args()
-  main(instance=kwargs.instance)
+  main(**vars(kwargs))
