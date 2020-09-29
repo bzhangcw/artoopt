@@ -12,7 +12,8 @@ from .conf import *
 
 if __name__ == "__main__":
 
-  instance_name = 'esc16h'
+  # instance_name = 'esc16h'
+  instance_name = 'bur26a'
   kwargs = {}
   msk_params = {**MSK_DEFAULT, **kwargs}
   qap_params = {**QAP_DEFAULT, **kwargs}
@@ -64,7 +65,7 @@ if __name__ == "__main__":
 
     # do projection
     while True:
-      dp, m, D, constrs_lb = gd_method(
+      dp, m, D, constrs_lb, constrs_a, constrs_b = gd_method(
           param,
           d0,
           (lb_x, lb_y),
@@ -93,6 +94,7 @@ if __name__ == "__main__":
         logger.info(f"finish active set tuning @{i}")
         logger.info(f"cannot find a better active set; KKT satisfied")
         break
+
     if _logging:
       logger.info(f"gradient norm: {ndf}")
 
@@ -108,3 +110,6 @@ if __name__ == "__main__":
       # update solution
       logger.info(f"obj: {vs}, {vs - _obj}, gap: {(vs - best_obj)/best_obj}")
       logger.info(f"trace deficiency: {n - x.dot(x.T).trace()}")
+
+  print(None)
+  print(1)

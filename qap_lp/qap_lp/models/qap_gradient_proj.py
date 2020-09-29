@@ -60,9 +60,9 @@ def msk_pd_on_dc(
 
   model.objective(mf.ObjectiveSense.Minimize, v)
 
-  model.constraint(expr.sum(D, 0), dom.equalsTo(0))
-  model.constraint(expr.sum(D, 1), dom.equalsTo(0))
   model.constraint(expr.vstack(v, m), dom.inQCone())
+  constrs_a = model.constraint(expr.sum(D, 0), dom.equalsTo(0))
+  constrs_b = model.constraint(expr.sum(D, 1), dom.equalsTo(0))
   constrs_lb = model.constraint(D.pick(*lb_indices), dom.equalsTo(0))
   # constrs_ub = model.constraint(D.pick(*ub_indices), dom.lessThan(0))
 
@@ -73,7 +73,51 @@ def msk_pd_on_dc(
 
   model.flushSolutions()
   D_sol = D.level().reshape(A.shape)
-  return D_sol, model, D, constrs_lb
+  return D_sol, model, D, constrs_lb, constrs_a, constrs_b
+
+
+def msk_pd_on_dc_lp(
+    param: QAPParam,
+    dF,  # gradient: \nabla dF
+    lb_indices,
+    ub_indices=None,
+    **kwargs):
+  """The Mosek model to compute the projected gradient 
+            onto orthogonal constraints. 
+            this is the linear programming model, i.e.
+         The model:
+            min <D, F>
+    Args:
+            param (QAPParam): QAP params
+            dF: gradient, dF
+            lb_indices: the indices of `active` lower bound 
+                inequality constraints
+            ub_indices: not used
+    Returns:
+            solution, model, variable, and lb constraints
+    """
+
+  A, B, n, m, e, E, ab = param.A, param.B, param.n, param.m, param.e, param.E, param.ab
+
+  model = mf.Model('projected_gradient_on_D_cone')
+  D = model.variable("d", [*A.shape], dom.unbounded())
+  m = expr.sum(expr.mulElm(D, dF))
+
+  model.objective(mf.ObjectiveSense.Minimize, m)
+
+  constrs_a = model.constraint(expr.sum(D, 0), dom.equalsTo(0))
+  constrs_b = model.constraint(expr.sum(D, 1), dom.equalsTo(0))
+  constrs_lb = model.constraint(D.pick(*lb_indices), dom.equalsTo(0))
+  # constrs_ub = model.constraint(D.pick(*ub_indices), dom.lessThan(0))
+
+  # set params
+  userCallback = set_mosek_model_params(model, **kwargs)
+  model.setLogHandler(None)
+  model.solve()
+
+  model.flushSolutions()
+  D_sol = D.level().reshape(A.shape)
+  return D_sol, model, D, constrs_lb, constrs_a, constrs_b
 
 
 def msk_st(dp, x, param):
@@ -134,7 +178,7 @@ def run_gradient_projection(x, param: QAPParam, nabla: QAPDerivative, **kwargs):
     # do projection
     while True:
       # compute gradient projection
-      dp, m, D, constrs_lb = gd_method(
+      dp, m, D, constrs_lb, constrs_a, constrs_b = gd_method(
           param,
           d0,
           (lb_x, lb_y),
@@ -184,5 +228,5 @@ def run_gradient_projection(x, param: QAPParam, nabla: QAPDerivative, **kwargs):
       # update solution
       logger.info(f"obj: {vs}, {vs - _obj}, gap: {(vs - best_obj)/best_obj}")
       logger.info(f"trace deficiency: {n - x.dot(x.T).trace()}")
-      
+
   return x

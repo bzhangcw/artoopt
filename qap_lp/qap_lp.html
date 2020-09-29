@@ -49,10 +49,14 @@
 </ul></li>
 <li><a href="#mathscr-l_p-regularization"><span class="math inline">\mathscr L_p</span> regularization</a>
 <ul>
-<li><a href="#l_2"><span class="math inline">L_2</span></a>
+<li><a href="#mathscr-l_2"><span class="math inline">\mathscr L_2</span></a>
 <ul>
 <li><a href="#naive">naive</a></li>
-<li><a href="#exact-penalty">exact penalty</a></li>
+</ul></li>
+<li><a href="#mathscr-l_1-exact-penalty"><span class="math inline">\mathscr L_1</span> exact penalty</a>
+<ul>
+<li><a href="#projected-gradient">Projected gradient</a></li>
+<li><a href="#section"></a></li>
 </ul></li>
 </ul></li>
 <li><a href="#reference">Reference</a></li>
@@ -96,18 +100,62 @@
 <li><span class="math inline">\mathscr L_2</span>, and is based on the fact that <span class="math inline">\Pi_n = D_n \bigcap \{X:\textrm{tr}(XX^\top) = n\}</span>, <span class="citation" data-cites="xia_efficient_2010"><a href="#ref-xia_efficient_2010" role="doc-biblioref">2</a></span></li>
 </ul>
 <p><span class="math display">\min_Xf(X)+\mu_{0} \cdot \textrm{tr} \left(X X^{\top}\right)</span></p>
-<h2 id="l_2"><span class="math inline">L_2</span></h2>
+<h2 id="mathscr-l_2"><span class="math inline">\mathscr L_2</span></h2>
 <h3 id="naive">naive</h3>
 <p><span class="math display">\begin{aligned}
 &amp;\textrm{tr}(A^\top XB X^\top) + \mu_0 \cdot \textrm{tr}(X X^{\top}) \\
 = &amp; x^\top (B^\top \otimes A^\top + \mu\cdot  \mathbf e_{n\times n}) x\\ 
 \end{aligned} </span> this implies a LD-like method. (but not exactly)</p>
-<h3 id="exact-penalty">exact penalty</h3>
+<h2 id="mathscr-l_1-exact-penalty"><span class="math inline">\mathscr L_1</span> exact penalty</h2>
+<p>Motivated by the formulation using trace:</p>
 <p><span class="math display">\begin{aligned}
-L_D &amp; =  f  + \mu_0\cdot | \textrm{tr}(XX^T) -  n| \\
- &amp;= f  + \mu_0\cdot n - \mu_0\cdot \textrm{tr}(XX^T)
+&amp; \min_X  f \\
+\mathbf{s.t.} &amp;\\
+&amp;   \textrm{tr}(XX^\top ) -  n = 0 \\
+&amp; X \in D_n
 \end{aligned}</span></p>
-<p>very likely to become a concave function, cannot be solved by conic solver.</p>
+<p>using <span class="math inline">\mathscr L_1</span> and by the factor that <span class="math inline">\forall X \in D_n ,\; \textrm{tr}(XX^\top)\le n</span>, we have:</p>
+<p><span class="math display">\begin{aligned}
+F_{\mu} &amp; =  f  + \mu\cdot | \textrm{tr}(XX^\top ) -  n| \\
+ &amp;= f  + \mu\cdot n - \mu\cdot \textrm{tr}(XX^\top )
+\end{aligned}</span></p>
+<p>For sufficiently large penalty parameter <span class="math inline">\mu</span>, the problem solves the original problem.</p>
+<p>The penalty method is very likely to become a concave function (even if the original one is convex), and thus it cannot be directly solved by conic solver.</p>
+<h3 id="projected-gradient">Projected gradient</h3>
+<p>Suppose we do projection on the penalized problem <span class="math inline">F_\mu</span> #### derivatives</p>
+<p><span class="math display">\begin{aligned}
+&amp; \nabla_X F_\mu  = A^\top XB + AXB^\top - 2\mu X \\
+&amp; \nabla_\mu F_\mu  = n - \textrm{tr}(XX^\top) \\
+&amp; \nabla_\Lambda F_\mu  = - X
+\end{aligned}</span></p>
+<h4 id="projected-derivative">projected derivative</h4>
+<p><span class="math inline">PD</span>, a quadratic program</p>
+<p><span class="math display">\begin{aligned}
+&amp;\min_D ||\nabla F_\mu + D ||_F^2  \\
+\mathbf{s.t.} &amp; \\
+&amp;D e = D^\top e = 0 \\ 
+&amp;D_{ij} = 0 \quad \textsf{if: } X_{ij} = 0\\
+\end{aligned}</span></p>
+<p>facts:</p>
+<p>the space of <span class="math inline">D</span>, (<span class="math inline">e</span> is the vector of 1)</p>
+<p><span class="math display">D \in \{D\in\mathbb{R}^{n\times n} : \; D e = D^\top e = 0;\; D_{ij} = 0,\;\forall  (i,j) \in M \}</span></p>
+<p>how to formulate for <span class="math inline">F</span> such that <span class="math inline">\left &lt;F, D \right&gt;_F = 0</span> ?</p>
+<p><span class="math inline">\mathbf I</span> is the identity matrix for active constraints of the <span class="math inline">X \ge 0</span> where <span class="math inline">\mathbf I_{ij} = 1</span> if <span class="math inline">X_{ij} = 0</span></p>
+<ul>
+<li><span class="math inline">\left &lt;D + \nabla F_\mu, D \right &gt; = 0</span></li>
+</ul>
+<p>dual problem for <span class="math inline">PD</span></p>
+<ul>
+<li><span class="math inline">\alpha,\beta,\Lambda</span> are Lagrange multipliers, <span class="math inline">\mathbf I</span> is the identity matrix for active constraints of the <span class="math inline">X \ge 0</span> where <span class="math inline">\mathbf I_{ij} = 1</span> if <span class="math inline">X_{ij} = 0</span></li>
+</ul>
+<p><span class="math display">\begin{aligned}
+&amp; L_d = 1/2\cdot ||\nabla F_\mu + D ||_F^2 - \alpha^\top De - \beta^\top D^\top e -\Lambda \bullet D \bullet \mathbf I \\
+\mathsf{KKT:} &amp;\\
+&amp; \nabla F+D - ae^\top - e\beta^\top -\Lambda \bullet \mathbf{I} = 0\\
+&amp; \nabla Fe - ae^\top e - e\beta^\top e -\Lambda \bullet \mathbf{I} e = 0\\
+&amp; \nabla F^\top e  - \beta e^\top e - e\alpha^\top e - (\Lambda \bullet \mathbf{I})^\top e = 0
+\end{aligned}</span></p>
+<h3 id="section"></h3>
 <h1 class="unnumbered" id="reference">Reference</h1>
 <div id="refs" class="references" role="doc-bibliography">
 <div id="ref-jiang_l_p-norm_2016">

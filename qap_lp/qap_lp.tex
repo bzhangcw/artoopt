@@ -329,8 +329,8 @@ various form of regularized problem:
 
 \[\min_Xf(X)+\mu_{0} \cdot \textrm{tr} \left(X X^{\top}\right)\]
 
-\hypertarget{l_2}{%
-\subsection{\texorpdfstring{\(L_2\)}{L\_2}}\label{l_2}}
+\hypertarget{mathscr-l_2}{%
+\subsection{\texorpdfstring{\(\mathscr L_2\)}{\textbackslash mathscr L\_2}}\label{mathscr-l_2}}
 
 \hypertarget{naive}{%
 \subsubsection{naive}\label{naive}}
@@ -340,16 +340,95 @@ various form of regularized problem:
 = & x^\top (B^\top \otimes A^\top + \mu\cdot  \mathbf e_{n\times n}) x\\ 
 \end{aligned} \] this implies a LD-like method. (but not exactly)
 
-\hypertarget{exact-penalty}{%
-\subsubsection{exact penalty}\label{exact-penalty}}
+\hypertarget{mathscr-l_1-exact-penalty}{%
+\subsection{\texorpdfstring{\(\mathscr L_1\) exact
+penalty}{\textbackslash mathscr L\_1 exact penalty}}\label{mathscr-l_1-exact-penalty}}
+
+Motivated by the formulation using trace:
 
 \[\begin{aligned}
-L_D & =  f  + \mu_0\cdot | \textrm{tr}(XX^T) -  n| \\
- &= f  + \mu_0\cdot n - \mu_0\cdot \textrm{tr}(XX^T)
+& \min_X  f \\
+\mathbf{s.t.} &\\
+&   \textrm{tr}(XX^\top ) -  n = 0 \\
+& X \in D_n
 \end{aligned}\]
 
-very likely to become a concave function, cannot be solved by conic
-solver.
+using \(\mathscr L_1\) and by the factor that
+\(\forall X \in D_n ,\; \textrm{tr}(XX^\top)\le n\), we have:
+
+\[\begin{aligned}
+F_{\mu} & =  f  + \mu\cdot | \textrm{tr}(XX^\top ) -  n| \\
+ &= f  + \mu\cdot n - \mu\cdot \textrm{tr}(XX^\top )
+\end{aligned}\]
+
+For sufficiently large penalty parameter \(\mu\), the problem solves the
+original problem.
+
+The penalty method is very likely to become a concave function (even if
+the original one is convex), and thus it cannot be directly solved by
+conic solver.
+
+\hypertarget{projected-gradient}{%
+\subsubsection{Projected gradient}\label{projected-gradient}}
+
+Suppose we do projection on the penalized problem \(F_\mu\) \#\#\#\#
+derivatives
+
+\[\begin{aligned}
+& \nabla_X F_\mu  = A^\top XB + AXB^\top - 2\mu X \\
+& \nabla_\mu F_\mu  = n - \textrm{tr}(XX^\top) \\
+& \nabla_\Lambda F_\mu  = - X
+\end{aligned}\]
+
+\hypertarget{projected-derivative}{%
+\paragraph{projected derivative}\label{projected-derivative}}
+
+\(PD\), a quadratic program
+
+\[\begin{aligned}
+&\min_D ||\nabla F_\mu + D ||_F^2  \\
+\mathbf{s.t.} & \\
+&D e = D^\top e = 0 \\ 
+&D_{ij} = 0 \quad \textsf{if: } X_{ij} = 0\\
+\end{aligned}\]
+
+facts:
+
+the space of \(D\), (\(e\) is the vector of 1)
+
+\[D \in \{D\in\mathbb{R}^{n\times n} : \; D e = D^\top e = 0;\; D_{ij} = 0,\;\forall  (i,j) \in M \}\]
+
+how to formulate for \(F\) such that \(\left <F, D \right>_F = 0\) ?
+
+\(\mathbf I\) is the identity matrix for active constraints of the
+\(X \ge 0\) where \(\mathbf I_{ij} = 1\) if \(X_{ij} = 0\)
+
+\begin{itemize}
+\tightlist
+\item
+  \(\left <D + \nabla F_\mu, D \right > = 0\)
+\end{itemize}
+
+dual problem for \(PD\)
+
+\begin{itemize}
+\tightlist
+\item
+  \(\alpha,\beta,\Lambda\) are Lagrange multipliers, \(\mathbf I\) is
+  the identity matrix for active constraints of the \(X \ge 0\) where
+  \(\mathbf I_{ij} = 1\) if \(X_{ij} = 0\)
+\end{itemize}
+
+\[\begin{aligned}
+& L_d = 1/2\cdot ||\nabla F_\mu + D ||_F^2 - \alpha^\top De - \beta^\top D^\top e -\Lambda \bullet D \bullet \mathbf I \\
+\mathsf{KKT:} &\\
+& \nabla F+D - ae^\top - e\beta^\top -\Lambda \bullet \mathbf{I} = 0\\
+& \nabla Fe - ae^\top e - e\beta^\top e -\Lambda \bullet \mathbf{I} e = 0\\
+& \nabla F^\top e  - \beta e^\top e - e\alpha^\top e - (\Lambda \bullet \mathbf{I})^\top e = 0
+\end{aligned}\]
+
+\hypertarget{section}{%
+\subsubsection{}\label{section}}
 
 \hypertarget{reference}{%
 \section*{Reference}\label{reference}}

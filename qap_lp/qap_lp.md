@@ -88,17 +88,18 @@ The penalty method is very likely to become a concave function (even if the orig
 ### Projected gradient
 
 Suppose we do projection on the penalized problem $F_\mu$ 
+
 #### derivatives
 
 $$\begin{aligned}
 & \nabla_X F_\mu  = A^\top XB + AXB^\top - 2\mu X \\
 & \nabla_\mu F_\mu  = n - \textrm{tr}(XX^\top) \\
-& \nabla_\Lambda F_\mu  = - X
+& \nabla_\Lambda F_\mu  = - Xvv
 \end{aligned}$$
 
 #### projected derivative
 
-$PD$, a quadratic program
+problem *PD*, a quadratic program
 
 $$\begin{aligned}
 &\min_D ||\nabla F_\mu + D ||_F^2  \\
@@ -109,28 +110,26 @@ $$\begin{aligned}
 
 facts:
 
-the space of $D$, ($e$ is the vector of 1)
+the space of $D$, ($e$ is the vector of 1s)
 
- $$D \in \{D\in\mathbb{R}^{n\times n} : \; D e = D^\top e = 0;\; D_{ij} = 0,\;\forall  (i,j) \in M \}$$
+ $$\mathcal D = \{D\in\mathbb{R}^{n\times n} : \; D e = D^\top e = 0;\; D_{ij} = 0,\;\forall  (i,j) \in M \}$$
 
-how to formulate for $F$ such that $\left <F, D \right>_F = 0$ ?
+- Q: how to formulate the set for $F$ such that $\left <F, D \right>_F = 0, \; \forall D\in \mathcal D$
 
- $\mathbf I$ is the identity matrix for active constraints of the $X \ge 0$  where $\mathbf I_{ij} = 1$ if $X_{ij} = 0$
 
-- $\left <D + \nabla F_\mu, D \right > = 0$
-  
 dual problem for $PD$
 
 -  $\alpha,\beta,\Lambda$ are Lagrange multipliers, $\mathbf I$ is the identity matrix for active constraints of the $X \ge 0$  where $\mathbf I_{ij} = 1$ if $X_{ij} = 0$
 
 $$\begin{aligned}
 & L_d = 1/2\cdot ||\nabla F_\mu + D ||_F^2 - \alpha^\top De - \beta^\top D^\top e -\Lambda \bullet D \bullet \mathbf I \\
-\mathsf{KKT:} &\\
-& \nabla F+D - ae^\top - e\beta^\top -\Lambda \bullet \mathbf{I} = 0\\
-& \nabla Fe - ae^\top e - e\beta^\top e -\Lambda \bullet \mathbf{I} e = 0\\
+\mathsf{KKT:} & \\
+& \nabla F+D - ae^\top - e\beta^\top -\Lambda \bullet \mathbf{I} = 0 \\
+& \nabla Fe - ae^\top e - e\beta^\top e -\Lambda \bullet \mathbf{I} e = 0 \\
 & \nabla F^\top e  - \beta e^\top e - e\alpha^\top e - (\Lambda \bullet \mathbf{I})^\top e = 0
 \end{aligned}$$
 
 
-###
+Suppose projected gradient $D = 0$, and $D$ satisfies KKT condition for problem *PD*.
+
 # Reference
