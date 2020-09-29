@@ -12,8 +12,8 @@ from .conf import *
 
 if __name__ == "__main__":
 
-  # instance_name = 'esc16h'
-  instance_name = 'bur26a'
+  instance_name = 'esc16h'
+  # instance_name = 'bur26a'
   kwargs = {}
   msk_params = {**MSK_DEFAULT, **kwargs}
   qap_params = {**QAP_DEFAULT, **kwargs}
@@ -65,11 +65,15 @@ if __name__ == "__main__":
 
     # do projection
     while True:
+
       dp, m, D, constrs_lb, constrs_a, constrs_b = gd_method(
           param,
           d0,
           (lb_x, lb_y),
+          logging=True,
       )
+
+
 
       # evaluate norm of the projected gradient
       ndf = np.abs(dp).max()

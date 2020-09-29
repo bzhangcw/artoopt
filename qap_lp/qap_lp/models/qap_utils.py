@@ -118,9 +118,12 @@ def set_mosek_model_params(model, **kwargs):
   """
   # unpacking
   mioMaxTime = kwargs.get('mioMaxTime', 60)
-
+  bool_logging = kwargs.get('logging', False)
   # settings
-  model.setLogHandler(sys.stdout)
+  if bool_logging:
+    model.setLogHandler(sys.stdout)
+  else:
+    model.setLogHandler(None)
   model.setSolverParam("mioMaxTime", mioMaxTime)
   model.acceptedSolutionStatus(mf.AccSolutionStatus.Anything)
   userCallback = makeUserCallback(model=model)

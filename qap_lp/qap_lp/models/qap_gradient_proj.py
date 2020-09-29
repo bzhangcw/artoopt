@@ -68,7 +68,6 @@ def msk_pd_on_dc(
 
   # set params
   userCallback = set_mosek_model_params(model, **kwargs)
-  model.setLogHandler(None)
   model.solve()
 
   model.flushSolutions()
@@ -100,7 +99,7 @@ def msk_pd_on_dc_lp(
   A, B, n, m, e, E, ab = param.A, param.B, param.n, param.m, param.e, param.E, param.ab
 
   model = mf.Model('projected_gradient_on_D_cone')
-  D = model.variable("d", [*A.shape], dom.unbounded())
+  D = model.variable("d", [*A.shape], dom.inRange(-1, 1))
   m = expr.sum(expr.mulElm(D, dF))
 
   model.objective(mf.ObjectiveSense.Minimize, m)
@@ -112,7 +111,6 @@ def msk_pd_on_dc_lp(
 
   # set params
   userCallback = set_mosek_model_params(model, **kwargs)
-  model.setLogHandler(None)
   model.solve()
 
   model.flushSolutions()
