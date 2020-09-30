@@ -12,7 +12,7 @@ from .conf import *
 
 if __name__ == "__main__":
 
-  instance_name = 'esc16h'
+  instance_name = 'esc128'
   # instance_name = 'bur26a'
   kwargs = {}
   msk_params = {**MSK_DEFAULT, **kwargs}
@@ -38,7 +38,7 @@ if __name__ == "__main__":
 
   # unpacking solver parameters
   max_iter = kwargs.get('max_iteration', 1000)
-  gd_method = kwargs.get('gd_method', msk_pd_on_dc)
+  gd_method = kwargs.get('gd_method', msk_pd_on_dc_lp)
   st_method = kwargs.get('st_method', msk_st)
   st_line_grids = kwargs.get('st_line_grids', 10)
   logging_interval = kwargs.get('logging_interval', 1)
@@ -70,7 +70,7 @@ if __name__ == "__main__":
           param,
           d0,
           (lb_x, lb_y),
-          logging=True,
+          logging=False,
       )
 
 
@@ -80,12 +80,15 @@ if __name__ == "__main__":
       # fetch maximum stepsize
       stp = st_method(dp, x, param)
       if ndf <= 1e-6 and stp <= 1e-6:
+        break
         logger.info(f"start active set tuning @{i}")
         try:
-          dv = constrs_lb.dual()
-          idx = dv.argmin()
+          a = constrs_a.dual()
+          b = constrs_b.dual()
+          L = constrs_lb.dual()
+          idx = L.argmin()
           # this pops most negative dual variables
-          if dv[idx] < 0:
+          if L[idx] < 0:
             lb_x.pop(idx)
             lb_y.pop(idx)
             continue

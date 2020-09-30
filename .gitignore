@@ -183,3 +183,5 @@ qap_lp/qapsoln/*
 qap_lp/qapdata/*
 log
 result
+.idea/codeStyles
+.idea/inspectionProfiles

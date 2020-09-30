@@ -10,9 +10,26 @@
 import argparse
 import json
 import sys
+import pickle as pk
 
 from .models import *
 from .conf import *
+
+
+def write_sol(instance_name, test_name,  x_sol):
+  x = x_sol.round(3)
+  with open(f"{RESULT_DIR}/{instance_name}_{test_name}.pk", 'wb') as f:
+    pk.dump(x, f)
+
+  with open(f"{RESULT_DIR}/{instance_name}_{test_name}.json", 'w') as f1:
+    y = (x > 0).nonzero()
+    list_sol = list(zip(*y))
+    for i, j in list_sol:
+      f1.write(f"{i}, {j}\n")
+
+  return 1
+
+
 
 
 def main_single(instance_name, **kwargs):
@@ -28,6 +45,8 @@ def main_single(instance_name, **kwargs):
   _, best_obj, arr = parse_sol(f'{QAP_SOL}/{instance_name}.sln')
 
   param = QAPParam(A0, B0, best_obj, arr, **qap_params)
+
+  logging.info(f"problem @{instance_name} parsing finished")
   # running tests
   tests = [
       QAPTest('l2_exact_penalty_gradient_proj', l2_exact_penalty_gradient_proj,
@@ -41,16 +60,18 @@ def main_single(instance_name, **kwargs):
   objectives = {'best': {'value': best_obj, 'rel_gap': 0, 'trace_res': 0}}
   for t in tests:
     x_sol = t.model(*t.args, **t.kwargs)
+    write_sol(instance_name, t.name, x_sol)
     obj = check_obj_val(param, x_sol)
     objectives[t.name] = {
         'value': obj,
         'rel_gap': (obj - best_obj) / best_obj,
-        'trace_res': param.n - x_sol.dot(x_sol.T).trace()
+        'trace_res': param.n - x_sol.dot(x_sol.T).trace(),
     }
 
   import json
   format_obj_str = json.dumps(objectives, indent=2)
   logging.info(f"=== objectives: ===\n{format_obj_str}")
+
   return objectives
 
 

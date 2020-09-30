@@ -70,7 +70,11 @@ class QAPParam(object):
       else:
         A, B = A0, B0
 
-    ab = np.kron(B.T, A.T)
+    # ===
+    # IT IS COSTLY TO COMPUTE THIS
+    # ===
+    # ab = np.kron(B.T, A.T)
+    ab = np.zeros((n, n))
     self.A = A
     self.B = B
     self.e = e

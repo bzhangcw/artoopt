@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8e025f85-539f-4478-8b87-7dc96059dcf4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artoopt.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp.md" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/dev_gradient_proj.py" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp/dev_gradient_proj.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_gradient_proj.py" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_gradient_proj.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_utils.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1iB6RYY7JZUp5MQcOQWyEcl41W3" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="sortByType" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager">
+    <configuration name="qap_lp.dev_gradient_proj" type="PythonConfigurationType" factoryName="Python" singleton="false" nameIsGenerated="true">
+      <module name="artoopt" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/qap_lp" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="qap_lp.dev_gradient_proj" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="true" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8e025f85-539f-4478-8b87-7dc96059dcf4" name="Default Changelist" comment="" />
+      <created>1601368629337</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601368629337</updated>
+      <workItem from="1601368630900" duration="7983000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="622" y="241" key="#Python" timestamp="1601435356366">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="622" y="241" key="#Python/0.0.1680.1050@0.0.1680.1050" timestamp="1601435356366" />
+    <state x="304" y="187" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601444280863">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="304" y="187" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1601444280863" />
+    <state x="168" y="94" key="DiffContextDialog" timestamp="1601444264472">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="168" y="94" key="DiffContextDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1601444264472" />
+    <state width="958" height="614" key="GridCell.Tab.0.bottom" timestamp="1601444824697">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="958" height="614" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1601444824697" />
+    <state width="958" height="614" key="GridCell.Tab.0.center" timestamp="1601444824695">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="958" height="614" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1601444824695" />
+    <state width="958" height="614" key="GridCell.Tab.0.left" timestamp="1601444824694">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="958" height="614" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1601444824694" />
+    <state width="958" height="614" key="GridCell.Tab.0.right" timestamp="1601444824696">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="958" height="614" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1601444824696" />
+    <state width="958" height="929" key="GridCell.Tab.1.bottom" timestamp="1601444203777">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="958" height="929" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1601444203777" />
+    <state width="958" height="929" key="GridCell.Tab.1.center" timestamp="1601444203776">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="958" height="929" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1601444203776" />
+    <state width="958" height="929" key="GridCell.Tab.1.left" timestamp="1601444203776">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="958" height="929" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1601444203776" />
+    <state width="958" height="929" key="GridCell.Tab.1.right" timestamp="1601444203777">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="958" height="929" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1601444203777" />
+    <state x="648" y="235" key="RollbackChangesDialog" timestamp="1601445219647">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="648" y="235" key="RollbackChangesDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1601445219647" />
+    <state x="326" y="237" key="com.intellij.execution.console.ConsoleHistoryController$MyBrowseAction$1" timestamp="1601444949658">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="326" y="237" key="com.intellij.execution.console.ConsoleHistoryController$MyBrowseAction$1/0.0.1680.1050@0.0.1680.1050" timestamp="1601444949658" />
+    <state x="385" y="262" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1601369269044">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="385" y="262" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1680.1050@0.0.1680.1050" timestamp="1601369269044" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/qap_lp/qap_lp/dev_gradient_proj.py</url>
+          <line>85</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/artoopt$dev_gradient_proj.coverage" NAME="qap_lp.dev_gradient_proj Coverage Results" MODIFIED="1601444824534" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/qap_lp" />
+  </component>
+</project>

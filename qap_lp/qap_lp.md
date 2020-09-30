@@ -122,14 +122,18 @@ dual problem for $PD$
 -  $\alpha,\beta,\Lambda$ are Lagrange multipliers, $\mathbf I$ is the identity matrix for active constraints of the $X \ge 0$  where $\mathbf I_{ij} = 1$ if $X_{ij} = 0$
 
 $$\begin{aligned}
-& L_d = 1/2\cdot ||\nabla F_\mu + D ||_F^2 - \alpha^\top De - \beta^\top D^\top e -\Lambda \bullet D \bullet \mathbf I \\
+& L_d = 1/2\cdot ||\nabla F_\mu + D ||_F^2 - \alpha^\top De - \beta^\top D^\top e -\Lambda \circ \mathbf I \bullet D\\
 \mathsf{KKT:} & \\
-& \nabla F+D - ae^\top - e\beta^\top -\Lambda \bullet \mathbf{I} = 0 \\
-& \nabla Fe - ae^\top e - e\beta^\top e -\Lambda \bullet \mathbf{I} e = 0 \\
-& \nabla F^\top e  - \beta e^\top e - e\alpha^\top e - (\Lambda \bullet \mathbf{I})^\top e = 0
+& \nabla F+D - ae^\top - e\beta^\top -\Lambda \circ \mathbf{I} = 0 \\
+& \nabla Fe - ae^\top e - e\beta^\top e -\Lambda \circ \mathbf{I} e = 0 \\
+& \nabla F^\top e  - \beta e^\top e - e\alpha^\top e - (\Lambda \circ \mathbf{I})^\top e = 0
 \end{aligned}$$
 
 
-Suppose projected gradient $D = 0$, and $D$ satisfies KKT condition for problem *PD*.
+Suppose projected gradient $D = 0$, and $D$ satisfies KKT condition for problem *PD*. We relax one condition for active inequality for some $e = (i,j), e \in M$ such that $X_e =0$, a new optimal direction for problem PD is achieved at $\hat D$, we have:
+
+$$\begin{aligned}
+ & \hat D_{ij} - (\alpha_i + \beta_j) + (\hat \alpha_i + \hat \beta_j) - \Lambda_{ij} = 0, \quad e = (i,j) \\
+\end{aligned}$$
 
 # Reference
