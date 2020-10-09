@@ -62,12 +62,12 @@ $$\begin{aligned}
 \end{aligned} $$
 this implies a LD-like method. (but not exactly)
 
-## $\mathscr L_1$ exact penalty
+## An $\mathscr L_1$ formulation 
 
 Motivated by the formulation using trace:
 
 $$\begin{aligned}
-& \min_X  f \\
+& \min_X  \textrm{tr}(A^\top XB X^\top) \\
 \mathbf{s.t.} &\\
 &   \textrm{tr}(XX^\top ) -  n = 0 \\
 & X \in D_n
@@ -77,13 +77,17 @@ using $\mathscr L_1$ and by the factor that $\forall X \in D_n ,\; \textrm{tr}(X
 
 $$\begin{aligned}
 F_{\mu} & =  f  + \mu\cdot | \textrm{tr}(XX^\top ) -  n| \\
- &= f  + \mu\cdot n - \mu\cdot \textrm{tr}(XX^\top )
+ &= \textrm{tr}(A^\top XB X^\top)  + \mu\cdot n - \mu\cdot \textrm{tr}(XX^\top )
 \end{aligned}$$
 
 For sufficiently large penalty parameter $\mu$, the problem solves the original problem.
 
-The penalty method is very likely to become a concave function (even if the original one is convex), and thus it cannot be directly solved by conic solver.
+The penalty method is very likely to become a concave function (even if the original one is convex), and thus it cannot be directly solved by conic solver. 
 
+Q:
+
+- prove that it is exact if $\mu$ is sufficiently large
+- 
 
 ### Projected gradient
 
@@ -94,7 +98,7 @@ Suppose we do projection on the penalized problem $F_\mu$
 $$\begin{aligned}
 & \nabla_X F_\mu  = A^\top XB + AXB^\top - 2\mu X \\
 & \nabla_\mu F_\mu  = n - \textrm{tr}(XX^\top) \\
-& \nabla_\Lambda F_\mu  = - Xvv
+& \nabla_\Lambda F_\mu  = - X
 \end{aligned}$$
 
 #### projected derivative

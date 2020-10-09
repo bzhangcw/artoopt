@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e025f85-539f-4478-8b87-7dc96059dcf4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artoopt.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp.md" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/dev_gradient_proj.py" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp/dev_gradient_proj.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_gradient_proj.py" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_gradient_proj.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +30,9 @@
       <module name="artoopt" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/qap_lp" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -66,7 +59,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1601368629337</updated>
-      <workItem from="1601368630900" duration="7983000" />
+      <workItem from="1601368630900" duration="8273000" />
+      <workItem from="1602211668496" duration="34000" />
     </task>
     <servers />
   </component>
@@ -86,38 +80,38 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="168" y="94" key="DiffContextDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1601444264472" />
-    <state width="958" height="614" key="GridCell.Tab.0.bottom" timestamp="1601444824697">
+    <state width="958" height="929" key="GridCell.Tab.0.bottom" timestamp="1601445847048">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="958" height="614" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1601444824697" />
-    <state width="958" height="614" key="GridCell.Tab.0.center" timestamp="1601444824695">
+    <state width="958" height="929" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1601445847048" />
+    <state width="958" height="929" key="GridCell.Tab.0.center" timestamp="1601445847048">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="958" height="614" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1601444824695" />
-    <state width="958" height="614" key="GridCell.Tab.0.left" timestamp="1601444824694">
+    <state width="958" height="929" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1601445847048" />
+    <state width="958" height="929" key="GridCell.Tab.0.left" timestamp="1601445847047">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="958" height="614" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1601444824694" />
-    <state width="958" height="614" key="GridCell.Tab.0.right" timestamp="1601444824696">
+    <state width="958" height="929" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1601445847047" />
+    <state width="958" height="929" key="GridCell.Tab.0.right" timestamp="1601445847048">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="958" height="614" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1601444824696" />
-    <state width="958" height="929" key="GridCell.Tab.1.bottom" timestamp="1601444203777">
+    <state width="958" height="929" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1601445847048" />
+    <state width="958" height="929" key="GridCell.Tab.1.bottom" timestamp="1601445847050">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="958" height="929" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1601444203777" />
-    <state width="958" height="929" key="GridCell.Tab.1.center" timestamp="1601444203776">
+    <state width="958" height="929" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1601445847050" />
+    <state width="958" height="929" key="GridCell.Tab.1.center" timestamp="1601445847049">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="958" height="929" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1601444203776" />
-    <state width="958" height="929" key="GridCell.Tab.1.left" timestamp="1601444203776">
+    <state width="958" height="929" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1601445847049" />
+    <state width="958" height="929" key="GridCell.Tab.1.left" timestamp="1601445847049">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="958" height="929" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1601444203776" />
-    <state width="958" height="929" key="GridCell.Tab.1.right" timestamp="1601444203777">
+    <state width="958" height="929" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1601445847049" />
+    <state width="958" height="929" key="GridCell.Tab.1.right" timestamp="1601445847050">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="958" height="929" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1601444203777" />
+    <state width="958" height="929" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1601445847050" />
     <state x="648" y="235" key="RollbackChangesDialog" timestamp="1601445219647">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
