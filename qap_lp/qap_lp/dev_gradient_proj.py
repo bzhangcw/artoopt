@@ -12,7 +12,7 @@ from .conf import *
 
 if __name__ == "__main__":
 
-  instance_name = 'esc128'
+  instance_name = 'bur26a'
   # instance_name = 'bur26a'
   kwargs = {}
   msk_params = {**MSK_DEFAULT, **kwargs}

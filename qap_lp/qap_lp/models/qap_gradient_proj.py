@@ -106,7 +106,7 @@ def msk_pd_on_dc_lp(
 
   constrs_a = model.constraint(expr.sum(D, 0), dom.equalsTo(0))
   constrs_b = model.constraint(expr.sum(D, 1), dom.equalsTo(0))
-  constrs_lb = model.constraint(D.pick(*lb_indices), dom.equalsTo(0))
+  constrs_lb = model.constraint(D.pick(*lb_indices), dom.greaterThan(0))
   # constrs_ub = model.constraint(D.pick(*ub_indices), dom.lessThan(0))
 
   # set params
@@ -156,6 +156,7 @@ def run_gradient_projection(x, param: QAPParam, nabla: QAPDerivative, **kwargs):
   n = param.n
   xo = param.xo
   best_obj = nabla.obj(xo)
+  final_iter = 0
 
   # start iterations
   for i in range(max_iter):
@@ -214,10 +215,11 @@ def run_gradient_projection(x, param: QAPParam, nabla: QAPDerivative, **kwargs):
       logger.info(f"gradient norm: {ndf}")
 
     if stp <= 1e-6:
+      final_iter = i
       break
 
-    objs = [(i, nabla.obj(x + i / st_line_grids * stp * dp))
-            for i in range(1, st_line_grids + 1)]
+    objs = [(ig, nabla.obj(x + ig / st_line_grids * stp * dp))
+            for ig in range(1, st_line_grids + 1)]
 
     i_s, vs = min(objs, key=lambda x: x[-1])
     x = x + i_s / st_line_grids * stp * dp
@@ -226,5 +228,7 @@ def run_gradient_projection(x, param: QAPParam, nabla: QAPDerivative, **kwargs):
       # update solution
       logger.info(f"obj: {vs}, {vs - _obj}, gap: {(vs - best_obj)/best_obj}")
       logger.info(f"trace deficiency: {n - x.dot(x.T).trace()}")
+
+  logger.info(f"finish algorithm iteration@{final_iter}")
 
   return x

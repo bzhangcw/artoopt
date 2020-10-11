@@ -84,11 +84,6 @@ For sufficiently large penalty parameter $\mu$, the problem solves the original 
 
 The penalty method is very likely to become a concave function (even if the original one is convex), and thus it cannot be directly solved by conic solver. 
 
-Q:
-
-- prove that it is exact if $\mu$ is sufficiently large
-- 
-
 ### Projected gradient
 
 Suppose we do projection on the penalized problem $F_\mu$ 
@@ -109,16 +104,26 @@ $$\begin{aligned}
 &\min_D ||\nabla F_\mu + D ||_F^2  \\
 \mathbf{s.t.} & \\
 &D e = D^\top e = 0 \\ 
-&D_{ij} = 0 \quad \textsf{if: } X_{ij} = 0\\
+&D_{ij} \ge 0 \quad \textsf{if: } X_{ij} = 0\\
 \end{aligned}$$
 
-facts:
+- There is no degeneracy, great.
 
-the space of $D$, ($e$ is the vector of 1s)
+### Remark
+
+#### quality of the solution
+ prove that it is exact if $\mu$ is sufficiently large, by "exact" we also claim that the model converges to an integral solution
+
+#### analytic representation for projection
+
+in projected gradient method,
+let the space of $D$, ($e$ is the vector of 1s)
 
  $$\mathcal D = \{D\in\mathbb{R}^{n\times n} : \; D e = D^\top e = 0;\; D_{ij} = 0,\;\forall  (i,j) \in M \}$$
 
-- Q: how to formulate the set for $F$ such that $\left <F, D \right>_F = 0, \; \forall D\in \mathcal D$
+is there a way to formulate the set for $F$ such that $\left <F, D \right>_F = 0, \; \forall D\in \mathcal D$, can we find an analytic representation?
+
+#### what if projection is zero?
 
 
 dual problem for $PD$
@@ -139,5 +144,11 @@ Suppose projected gradient $D = 0$, and $D$ satisfies KKT condition for problem 
 $$\begin{aligned}
  & \hat D_{ij} - (\alpha_i + \beta_j) + (\hat \alpha_i + \hat \beta_j) - \Lambda_{ij} = 0, \quad e = (i,j) \\
 \end{aligned}$$
+
+#### Implementation
+
+see `qap_lp.models.qap_gradient_proj`
+
+
 
 # Reference

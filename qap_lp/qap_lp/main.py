@@ -16,20 +16,18 @@ from .models import *
 from .conf import *
 
 
-def write_sol(instance_name, test_name,  x_sol):
+def write_sol(instance_name, test_name, x_sol):
   x = x_sol.round(3)
   with open(f"{RESULT_DIR}/{instance_name}_{test_name}.pk", 'wb') as f:
     pk.dump(x, f)
 
-  with open(f"{RESULT_DIR}/{instance_name}_{test_name}.json", 'w') as f1:
+  with open(f"{RESULT_DIR}/{instance_name}_{test_name}", 'w') as f1:
     y = (x > 0).nonzero()
     list_sol = list(zip(*y))
     for i, j in list_sol:
       f1.write(f"{i}, {j}\n")
 
   return 1
-
-
 
 
 def main_single(instance_name, **kwargs):
