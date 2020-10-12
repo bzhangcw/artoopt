@@ -2,13 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e025f85-539f-4478-8b87-7dc96059dcf4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artoopt.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artoopt.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qap_lp/l2_grad_proj_benchmark.20201012.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qap_lp/summarize.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qap_lp/summary_20201012-2212.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/bench.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp.html" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp.md" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/dev_gradient_proj.py" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp/dev_gradient_proj.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp.tex" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_gradient_proj.py" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_gradient_proj.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ref.bib" beforeDir="false" afterPath="$PROJECT_DIR$/ref.bib" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +47,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Python" />
   </component>
   <component name="RunManager">
     <configuration name="qap_lp.dev_gradient_proj" type="PythonConfigurationType" factoryName="Python" singleton="false" nameIsGenerated="true">
@@ -81,7 +87,8 @@
       <workItem from="1601368630900" duration="8273000" />
       <workItem from="1602211668496" duration="34000" />
       <workItem from="1602293677563" duration="215000" />
-      <workItem from="1602426070120" duration="1242000" />
+      <workItem from="1602426070120" duration="1543000" />
+      <workItem from="1602500343766" duration="1089000" />
     </task>
     <servers />
   </component>
@@ -105,54 +112,54 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="748" y="302" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1602426974065" />
-    <state width="1878" height="366" key="GridCell.Tab.0.bottom" timestamp="1602429981904">
+    <state width="1878" height="366" key="GridCell.Tab.0.bottom" timestamp="1602430649308">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="958" height="929" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1601445847048" />
-    <state width="1878" height="366" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1602429981904" />
-    <state width="1878" height="366" key="GridCell.Tab.0.center" timestamp="1602429981902">
+    <state width="1878" height="366" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1602430649308" />
+    <state width="1878" height="366" key="GridCell.Tab.0.center" timestamp="1602430649307">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="958" height="929" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1601445847048" />
-    <state width="1878" height="366" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1602429981902" />
-    <state width="1878" height="366" key="GridCell.Tab.0.left" timestamp="1602429981900">
+    <state width="1878" height="366" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1602430649307" />
+    <state width="1878" height="366" key="GridCell.Tab.0.left" timestamp="1602430649307">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="958" height="929" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1601445847047" />
-    <state width="1878" height="366" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1602429981900" />
-    <state width="1878" height="366" key="GridCell.Tab.0.right" timestamp="1602429981904">
+    <state width="1878" height="366" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1602430649307" />
+    <state width="1878" height="366" key="GridCell.Tab.0.right" timestamp="1602430649307">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="958" height="929" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1601445847048" />
-    <state width="1878" height="366" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1602429981904" />
-    <state width="1878" height="366" key="GridCell.Tab.1.bottom" timestamp="1602429981818">
+    <state width="1878" height="366" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1602430649307" />
+    <state width="1878" height="366" key="GridCell.Tab.1.bottom" timestamp="1602430649309">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="958" height="929" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1601445847050" />
-    <state width="1878" height="366" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1602429981818" />
-    <state width="1878" height="366" key="GridCell.Tab.1.center" timestamp="1602429981817">
+    <state width="1878" height="366" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1602430649309" />
+    <state width="1878" height="366" key="GridCell.Tab.1.center" timestamp="1602430649308">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="958" height="929" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1601445847049" />
-    <state width="1878" height="366" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1602429981817" />
-    <state width="1878" height="366" key="GridCell.Tab.1.left" timestamp="1602429981817">
+    <state width="1878" height="366" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1602430649308" />
+    <state width="1878" height="366" key="GridCell.Tab.1.left" timestamp="1602430649308">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="958" height="929" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1601445847049" />
-    <state width="1878" height="366" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1602429981817" />
-    <state width="1878" height="366" key="GridCell.Tab.1.right" timestamp="1602429981817">
+    <state width="1878" height="366" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1602430649308" />
+    <state width="1878" height="366" key="GridCell.Tab.1.right" timestamp="1602430649309">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="958" height="929" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1601445847050" />
-    <state width="1878" height="366" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1602429981817" />
+    <state width="1878" height="366" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1602430649309" />
     <state x="648" y="235" key="RollbackChangesDialog" timestamp="1601445219647">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="648" y="235" key="RollbackChangesDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1601445219647" />
-    <state x="461" y="179" key="SettingsEditor" timestamp="1602429878812">
+    <state x="461" y="179" key="SettingsEditor" timestamp="1602500398262">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="461" y="179" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1602429878812" />
+    <state x="461" y="179" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1602500398262" />
     <state x="326" y="237" key="com.intellij.execution.console.ConsoleHistoryController$MyBrowseAction$1" timestamp="1601444949658">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

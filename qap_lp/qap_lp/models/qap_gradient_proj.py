@@ -146,7 +146,7 @@ def msk_st(dp, x, param):
 
 def run_gradient_projection(x, param: QAPParam, nabla: QAPDerivative, **kwargs):
   # unpacking solver parameters
-  max_iter = kwargs.get('max_iteration', 1000)
+  max_iter = kwargs.get('max_iteration', 500)
   gd_method = kwargs.get('gd_method', msk_pd_on_dc_lp)
   st_method = kwargs.get('st_method', msk_st)
   st_line_grids = kwargs.get('st_line_grids', 10)

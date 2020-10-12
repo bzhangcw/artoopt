@@ -178,6 +178,9 @@ dmypy.json
 .pyre/
 \[*\]*
 
+# latex
+*.synctex.gz
+
 # specific
 qap_lp/qapsoln/*
 qap_lp/qapdata/*

@@ -10,6 +10,7 @@ import logging
 import os
 import pickle as pk
 import sys
+import time
 from logging.handlers import TimedRotatingFileHandler as TRFH
 
 import mosek.fusion as mf
@@ -110,6 +111,13 @@ class QAPTest(object):
     self.model = model
     self.args = args
     self.kwargs = kwargs
+    self.start, self.end = None, None
+
+  def run(self):
+    self.start = time.time()
+    sol = self.model(*self.args, **self.kwargs)
+    self.end = time.time()
+    return sol
 
 
 def check_obj_val(param, x_sol):

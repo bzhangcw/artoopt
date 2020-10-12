@@ -62,7 +62,7 @@ $$\begin{aligned}
 \end{aligned} $$
 this implies a LD-like method. (but not exactly)
 
-## An $\mathscr L_1$ formulation 
+## $\mathscr L_2$ + $\mathscr L_1$ penalized formulation 
 
 Motivated by the formulation using trace:
 
@@ -73,7 +73,7 @@ $$\begin{aligned}
 & X \in D_n
 \end{aligned}$$
 
-using $\mathscr L_1$ and by the factor that $\forall X \in D_n ,\; \textrm{tr}(XX^\top)\le n$, we have:
+using absolute value of $\mathscr L_2$ penalty and by the factor that $\forall X \in D_n ,\; \textrm{tr}(XX^\top)\le n$, we have:
 
 $$\begin{aligned}
 F_{\mu} & =  f  + \mu\cdot | \textrm{tr}(XX^\top ) -  n| \\
@@ -85,6 +85,12 @@ For sufficiently large penalty parameter $\mu$, the problem solves the original 
 The penalty method is very likely to become a concave function (even if the original one is convex), and thus it cannot be directly solved by conic solver. 
 
 ### Projected gradient
+
+
+```python
+# code see
+qap_lp.models.qap_model_l2.l2_exact_penalty_gradient_proj
+```
 
 Suppose we do projection on the penalized problem $F_\mu$ 
 
@@ -134,21 +140,30 @@ $$\begin{aligned}
 & L_d = 1/2\cdot ||\nabla F_\mu + D ||_F^2 - \alpha^\top De - \beta^\top D^\top e -\Lambda \circ \mathbf I \bullet D\\
 \mathsf{KKT:} & \\
 & \nabla F+D - ae^\top - e\beta^\top -\Lambda \circ \mathbf{I} = 0 \\
-& \nabla Fe - ae^\top e - e\beta^\top e -\Lambda \circ \mathbf{I} e = 0 \\
-& \nabla F^\top e  - \beta e^\top e - e\alpha^\top e - (\Lambda \circ \mathbf{I})^\top e = 0
+& \Lambda \ge 0
 \end{aligned}$$
 
 
-Suppose projected gradient $D = 0$, and $D$ satisfies KKT condition for problem *PD*. We relax one condition for active inequality for some $e = (i,j), e \in M$ such that $X_e =0$, a new optimal direction for problem PD is achieved at $\hat D$, we have:
+Suppose at iteration $k$ projected gradient $D_k = 0$, then the KKT condition for 
+
+We relax one condition for active inequality for some $e = (i,j), e \in M$ such that $X_e =0$, a new optimal direction for problem PD is achieved at $\hat D$, we have:
 
 $$\begin{aligned}
  & \hat D_{ij} - (\alpha_i + \beta_j) + (\hat \alpha_i + \hat \beta_j) - \Lambda_{ij} = 0, \quad e = (i,j) \\
 \end{aligned}$$
 
-#### Implementation
-
-see `qap_lp.models.qap_gradient_proj`
 
 
+# Computational Results
+
+The experiments are done on dataset of [QAPLIB](http://anjos.mgi.polymtl.ca/qaplib/), also see paper [@burkard1997qaplib]
+
+The $\mathscr L_2$ penalized [formulation](#mathscr-l_2--mathscr-l_1-penalized-formulation) with code `qap_lp.models.qap_model_l2.l2_exact_penalty_gradient_proj`, solved by gradient projection of module `qap_lp.models.qap_gradient_proj` can solve almost all instances, except for very large ones ($\ge$ 256), it should be better since it now uses Mosek as backend to solve orthogonal projections, line search for step-size, and so on.
+
+current benchmark
+
+
+```{.table caption="L_2 + L_1 penalized gradient projection" source="l2_grad_proj_benchmark.20201012.csv"}  
+```
 
 # Reference
