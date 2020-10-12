@@ -478,11 +478,28 @@ problem \emph{PD}, a quadratic program
 \hypertarget{remark}{%
 \subsubsection{Remark}\label{remark}}
 
+\hypertarget{integrality-of-the-solution}{%
+\paragraph{integrality of the
+solution}\label{integrality-of-the-solution}}
+
+Computational results show that the \emph{residue of the trace}:
+\(|n - \textrm{tr}(XX^\top)|\) is almost zero, this means the algorithm
+converges to an integral solution. (even without any tuning of penalty
+parameter \(\mu\))
+
+Prove that it is exact if \(\mu\) is sufficiently large, the model
+converges to an integral solution.
+
+\textbf{PF. outline} the model uses exact penalty function, as \(\mu\),
+actually \(\{\mu_k\}\) become sufficiently large, the penalty method
+solves the original problem.
+
 \hypertarget{quality-of-the-solution}{%
 \paragraph{quality of the solution}\label{quality-of-the-solution}}
 
-prove that it is exact if \(\mu\) is sufficiently large, by ``exact'' we
-also claim that the model converges to an integral solution
+it is however hard to find a global optimum, and gradient projection as
+defined above converges to a local integral solution and then stops, see
+instances with gap \textgreater{} 10\%.
 
 \hypertarget{analytic-representation-for-projection}{%
 \paragraph{analytic representation for

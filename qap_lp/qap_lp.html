@@ -206,8 +206,12 @@ F_{\mu} &amp; =  f  + \mu\cdot | \textrm{tr}(XX^\top ) -  n| \\
 <li>There is no degeneracy, great.</li>
 </ul>
 <h3 id="remark">Remark</h3>
+<h4 id="integrality-of-the-solution">integrality of the solution</h4>
+<p>Computational results show that the <em>residue of the trace</em>: <span class="math inline">|n - \textrm{tr}(XX^\top)|</span> is almost zero, this means the algorithm converges to an integral solution. (even without any tuning of penalty parameter <span class="math inline">\mu</span>)</p>
+<p>Prove that it is exact if <span class="math inline">\mu</span> is sufficiently large, the model converges to an integral solution.</p>
+<p><strong>PF. outline</strong> the model uses exact penalty function, as <span class="math inline">\mu</span>, actually <span class="math inline">\{\mu_k\}</span> become sufficiently large, the penalty method solves the original problem.</p>
 <h4 id="quality-of-the-solution">quality of the solution</h4>
-<p>prove that it is exact if <span class="math inline">\mu</span> is sufficiently large, by “exact” we also claim that the model converges to an integral solution</p>
+<p>it is however hard to find a global optimum, and gradient projection as defined above converges to a local integral solution and then stops, see instances with gap &gt; 10%.</p>
 <h4 id="analytic-representation-for-projection">analytic representation for projection</h4>
 <p>in projected gradient method, let the space of <span class="math inline">D</span>, (<span class="math inline">e</span> is the vector of 1s)</p>
 <p><span class="math display">\mathcal D = \{D\in\mathbb{R}^{n\times n} : \; D e = D^\top e = 0;\; D_{ij} = 0,\;\forall  (i,j) \in M \}</span></p>
