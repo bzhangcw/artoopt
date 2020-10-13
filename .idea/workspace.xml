@@ -2,19 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e025f85-539f-4478-8b87-7dc96059dcf4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/qap_lp/l2_grad_proj_benchmark.20201012.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qap_lp/summarize.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qap_lp/summary_20201012-2212.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qap_lp/bench.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp.html" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp.md" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp.tex" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_gradient_proj.py" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_gradient_proj.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ref.bib" beforeDir="false" afterPath="$PROJECT_DIR$/ref.bib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/assets" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/l2_grad_proj_benchmark.20201012.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_julia.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/conf.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/deserialize_qapdata.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/dev_gradient_proj.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_gradient_proj.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_model_l2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/models/qap_utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_lp/qap_georounding.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qap_py.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qapdata.tar.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/qapsoln.tar.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/result.20201012.tar.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/summarize.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/summary_20201012-2212.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/qap_lp/summary_20201012-2228.csv" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +101,7 @@
       <workItem from="1602211668496" duration="34000" />
       <workItem from="1602293677563" duration="215000" />
       <workItem from="1602426070120" duration="1543000" />
-      <workItem from="1602500343766" duration="1089000" />
+      <workItem from="1602500343766" duration="2319000" />
     </task>
     <servers />
   </component>
