@@ -8,7 +8,7 @@
         "editor.tabSize": 2
     },
     "autoDocstring.docstringFormat": "google",
-    "editor.fontFamily": "'roboto mono'",
+    "editor.fontFamily": "'hack'",
     "editor.fontLigatures": true,
     "editor.fontSize": 13,
     "editor.fontWeight": "400",
@@ -85,7 +85,7 @@
         "chromium"
     ],
     "python.pythonPath": "/Users/chuwen/anaconda3/bin/python",
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 0,
     "workbench.editor.tabSizing": "shrink",
     "latex-workshop.latex.tools": [
         {
