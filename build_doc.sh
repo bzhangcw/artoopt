@@ -10,7 +10,7 @@ cd $DOC/ &&
     --filter $PANDOC_FILTERS/pandoc-citeproc \
     --filter $PANDOC_FILTERS/pandoc-csv2table \
     --katex --toc \
-    --csl=assets/ieee.csl \
+    --csl=assets/or.csl \
     --css=assets/pandoc.css \
     -o $HTML \
     assets/meta.yaml -s $MD
@@ -22,7 +22,7 @@ $PANDOC_FILTERS/pandoc \
   --filter $PANDOC_FILTERS/pandoc-citeproc \
   --filter $PANDOC_FILTERS/pandoc-csv2table \
   --pdf-engine=xelatex \
-  --csl=assets/ieee.csl \
+  --csl=assets/or.csl \
   --template=assets/markdown.tex \
   -t latex \
   -N \

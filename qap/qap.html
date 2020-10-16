@@ -105,7 +105,7 @@
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#qap-the-problem">QAP, the problem</a>
+<li><a href="#the-problem">The Problem</a>
 <ul>
 <li><a href="#differentiation">Differentiation</a></li>
 </ul></li>
@@ -118,16 +118,16 @@
 </ul></li>
 <li><a href="#mathscr-l_2-mathscr-l_1-penalized-formulation"><span class="math inline">\mathscr L_2</span> + <span class="math inline">\mathscr L_1</span> penalized formulation</a>
 <ul>
-<li><a href="#projected-gradient">Projected gradient</a></li>
-<li><a href="#remark">Remark</a></li>
+<li><a href="#rosens-projected-gradient">Rosen’s Projected Gradient</a></li>
+<li><a href="#goldstein-levitin-poljak-projected-gradient">Goldstein-Levitin-Poljak Projected Gradient</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#computational-results">Computational Results</a></li>
 <li><a href="#reference">Reference</a></li>
 </ul>
 </nav>
-<h1 id="qap-the-problem">QAP, the problem</h1>
-<p>QAP, and alternative descriptions, see <span class="citation" data-cites="jiang_l_p-norm_2016"><a href="#ref-jiang_l_p-norm_2016" role="doc-biblioref">1</a></span></p>
+<h1 id="the-problem">The Problem</h1>
+<p>QAP, and alternative descriptions, see <span class="citation" data-cites="jiang_l_p-norm_2016">Jiang et al. (<a href="#ref-jiang_l_p-norm_2016" role="doc-biblioref">2016</a>)</span></p>
 <p><span class="math display">\begin{aligned}
 &amp;\min_X f(X) = \textrm{tr}(A^\top XB X^\top)  \\
 &amp; = \textrm{tr}(X^\top A^\top XB) &amp; x = \textrm{vec}(X)\\
@@ -152,8 +152,8 @@
 <h1 id="mathscr-l_p-regularization"><span class="math inline">\mathscr L_p</span> regularization</h1>
 <p>various form of regularized problem:</p>
 <ul>
-<li><p><span class="math inline">\mathscr L_0</span>: <span class="math inline">f(X) + \sigma ||X||_0</span> is exact to the original problem for efficiently large <span class="math inline">\sigma</span> <span class="citation" data-cites="jiang_l_p-norm_2016"><a href="#ref-jiang_l_p-norm_2016" role="doc-biblioref">1</a></span>, but the problem itself is still NP-hard.</p></li>
-<li><p><span class="math inline">\mathscr L_p</span>: also suggested by <span class="citation" data-cites="jiang_l_p-norm_2016"><a href="#ref-jiang_l_p-norm_2016" role="doc-biblioref">1</a></span>, good in the sense:</p>
+<li><p><span class="math inline">\mathscr L_0</span>: <span class="math inline">f(X) + \sigma ||X||_0</span> is exact to the original problem for efficiently large <span class="math inline">\sigma</span> <span class="citation" data-cites="jiang_l_p-norm_2016">Jiang et al. (<a href="#ref-jiang_l_p-norm_2016" role="doc-biblioref">2016</a>)</span>, but the problem itself is still NP-hard.</p></li>
+<li><p><span class="math inline">\mathscr L_p</span>: also suggested by <span class="citation" data-cites="jiang_l_p-norm_2016">Jiang et al. (<a href="#ref-jiang_l_p-norm_2016" role="doc-biblioref">2016</a>)</span>, good in the sense:</p>
 <ul>
 <li>strongly concave and the global optimizer must be at vertices</li>
 <li><strong>local optimizer is a permutation matrix</strong> if <span class="math inline">\sigma, \epsilon</span> satisfies some condition. Also, there is a lower bound for nonzero entries of the KKT points</li>
@@ -161,7 +161,7 @@
 </ul>
 <p><span class="math display">\min _{X \in D _{n}} F_{\sigma, p, \epsilon}(X):=f(X)+\sigma\|X+\epsilon 1 \|_{p}^{p}</span></p>
 <ul>
-<li><span class="math inline">\mathscr L_2</span>, and is based on the fact that <span class="math inline">\Pi_n = D_n \bigcap \{X:\textrm{tr}(XX^\top) = n\}</span>, <span class="citation" data-cites="xia_efficient_2010"><a href="#ref-xia_efficient_2010" role="doc-biblioref">2</a></span></li>
+<li><span class="math inline">\mathscr L_2</span>, and is based on the fact that <span class="math inline">\Pi_n = D_n \bigcap \{X:\textrm{tr}(XX^\top) = n\}</span>, <span class="citation" data-cites="xia_efficient_2010">Xia (<a href="#ref-xia_efficient_2010" role="doc-biblioref">2010</a>)</span></li>
 </ul>
 <p><span class="math display">\min_Xf(X)+\mu_{0} \cdot \textrm{tr} \left(X X^{\top}\right)</span></p>
 <h2 id="mathscr-l_2"><span class="math inline">\mathscr L_2</span></h2>
@@ -189,7 +189,7 @@ F_{\mu} &amp; =  f  + \mu\cdot | \textrm{tr}(XX^\top ) -  n| \\
 \end{aligned}</span></p>
 <p>For sufficiently large penalty parameter <span class="math inline">\mu</span>, the problem solves the original problem.</p>
 <p>The penalty method is very likely to become a concave function (even if the original one is convex), and thus it cannot be directly solved by conic solver.</p>
-<h3 id="projected-gradient">Projected gradient</h3>
+<h3 id="rosens-projected-gradient">Rosen’s Projected Gradient</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># code see</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a>qap.models.qap_model_l2.l2_exact_penalty_gradient_proj</span></code></pre></div>
 <p>Suppose we do projection on the penalized problem <span class="math inline">F_\mu</span></p>
@@ -207,7 +207,7 @@ F_{\mu} &amp; =  f  + \mu\cdot | \textrm{tr}(XX^\top ) -  n| \\
 &amp;D e = D^\top e = 0 \\ 
 &amp;D_{ij} \ge 0 \quad \textsf{if: } X_{ij} = 0\\
 \end{aligned}</span></p>
-<p>or equivalently, a linear program</p>
+<p>or equivalently, a linear program (must add norm constraints to avoid unbounded objective)</p>
 <p><span class="math display">\begin{aligned}
 &amp;\min_D \nabla F_\mu \bullet D   \\
 \mathbf{s.t.} &amp; \\
@@ -218,18 +218,26 @@ F_{\mu} &amp; =  f  + \mu\cdot | \textrm{tr}(XX^\top ) -  n| \\
 <ul>
 <li>There is no degeneracy, great.</li>
 </ul>
-<h3 id="remark">Remark</h3>
-<h4 id="integrality-of-the-solution">integrality of the solution</h4>
+<h4 id="remark">Remark</h4>
+<blockquote>
+<p>integrality of the solution</p>
+</blockquote>
 <p>Computational results show that the <em>residue of the trace</em>: <span class="math inline">|n - \textrm{tr}(XX^\top)|</span> is almost zero, this means the algorithm converges to an integral solution. (even without any tuning of penalty parameter <span class="math inline">\mu</span>)</p>
 <p>Prove that it is exact if <span class="math inline">\mu</span> is sufficiently large, the model converges to an integral solution.</p>
 <p><strong>PF. outline</strong> <strong>a</strong>. the model uses exact penalty function, as <span class="math inline">\mu</span>, actually <span class="math inline">\{\mu_k\}</span> become sufficiently large, the penalty method solves the original problem. <strong>b</strong>. if <span class="math inline">\{\mu_k\}</span> become sufficiently large, the penalized objective will be concave, so that the optimal solution should be attained at the vertices.</p>
-<h4 id="quality-of-the-solution">quality of the solution</h4>
+<blockquote>
+<p>quality of the solution</p>
+</blockquote>
 <p>it is however hard to find a global optimum, and gradient projection as defined above converges to a local integral solution and then stops, see instances with gap &gt; 10%.</p>
-<h4 id="analytic-representation-for-projection">analytic representation for projection</h4>
+<blockquote>
+<p>analytic representation for projection</p>
+</blockquote>
 <p>in projected gradient method, let the space of <span class="math inline">D</span>, (<span class="math inline">e</span> is the vector of 1s)</p>
 <p><span class="math display">\mathcal D = \{D\in\mathbb{R}^{n\times n} : \; D e = D^\top e = 0;\; D_{ij} = 0,\;\forall  (i,j) \in M \}</span></p>
 <p>is there a way to formulate the set for <span class="math inline">F</span> such that <span class="math inline">\left &lt;F, D \right&gt;_F = 0, \; \forall D\in \mathcal D</span>, can we find an analytic representation?</p>
-<h4 id="what-if-projection-is-zero">*what if projection is zero?</h4>
+<blockquote>
+<p>*what if projection is zero?</p>
+</blockquote>
 <p>dual problem for <span class="math inline">PD</span></p>
 <ul>
 <li><span class="math inline">\alpha,\beta,\Lambda</span> are Lagrange multipliers, <span class="math inline">\mathbf I</span> is the identity matrix for active constraints of the <span class="math inline">X \ge 0</span> where <span class="math inline">\mathbf I_{ij} = 1</span> if <span class="math inline">X_{ij} = 0</span></li>
@@ -245,8 +253,11 @@ F_{\mu} &amp; =  f  + \mu\cdot | \textrm{tr}(XX^\top ) -  n| \\
 <p><span class="math display">\begin{aligned}
  &amp; \hat D_{ij} - (\alpha_i + \beta_j) + (\hat \alpha_i + \hat \beta_j) - \Lambda_{ij} = 0, \quad e = (i,j) \\
 \end{aligned}</span></p>
+<p>You should exchange the most negative <span class="math inline">\Lambda_{ij}</span></p>
+<h3 id="goldstein-levitin-poljak-projected-gradient">Goldstein-Levitin-Poljak Projected Gradient</h3>
+<p>This is a better known projected gradient method.</p>
 <h1 id="computational-results">Computational Results</h1>
-<p>The experiments are done on dataset of <a href="http://anjos.mgi.polymtl.ca/qaplib/">QAPLIB</a>, also see paper <span class="citation" data-cites="burkard1997qaplib">[<a href="#ref-burkard1997qaplib" role="doc-biblioref">3</a>]</span></p>
+<p>The experiments are done on dataset of <a href="http://anjos.mgi.polymtl.ca/qaplib/">QAPLIB</a>, also see paper <span class="citation" data-cites="burkard1997qaplib">(Burkard et al. <a href="#ref-burkard1997qaplib" role="doc-biblioref">1997</a>)</span></p>
 <p>The <span class="math inline">\mathscr L_2</span> penalized <a href="#mathscr-l_2--mathscr-l_1-penalized-formulation">formulation</a> with code <code>qap.models.qap_model_l2.l2_exact_penalty_gradient_proj</code>, solved by gradient projection of module <code>qap.models.qap_gradient_proj</code> can solve almost all instances, except for very large ones (<span class="math inline">\ge</span> 256), it should be better since it now uses Mosek as backend to solve orthogonal projections, line search for step-size, and so on.</p>
 <p>current benchmark</p>
 <table style="width:86%;">
@@ -327,15 +338,15 @@ F_{\mu} &amp; =  f  + \mu\cdot | \textrm{tr}(XX^\top ) -  n| \\
 </tbody>
 </table>
 <h1 class="unnumbered" id="reference">Reference</h1>
-<div id="refs" class="references" role="doc-bibliography">
+<div id="refs" class="references hanging-indent" role="doc-bibliography">
+<div id="ref-burkard1997qaplib">
+<p>Burkard RE, Karisch SE, Rendl F (1997) QAPLIB–a quadratic assignment problem library. <em>Journal of Global optimization</em> 10(4):391–403.</p>
+</div>
 <div id="ref-jiang_l_p-norm_2016">
-<p>[1] B. Jiang, Y.-F. Liu, and Z. Wen, “L_p-norm regularization algorithms for optimization over permutation matrices,” <em>SIAM Journal on Optimization</em>, vol. 26, no. 4, pp. 2284–2313, 2016.</p>
+<p>Jiang B, Liu YF, Wen Z (2016) L_p-norm regularization algorithms for optimization over permutation matrices. <em>SIAM Journal on Optimization</em> 26(4):2284–2313.</p>
 </div>
 <div id="ref-xia_efficient_2010">
-<p>[2] Y. Xia, “An efficient continuation method for quadratic assignment problems,” <em>Computers &amp; Operations Research</em>, vol. 37, no. 6, pp. 1027–1032, 2010.</p>
-</div>
-<div id="ref-burkard1997qaplib">
-<p>[3] R. E. Burkard, S. E. Karisch, and F. Rendl, “QAPLIB–a quadratic assignment problem library,” <em>Journal of Global optimization</em>, vol. 10, no. 4, pp. 391–403, 1997.</p>
+<p>Xia Y (2010) An efficient continuation method for quadratic assignment problems. <em>Computers &amp; Operations Research</em> 37(6):1027–1032.</p>
 </div>
 </div>
 </body>

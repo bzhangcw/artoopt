@@ -174,7 +174,8 @@
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{1.5em}
 \newenvironment{cslreferences}%
-  {}%
+  {\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
   {\par}
 
 \title{QAP}
@@ -320,11 +321,11 @@
 
 
 
-\hypertarget{qap-the-problem}{%
-\section{QAP, the problem}\label{qap-the-problem}}
+\hypertarget{the-problem}{%
+\section{The Problem}\label{the-problem}}
 
-QAP, and alternative descriptions, see
-\protect\hyperlink{ref-jiang_l_p-norm_2016}{1}
+QAP, and alternative descriptions, see Jiang et al.
+(\protect\hyperlink{ref-jiang_l_p-norm_2016}{2016})
 
 \[\begin{aligned}
 &\min_X f(X) = \textrm{tr}(A^\top XB X^\top)  \\
@@ -366,12 +367,13 @@ various form of regularized problem:
 \begin{itemize}
 \item
   \(\mathscr L_0\): \(f(X) + \sigma ||X||_0\) is exact to the original
-  problem for efficiently large \(\sigma\)
-  \protect\hyperlink{ref-jiang_l_p-norm_2016}{1}, but the problem itself
-  is still NP-hard.
+  problem for efficiently large \(\sigma\) Jiang et al.
+  (\protect\hyperlink{ref-jiang_l_p-norm_2016}{2016}), but the problem
+  itself is still NP-hard.
 \item
-  \(\mathscr L_p\): also suggested by
-  \protect\hyperlink{ref-jiang_l_p-norm_2016}{1}, good in the sense:
+  \(\mathscr L_p\): also suggested by Jiang et al.
+  (\protect\hyperlink{ref-jiang_l_p-norm_2016}{2016}), good in the
+  sense:
 
   \begin{itemize}
   \tightlist
@@ -390,8 +392,8 @@ various form of regularized problem:
 \tightlist
 \item
   \(\mathscr L_2\), and is based on the fact that
-  \(\Pi_n = D_n \bigcap \{X:\textrm{tr}(XX^\top) = n\}\),
-  \protect\hyperlink{ref-xia_efficient_2010}{2}
+  \(\Pi_n = D_n \bigcap \{X:\textrm{tr}(XX^\top) = n\}\), Xia
+  (\protect\hyperlink{ref-xia_efficient_2010}{2010})
 \end{itemize}
 
 \[\min_Xf(X)+\mu_{0} \cdot \textrm{tr} \left(X X^{\top}\right)\]
@@ -444,8 +446,9 @@ The penalty method is very likely to become a concave function (even if
 the original one is convex), and thus it cannot be directly solved by
 conic solver.
 
-\hypertarget{projected-gradient}{%
-\subsubsection{Projected gradient}\label{projected-gradient}}
+\hypertarget{rosens-projected-gradient}{%
+\subsubsection{Rosen's Projected
+Gradient}\label{rosens-projected-gradient}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -477,7 +480,8 @@ problem \emph{PD}, a quadratic program
 &D_{ij} \ge 0 \quad \textsf{if: } X_{ij} = 0\\
 \end{aligned}\]
 
-or equivalently, a linear program
+or equivalently, a linear program (must add norm constraints to avoid
+unbounded objective)
 
 \[\begin{aligned}
 &\min_D \nabla F_\mu \bullet D   \\
@@ -494,11 +498,11 @@ or equivalently, a linear program
 \end{itemize}
 
 \hypertarget{remark}{%
-\subsubsection{Remark}\label{remark}}
+\paragraph{Remark}\label{remark}}
 
-\hypertarget{integrality-of-the-solution}{%
-\paragraph{integrality of the
-solution}\label{integrality-of-the-solution}}
+\begin{quote}
+integrality of the solution
+\end{quote}
 
 Computational results show that the \emph{residue of the trace}:
 \(|n - \textrm{tr}(XX^\top)|\) is almost zero, this means the algorithm
@@ -514,16 +518,17 @@ penalty method solves the original problem. \textbf{b}. if \(\{\mu_k\}\)
 become sufficiently large, the penalized objective will be concave, so
 that the optimal solution should be attained at the vertices.
 
-\hypertarget{quality-of-the-solution}{%
-\paragraph{quality of the solution}\label{quality-of-the-solution}}
+\begin{quote}
+quality of the solution
+\end{quote}
 
 it is however hard to find a global optimum, and gradient projection as
 defined above converges to a local integral solution and then stops, see
 instances with gap \textgreater{} 10\%.
 
-\hypertarget{analytic-representation-for-projection}{%
-\paragraph{analytic representation for
-projection}\label{analytic-representation-for-projection}}
+\begin{quote}
+analytic representation for projection
+\end{quote}
 
 in projected gradient method, let the space of \(D\), (\(e\) is the
 vector of 1s)
@@ -534,9 +539,9 @@ is there a way to formulate the set for \(F\) such that
 \(\left <F, D \right>_F = 0, \; \forall D\in \mathcal D\), can we find
 an analytic representation?
 
-\hypertarget{what-if-projection-is-zero}{%
-\paragraph{*what if projection is
-zero?}\label{what-if-projection-is-zero}}
+\begin{quote}
+*what if projection is zero?
+\end{quote}
 
 dual problem for \(PD\)
 
@@ -566,12 +571,20 @@ problem PD is achieved at \(\hat D\), we have:
  & \hat D_{ij} - (\alpha_i + \beta_j) + (\hat \alpha_i + \hat \beta_j) - \Lambda_{ij} = 0, \quad e = (i,j) \\
 \end{aligned}\]
 
+You should exchange the most negative \(\Lambda_{ij}\)
+
+\hypertarget{goldstein-levitin-poljak-projected-gradient}{%
+\subsubsection{Goldstein-Levitin-Poljak Projected
+Gradient}\label{goldstein-levitin-poljak-projected-gradient}}
+
+This is a better known projected gradient method.
+
 \hypertarget{computational-results}{%
 \section{Computational Results}\label{computational-results}}
 
 The experiments are done on dataset of
 \href{http://anjos.mgi.polymtl.ca/qaplib/}{QAPLIB}, also see paper
-{[}\protect\hyperlink{ref-burkard1997qaplib}{3}{]}
+(Burkard et al. \protect\hyperlink{ref-burkard1997qaplib}{1997})
 
 The \(\mathscr L_2\) penalized
 \protect\hyperlink{mathscr-l_2--mathscr-l_1-penalized-formulation}{formulation}
@@ -712,20 +725,18 @@ max\strut
 
 \hypertarget{refs}{}
 \begin{cslreferences}
+\leavevmode\hypertarget{ref-burkard1997qaplib}{}%
+Burkard RE, Karisch SE, Rendl F (1997) QAPLIB--a quadratic assignment
+problem library. \emph{Journal of Global optimization} 10(4):391--403.
+
 \leavevmode\hypertarget{ref-jiang_l_p-norm_2016}{}%
-{[}1{]} B. Jiang, Y.-F. Liu, and Z. Wen, ``L\_p-norm regularization
-algorithms for optimization over permutation matrices,'' \emph{SIAM
-Journal on Optimization}, vol. 26, no. 4, pp. 2284--2313, 2016.
+Jiang B, Liu YF, Wen Z (2016) L\_p-norm regularization algorithms for
+optimization over permutation matrices. \emph{SIAM Journal on
+Optimization} 26(4):2284--2313.
 
 \leavevmode\hypertarget{ref-xia_efficient_2010}{}%
-{[}2{]} Y. Xia, ``An efficient continuation method for quadratic
-assignment problems,'' \emph{Computers \& Operations Research}, vol. 37,
-no. 6, pp. 1027--1032, 2010.
-
-\leavevmode\hypertarget{ref-burkard1997qaplib}{}%
-{[}3{]} R. E. Burkard, S. E. Karisch, and F. Rendl, ``QAPLIB--a
-quadratic assignment problem library,'' \emph{Journal of Global
-optimization}, vol. 10, no. 4, pp. 391--403, 1997.
+Xia Y (2010) An efficient continuation method for quadratic assignment
+problems. \emph{Computers \& Operations Research} 37(6):1027--1032.
 \end{cslreferences}
 
 \end{document}

@@ -6,7 +6,7 @@
 # @modified: brentian (chuwzhang@gmail.com>)
 #    Sunday, 27th September 2020 4:46:00 pm
 # @description:
-#  The module for projected gradient method.
+#  The module for Rosen's projected gradient method.
 #  The key is to compute projections
 
 from .qap_utils import *

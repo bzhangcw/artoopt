@@ -3,7 +3,7 @@ bibliography: [../ref.bib]
 title: QAP
 ---
 
-# QAP, the problem
+# The Problem
 
 QAP, and alternative descriptions, see @jiang_l_p-norm_2016
 
@@ -93,7 +93,8 @@ For sufficiently large penalty parameter $\mu$, the problem solves the original 
 
 The penalty method is very likely to become a concave function (even if the original one is convex), and thus it cannot be directly solved by conic solver. 
 
-### Projected gradient
+
+### Rosen's Projected Gradient
 
 
 ```python
@@ -122,7 +123,7 @@ $$\begin{aligned}
 &D_{ij} \ge 0 \quad \textsf{if: } X_{ij} = 0\\
 \end{aligned}$$
 
-or equivalently, a linear program
+or equivalently, a linear program (must add norm constraints to avoid unbounded objective)
 
 $$\begin{aligned}
 &\min_D \nabla F_\mu \bullet D   \\
@@ -134,9 +135,12 @@ $$\begin{aligned}
 
 - There is no degeneracy, great.
 
-### Remark
 
-#### integrality of the solution
+#### Remark
+
+> integrality of the solution
+
+
 Computational results show that the *residue of the trace*: $|n - \textrm{tr}(XX^\top)|$ is almost zero, this means the algorithm converges to an integral solution. (even without any tuning of penalty parameter $\mu$)
 
 Prove that it is exact if $\mu$ is sufficiently large, the model converges to an integral solution.
@@ -145,11 +149,12 @@ Prove that it is exact if $\mu$ is sufficiently large, the model converges to an
 
 
 
-#### quality of the solution
+> quality of the solution
+
 it is however hard to find a global optimum, and gradient projection as defined above converges to a local integral solution and then stops, see instances with gap > 10%.
 
 
-#### analytic representation for projection
+> analytic representation for projection
 
 in projected gradient method,
 let the space of $D$, ($e$ is the vector of 1s)
@@ -158,8 +163,7 @@ let the space of $D$, ($e$ is the vector of 1s)
 
 is there a way to formulate the set for $F$ such that $\left <F, D \right>_F = 0, \; \forall D\in \mathcal D$, can we find an analytic representation?
 
-#### *what if projection is zero?
-
+> *what if projection is zero?
 
 dual problem for $PD$
 
@@ -181,7 +185,14 @@ $$\begin{aligned}
  & \hat D_{ij} - (\alpha_i + \beta_j) + (\hat \alpha_i + \hat \beta_j) - \Lambda_{ij} = 0, \quad e = (i,j) \\
 \end{aligned}$$
 
+You should exchange the most negative $\Lambda_{ij}$
 
+
+
+
+### Goldstein-Levitin-Poljak Projected Gradient
+
+This is a better known projected gradient method.
 
 # Computational Results
 
