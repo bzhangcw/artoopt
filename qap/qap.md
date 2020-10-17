@@ -8,10 +8,8 @@ title: QAP
 QAP, and alternative descriptions, see @jiang_l_p-norm_2016
 
 $$\begin{aligned}
-&\min_X f(X) = \textrm{tr}(A^\top XB X^\top)  \\
+\min_X f(X) &= \textrm{tr}(A^\top XB X^\top)  \\
 & = \textrm{tr}(X^\top A^\top XB) & x = \textrm{vec}(X)\\
-& = \left <\textrm{vec}(X),  \textrm{vec}(A^\top X B )  \right > \\
-& = \left <\textrm{vec}(X), B^\top \otimes A^\top \cdot \textrm{vec}(X)  \right > \\ 
 & = x^\top (B^\top \otimes A^\top) x\\ 
 \mathbf{s.t.} & \\ 
 &X \in \Pi_{n}
@@ -25,7 +23,7 @@ The convex hull of permutation matrices, the Birkhoﬀ polytope, is defined:
 
 $$D _{n}=\left\{X \in \mathbb R ^{n \times n} \mid X e =X^{\top} e = e , X \geq 0 \right\}$$
 
-for the constraints, also equivalently:
+for the integral constraints, also equivalently:
 $$\begin{aligned}
 & \textrm{tr}(XX^\top) = \left <x, x \right >_F= n, X \in D_{n}
 \end{aligned}$$
@@ -41,17 +39,24 @@ $$\begin{aligned}
 
 various form of regularized problem:
 
-- $\mathscr L_0$: $f(X) + \sigma ||X||_0$ is exact to the original problem for efficiently large $\sigma$ @jiang_l_p-norm_2016, but the problem itself is still NP-hard.
-  
-- $\mathscr L_p$: also suggested by @jiang_l_p-norm_2016, good in the sense:
-  - strongly concave and the global optimizer must be at vertices
-  - **local optimizer is a permutation matrix** if $\sigma, \epsilon$ satisfies some condition. Also, there is a lower bound for nonzero entries of the KKT points 
+- $\mathscr L_0$, $f(X) + \sigma ||X||_0$ is exact to the original problem for efficiently large $\sigma$ @jiang_l_p-norm_2016, but the problem itself is still NP-hard.
+
 
 $$\min _{X \in D _{n}} F_{\sigma, p, \epsilon}(X):=f(X)+\sigma\|X+\epsilon 1 \|_{p}^{p}$$
 
-- $\mathscr L_2$, and is based on the fact that $\Pi_n =  D_n  \bigcap \{X:\textrm{tr}(XX^\top) = n\}$, @xia_efficient_2010
+- $\mathscr L_2$, and is based on the fact that $\Pi_n =  D_n  \bigcap \{X:\textrm{tr}(XX^\top) = n\}$, @xia_efficient_2010, see [implementations](#mathscr-l_2)
 
 $$\min_Xf(X)+\mu_{0} \cdot \textrm{tr} \left(X X^{\top}\right)$$
+
+- $\mathscr L_2$, using penalized objective, see [implementations](#mathscr-l_2--mathscr-l_1-penalized-formulation)
+
+$$\textrm{tr}(A^\top XB X^\top)  + \mu\cdot n - \mu\cdot \textrm{tr}(XX^\top )$$
+
+- $\mathscr L_p, 0<p< 1$, also suggested by @jiang_l_p-norm_2016, good in the sense:
+  - strongly concave and the global optimizer must be at vertices
+  - **local optimizer is a permutation matrix** if $\sigma, \epsilon$ satisfies some condition. Also, there is a lower bound for nonzero entries of the KKT points 
+  - reproduced results
+
 
 ## $\mathscr L_2$
 
@@ -193,7 +198,7 @@ You should exchange the most negative $\Lambda_{ij}$
 ### Goldstein-Levitin-Poljak Projected Gradient
 
 This is a better known projected gradient method.
-
+##
 # Computational Results
 
 The experiments are done on dataset of [QAPLIB](http://anjos.mgi.polymtl.ca/qaplib/), also see paper [@burkard1997qaplib]
