@@ -182,11 +182,12 @@ dmypy.json
 *.synctex.gz
 
 # specific
-qap_lp/qapsoln/*
-qap_lp/qapdata/*
 log
 result
 .idea/codeStyles
 .idea/inspectionProfiles
 .idea/misc.xml
 .idea/artoopt.iml
+
+qap_lp/qapsoln/*
+qap_lp/qapdata/*

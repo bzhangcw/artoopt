@@ -135,14 +135,6 @@ class LagrangeModel(UFLParam):
       self.unimproved_flag = True
       self.unimproved_iter += 1
 
-    # print(self.gap, _gap)
-    # if val_lag < self.val_lag:
-    #   self.unimproved_flag = False
-    #   self.unimproved_iter = 0
-    # else:
-    #   self.unimproved_flag = True
-    #   self.unimproved_iter += 1
-
     self.val_lag = val_lag
 
   def iter(self, step_size_method='b'):
