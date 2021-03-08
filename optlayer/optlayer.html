@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Chuwen Zhang" />
+  <title>Optimization as a Layer</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="assets/pandoc.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.0/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true });</script>
+  
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Optimization as a Layer</h1>
+<p class="author">Chuwen Zhang</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#optimization-as-a-layer">Optimization as a layer</a>
+<ul>
+<li><a href="#some-concepts">Some Concepts</a></li>
+<li><a href="#differentiations">Differentiations</a></li>
+<li><a href="#application">Application</a></li>
+<li><a href="#reference">Reference</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="optimization-as-a-layer">Optimization as a layer</h1>
+<h2 id="some-concepts">Some Concepts</h2>
+<p>(.) is the alias:</p>
+<ul>
+<li>(<strong>e2e</strong>) End-to-end: raw-input to ultimate outputs of interests.
+<ul>
+<li>without tuned features/feature engineering</li>
+</ul></li>
+<li>(<strong>optlayer</strong>) Optimization as a Layer
+<ul>
+<li>inputs <span class="math inline">\to</span> outputs: <span class="math inline">x\to y</span>, includes an optimization problem <span class="math inline">y = \arg \min f(x)</span></li>
+</ul></li>
+<li>Differentiation.
+<ul>
+<li>for differentiable (convex) problem, Jacobian can be calculated via KKT.</li>
+<li>for LP, can be calculated via interior point HSD formulation, <span class="citation" data-cites="mandi_interior_2020">(<span class="citeproc-not-found" data-reference-id="mandi_interior_2020"><strong>???</strong></span>)</span>, <span class="citation" data-cites="ye_o_1994">Ye et al. (<a href="#ref-ye_o_1994" role="doc-biblioref">1994</a>)</span></li>
+<li>other specified solvers, for QP, conic, …</li>
+</ul></li>
+</ul>
+<h2 id="differentiations">Differentiations</h2>
+<p>[optimal condition] + solver</p>
+<ul>
+<li>KKT + QP solver, <span class="citation" data-cites="amos_optnet_2017">Amos and Kolter (<a href="#ref-amos_optnet_2017" role="doc-biblioref">2017</a>)</span></li>
+<li>CVX -&gt; Conic (HSD embedding) [optimal condition] -&gt; conic solver (SCS, …)</li>
+<li>LP -&gt; HSD</li>
+</ul>
+<h2 id="application">Application</h2>
+<ul>
+<li>e2e,</li>
+</ul>
+<h2 id="reference">Reference</h2>
+<!-- Q
+  - not solve to optimal?
+  - 
+ -->
+<div id="refs" class="references hanging-indent" role="doc-bibliography">
+<div id="ref-amos_optnet_2017">
+<p>Amos B, Kolter JZ (2017) Optnet: Differentiable optimization as a layer in neural networks. <em>International Conference on Machine Learning</em>. (PMLR), 136–145.</p>
+</div>
+<div id="ref-ye_o_1994">
+<p>Ye Y, Todd MJ, Mizuno S (1994) An O (√ nL)-iteration homogeneous and self-dual linear programming algorithm. <em>Mathematics of operations research</em> 19(1):53–67.</p>
+</div>
+</div>
+</body>
+</html>

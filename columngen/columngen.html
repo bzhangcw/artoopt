@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Chuwen Zhang" />
+  <title>Column generation</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="assets/pandoc.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.0/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true });</script>
+  
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Column generation</h1>
+<p class="author">Chuwen Zhang</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#capacitated-shortest-path">Capacitated Shortest path</a></li>
+</ul>
+</nav>
+<p>The following formulation, notation repeats from, <span class="citation" data-cites="desrosiers_primer_2005">Desrosiers and Lübbecke (<a href="#ref-desrosiers_primer_2005" role="doc-biblioref">2005</a>)</span>.</p>
+<h2 id="capacitated-shortest-path">Capacitated Shortest path</h2>
+<p>For graph <span class="math inline">\mathcal G(V, A)</span> <span class="math display">\begin{aligned}
+z^{\star}:= &amp;\min \sum_{(i, j) \in A} c_{i j} x_{i j} \\
+&amp;\text { s.t.} \\
+&amp;\sum_{j:(s, j) \in A} x_{s j}=1 \\
+&amp;\sum_{j:(i, j) \in A} x_{i j}-\sum_{j:(j, i) \in A} x_{j i}=0 &amp;\quad i \in I \backslash\{s, t\} \\
+&amp;\sum_{i:(i, t) \in A} x_{i t}=1 \\
+&amp;\sum_{(i, j) \in A} t_{i j} x_{i j} \leq C \\
+&amp;x_{i j}=0 \text { or } 1 \quad(i, j) \in A
+\end{aligned}</span></p>
+<p>with <span class="math inline">p \in P</span> as set of feasible s-t paths, Dantzig-Wolfe reformulation as follows:</p>
+<p><span class="math display">\begin{aligned}
+z^{\star}=&amp;\min \sum_{p \in P}\left(\sum_{(i, j) \in A} c_{i j} x_{p i j}\right) \lambda_{p} \\
+\text { s.t. } &amp;\\
+&amp;\sum_{p \in P}\left(\sum_{(i, j) \in A} t_{i j} x_{p i j}\right) \lambda_{p} \leq C \\
+&amp;\sum_{p \in P} \lambda_{p}=1 \\
+&amp;\lambda_{p} \geq 0 \quad p \in P \\
+&amp;\sum_{p \in P} x_{p i j} \lambda_{p}=x_{i j} \quad(i, j) \in A \\
+&amp;x_{i j}=0 \text { or } 1 \quad(i, j) \in A
+\end{aligned}</span></p>
+<div id="refs" class="references hanging-indent" role="doc-bibliography">
+<div id="ref-desrosiers_primer_2005">
+<p>Desrosiers J, Lübbecke ME (2005) A primer in column generation. <em>Column generation</em>. (Springer), 1–32.</p>
+</div>
+</div>
+</body>
+</html>
