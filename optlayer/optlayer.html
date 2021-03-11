@@ -13,17 +13,38 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
   </style>
   <link rel="stylesheet" href="assets/pandoc.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
    var mathElements = document.getElementsByClassName("math");
+   var macros = [];
    for (var i = 0; i < mathElements.length; i++) {
     var texText = mathElements[i].firstChild;
     if (mathElements[i].tagName == "SPAN") {
      katex.render(texText.data, mathElements[i], {
       displayMode: mathElements[i].classList.contains('display'),
       throwOnError: false,
+      macros: macros,
       fleqn: false
      });
   }}});
@@ -64,35 +85,43 @@
 <ul>
 <li>inputs <span class="math inline">\to</span> outputs: <span class="math inline">x\to y</span>, includes an optimization problem <span class="math inline">y = \arg \min f(x)</span></li>
 </ul></li>
-<li>Differentiation.
+<li>Differentiation, forward-and-backward pass.
 <ul>
 <li>for differentiable (convex) problem, Jacobian can be calculated via KKT.</li>
-<li>for LP, can be calculated via interior point HSD formulation, <span class="citation" data-cites="mandi_interior_2020">(<span class="citeproc-not-found" data-reference-id="mandi_interior_2020"><strong>???</strong></span>)</span>, <span class="citation" data-cites="ye_o_1994">Ye et al. (<a href="#ref-ye_o_1994" role="doc-biblioref">1994</a>)</span></li>
+<li>for LP, can be calculated via interior point HSD formulation, <span class="citation" data-cites="ye_o_1994"><a href="#ref-ye_o_1994" role="doc-biblioref">Ye et al.</a> (<a href="#ref-ye_o_1994" role="doc-biblioref">1994</a>)</span></li>
 <li>other specified solvers, for QP, conic, …</li>
 </ul></li>
 </ul>
 <h2 id="differentiations">Differentiations</h2>
 <p>[optimal condition] + solver</p>
 <ul>
-<li>KKT + QP solver, <span class="citation" data-cites="amos_optnet_2017">Amos and Kolter (<a href="#ref-amos_optnet_2017" role="doc-biblioref">2017</a>)</span></li>
-<li>CVX -&gt; Conic (HSD embedding) [optimal condition] -&gt; conic solver (SCS, …)</li>
-<li>LP -&gt; HSD</li>
+<li>KKT + QP solver, <span class="citation" data-cites="amos_optnet_2017"><a href="#ref-amos_optnet_2017" role="doc-biblioref">Amos and Kolter</a> (<a href="#ref-amos_optnet_2017" role="doc-biblioref">2017</a>)</span></li>
+<li>CVX -&gt; Conic (HSD embedding) [optimal condition] -&gt; conic solver (SCS, …), <span class="citation" data-cites="amos_optnet_2017"><a href="#ref-amos_optnet_2017" role="doc-biblioref">Amos and Kolter</a> (<a href="#ref-amos_optnet_2017" role="doc-biblioref">2017</a>)</span></li>
+<li>LP -&gt; HSD, <span class="citation" data-cites="mandi_interior_2020"><a href="#ref-mandi_interior_2020" role="doc-biblioref">Mandi and Guns</a> (<a href="#ref-mandi_interior_2020" role="doc-biblioref">2020</a>)</span></li>
 </ul>
 <h2 id="application">Application</h2>
 <ul>
-<li>e2e,</li>
+<li>e2e, stochastic programming (single stage.)
+<ul>
+<li>sp -&gt; deterministic.</li>
+</ul></li>
+<li>sensitivity analysis</li>
+<li></li>
 </ul>
 <h2 id="reference">Reference</h2>
 <!-- Q
   - not solve to optimal?
   - 
  -->
-<div id="refs" class="references hanging-indent" role="doc-bibliography">
-<div id="ref-amos_optnet_2017">
-<p>Amos B, Kolter JZ (2017) Optnet: Differentiable optimization as a layer in neural networks. <em>International Conference on Machine Learning</em>. (PMLR), 136–145.</p>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-amos_optnet_2017" class="csl-entry" role="doc-biblioentry">
+Amos B, Kolter JZ (2017) Optnet: <span>Differentiable</span> optimization as a layer in neural networks. <em>International <span>Conference</span> on <span>Machine</span> <span>Learning</span></em>. (PMLR), 136–145.
 </div>
-<div id="ref-ye_o_1994">
-<p>Ye Y, Todd MJ, Mizuno S (1994) An O (√ nL)-iteration homogeneous and self-dual linear programming algorithm. <em>Mathematics of operations research</em> 19(1):53–67.</p>
+<div id="ref-mandi_interior_2020" class="csl-entry" role="doc-biblioentry">
+Mandi J, Guns T (2020) Interior <span>Point</span> <span>Solving</span> for <span>LP</span>-based prediction+ optimisation. <em>arXiv preprint arXiv:2010.13943</em>.
+</div>
+<div id="ref-ye_o_1994" class="csl-entry" role="doc-biblioentry">
+Ye Y, Todd MJ, Mizuno S (1994) An <span>O</span> (√ <span class="nocase">nL</span>)-iteration homogeneous and self-dual linear programming algorithm. <em>Mathematics of operations research</em> 19(1):53–67.
 </div>
 </div>
 </body>

@@ -117,8 +117,7 @@
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{1.5em}
 \newenvironment{cslreferences}%
-  {\setlength{\parindent}{0pt}%
-  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
+  {}%
   {\par}
 
 \title{Optimization as a Layer}
@@ -278,7 +277,7 @@
     \(y = \arg \min f(x)\)
   \end{itemize}
 \item
-  Differentiation.
+  Differentiation, forward-and-backward pass.
 
   \begin{itemize}
   \tightlist
@@ -287,7 +286,7 @@
     KKT.
   \item
     for LP, can be calculated via interior point HSD formulation,
-    ({\textbf{???}}), Ye et al.
+    \protect\hyperlink{ref-ye_o_1994}{Ye et al.}
     (\protect\hyperlink{ref-ye_o_1994}{1994})
   \item
     other specified solvers, for QP, conic, \ldots{}
@@ -302,13 +301,17 @@
 \begin{itemize}
 \tightlist
 \item
-  KKT + QP solver, Amos and Kolter
-  (\protect\hyperlink{ref-amos_optnet_2017}{2017})
+  KKT + QP solver, \protect\hyperlink{ref-amos_optnet_2017}{Amos and
+  Kolter} (\protect\hyperlink{ref-amos_optnet_2017}{2017})
 \item
   CVX -\textgreater{} Conic (HSD embedding) {[}optimal condition{]}
-  -\textgreater{} conic solver (SCS, \ldots)
+  -\textgreater{} conic solver (SCS, \ldots),
+  \protect\hyperlink{ref-amos_optnet_2017}{Amos and Kolter}
+  (\protect\hyperlink{ref-amos_optnet_2017}{2017})
 \item
-  LP -\textgreater{} HSD
+  LP -\textgreater{} HSD,
+  \protect\hyperlink{ref-mandi_interior_2020}{Mandi and Guns}
+  (\protect\hyperlink{ref-mandi_interior_2020}{2020})
 \end{itemize}
 
 \hypertarget{application}{%
@@ -317,23 +320,37 @@
 \begin{itemize}
 \tightlist
 \item
-  e2e,
+  e2e, stochastic programming (single stage.)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    sp -\textgreater{} deterministic.
+  \end{itemize}
+\item
+  sensitivity analysis
+\item
 \end{itemize}
 
 \hypertarget{reference}{%
 \subsection{Reference}\label{reference}}
 
 \hypertarget{refs}{}
-\begin{cslreferences}
+\begin{CSLReferences}{1}{0}
 \leavevmode\hypertarget{ref-amos_optnet_2017}{}%
-Amos B, Kolter JZ (2017) Optnet: Differentiable optimization as a layer
-in neural networks. \emph{International Conference on Machine Learning}.
-(PMLR), 136--145.
+Amos B, Kolter JZ (2017) Optnet: {Differentiable} optimization as a
+layer in neural networks. \emph{International {Conference} on {Machine}
+{Learning}}. (PMLR), 136--145.
+
+\leavevmode\hypertarget{ref-mandi_interior_2020}{}%
+Mandi J, Guns T (2020) Interior {Point} {Solving} for {LP}-based
+prediction+ optimisation. \emph{arXiv preprint arXiv:2010.13943}.
 
 \leavevmode\hypertarget{ref-ye_o_1994}{}%
-Ye Y, Todd MJ, Mizuno S (1994) An O (√ nL)-iteration homogeneous and
+Ye Y, Todd MJ, Mizuno S (1994) An {O} (√ {nL})-iteration homogeneous and
 self-dual linear programming algorithm. \emph{Mathematics of operations
 research} 19(1):53--67.
-\end{cslreferences}
+
+\end{CSLReferences}
 
 \end{document}

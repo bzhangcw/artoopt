@@ -6,9 +6,8 @@ mainfont: Roboto
 ---
 
 
-# Optimization as a layer
 
-## Some Concepts
+# Some Concepts
 
 (.) is the alias:
 
@@ -22,7 +21,7 @@ mainfont: Roboto
   - other specified solvers, for QP, conic, ...
 
 
-## Differentiations
+# Differentiations
 
 [optimal condition] + solver
 
@@ -30,7 +29,14 @@ mainfont: Roboto
 - CVX -> Conic (HSD embedding) [optimal condition] -> conic solver (SCS, ...), @amos_optnet_2017
 - LP -> HSD, @mandi_interior_2020
 
+## 
+
+
+
 ## Application
+
+
+- learn and optimize
 
 - e2e, stochastic programming (single stage.)
   - sp -> deterministic.
@@ -39,8 +45,10 @@ mainfont: Roboto
 - 
 
 
+## Future directions
 
-
+- multistage optimization? maybe this, @mensch_differentiable_2018
+- only have to work on dual? 
 
 ## Reference
 

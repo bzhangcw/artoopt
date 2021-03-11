@@ -146,15 +146,6 @@
 \usepackage{fvextra}
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=\small,commandchars=\\\{\}}
 
-\usepackage{longtable,booktabs}
-% Correct order of tables after \paragraph or \subparagraph
-\usepackage{etoolbox}
-\makeatletter
-\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
-\makeatother
-% Allow footnotes in longtable head/foot
-\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
-\makesavenoteenv{longtable}
 % add backlinks to footnote references, cf. https://tex.stackexchange.com/questions/302266/make-footnote-clickable-both-ways
 \usepackage{footnotebackref}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
@@ -174,8 +165,7 @@
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{1.5em}
 \newenvironment{cslreferences}%
-  {\setlength{\parindent}{0pt}%
-  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
+  {}%
   {\par}
 
 \title{QAP}
@@ -263,15 +253,6 @@
 % tables
 %
 
-\definecolor{table-row-color}{HTML}{F5F5F5}
-\definecolor{table-rule-color}{HTML}{999999}
-
-%\arrayrulecolor{black!40}
-\arrayrulecolor{table-rule-color}     % color of \toprule, \midrule, \bottomrule
-\setlength\heavyrulewidth{0.3ex}      % thickness of \toprule, \bottomrule
-\renewcommand{\arraystretch}{1.3}     % spacing (padding)
-
-
 %
 % remove paragraph indention
 %
@@ -324,14 +305,13 @@
 \hypertarget{the-problem}{%
 \section{The Problem}\label{the-problem}}
 
-QAP, and alternative descriptions, see Jiang et al.
+QAP, and alternative descriptions, see
+\protect\hyperlink{ref-jiang_l_p-norm_2016}{Jiang et al.}
 (\protect\hyperlink{ref-jiang_l_p-norm_2016}{2016})
 
 \[\begin{aligned}
-&\min_X f(X) = \textrm{tr}(A^\top XB X^\top)  \\
+\min_X f(X) &= \textrm{tr}(A^\top XB X^\top)  \\
 & = \textrm{tr}(X^\top A^\top XB) & x = \textrm{vec}(X)\\
-& = \left <\textrm{vec}(X),  \textrm{vec}(A^\top X B )  \right > \\
-& = \left <\textrm{vec}(X), B^\top \otimes A^\top \cdot \textrm{vec}(X)  \right > \\ 
 & = x^\top (B^\top \otimes A^\top) x\\ 
 \mathbf{s.t.} & \\ 
 &X \in \Pi_{n}
@@ -346,7 +326,7 @@ defined:
 
 \[D _{n}=\left\{X \in \mathbb R ^{n \times n} \mid X e =X^{\top} e = e , X \geq 0 \right\}\]
 
-for the constraints, also equivalently: \[\begin{aligned}
+for the integral constraints, also equivalently: \[\begin{aligned}
 & \textrm{tr}(XX^\top) = \left <x, x \right >_F= n, X \in D_{n}
 \end{aligned}\]
 
@@ -365,13 +345,43 @@ regularization}{\textbackslash mathscr L\_p regularization}}\label{mathscr-l_p-r
 various form of regularized problem:
 
 \begin{itemize}
+\tightlist
 \item
-  \(\mathscr L_0\): \(f(X) + \sigma ||X||_0\) is exact to the original
-  problem for efficiently large \(\sigma\) Jiang et al.
+  \(\mathscr L_0\), \(f(X) + \sigma ||X||_0\) is exact to the original
+  problem for efficiently large \(\sigma\)
+  \protect\hyperlink{ref-jiang_l_p-norm_2016}{Jiang et al.}
   (\protect\hyperlink{ref-jiang_l_p-norm_2016}{2016}), but the problem
   itself is still NP-hard.
+\end{itemize}
+
+\[\min _{X \in D _{n}} F_{\sigma, p, \epsilon}(X):=f(X)+\sigma\|X+\epsilon 1 \|_{p}^{p}\]
+
+\begin{itemize}
+\tightlist
 \item
-  \(\mathscr L_p\): also suggested by Jiang et al.
+  \(\mathscr L_2\), and is based on the fact that
+  \(\Pi_n = D_n \bigcap \{X:\textrm{tr}(XX^\top) = n\}\),
+  \protect\hyperlink{ref-xia_efficient_2010}{Xia}
+  (\protect\hyperlink{ref-xia_efficient_2010}{2010}), see
+  \protect\hyperlink{mathscr-l_2}{implementations}
+\end{itemize}
+
+\[\min_Xf(X)+\mu_{0} \cdot \textrm{tr} \left(X X^{\top}\right)\]
+
+\begin{itemize}
+\tightlist
+\item
+  \(\mathscr L_2\), using penalized objective, see
+  \protect\hyperlink{mathscr-l_2--mathscr-l_1-penalized-formulation}{implementations}
+\end{itemize}
+
+\[\textrm{tr}(A^\top XB X^\top)  + \mu\cdot n - \mu\cdot \textrm{tr}(XX^\top )\]
+
+\begin{itemize}
+\tightlist
+\item
+  \(\mathscr L_p, 0<p< 1\), also suggested by
+  \protect\hyperlink{ref-jiang_l_p-norm_2016}{Jiang et al.}
   (\protect\hyperlink{ref-jiang_l_p-norm_2016}{2016}), good in the
   sense:
 
@@ -383,20 +393,10 @@ various form of regularized problem:
     \textbf{local optimizer is a permutation matrix} if
     \(\sigma, \epsilon\) satisfies some condition. Also, there is a
     lower bound for nonzero entries of the KKT points
+  \item
+    reproduced results
   \end{itemize}
 \end{itemize}
-
-\[\min _{X \in D _{n}} F_{\sigma, p, \epsilon}(X):=f(X)+\sigma\|X+\epsilon 1 \|_{p}^{p}\]
-
-\begin{itemize}
-\tightlist
-\item
-  \(\mathscr L_2\), and is based on the fact that
-  \(\Pi_n = D_n \bigcap \{X:\textrm{tr}(XX^\top) = n\}\), Xia
-  (\protect\hyperlink{ref-xia_efficient_2010}{2010})
-\end{itemize}
-
-\[\min_Xf(X)+\mu_{0} \cdot \textrm{tr} \left(X X^{\top}\right)\]
 
 \hypertarget{mathscr-l_2}{%
 \subsection{\texorpdfstring{\(\mathscr L_2\)}{\textbackslash mathscr L\_2}}\label{mathscr-l_2}}
@@ -577,14 +577,12 @@ You should exchange the most negative \(\Lambda_{ij}\)
 \subsubsection{Goldstein-Levitin-Poljak Projected
 Gradient}\label{goldstein-levitin-poljak-projected-gradient}}
 
-This is a better known projected gradient method.
-
-\hypertarget{computational-results}{%
-\section{Computational Results}\label{computational-results}}
+This is a better known projected gradient method. \#\# \# Computational
+Results
 
 The experiments are done on dataset of
 \href{http://anjos.mgi.polymtl.ca/qaplib/}{QAPLIB}, also see paper
-(Burkard et al. \protect\hyperlink{ref-burkard1997qaplib}{1997})
+(\protect\hyperlink{ref-burkard1997qaplib}{Burkard et al. 1997})
 
 The \(\mathscr L_2\) penalized
 \protect\hyperlink{mathscr-l_2--mathscr-l_1-penalized-formulation}{formulation}
@@ -598,145 +596,28 @@ for step-size, and so on.
 
 current benchmark
 
-\begin{longtable}[]{@{}lllll@{}}
-\caption{L\_2 + L\_1 penalized gradient projection}\tabularnewline
-\toprule
-\begin{minipage}[b]{0.11\columnwidth}\raggedright
-\strut
-\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedright
-value\strut
-\end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\raggedright
-rel\_gap\strut
-\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright
-trace\_res\strut
-\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright
-runtime\strut
-\end{minipage}\tabularnewline
-\midrule
-\endfirsthead
-\toprule
-\begin{minipage}[b]{0.11\columnwidth}\raggedright
-\strut
-\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedright
-value\strut
-\end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\raggedright
-rel\_gap\strut
-\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright
-trace\_res\strut
-\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright
-runtime\strut
-\end{minipage}\tabularnewline
-\midrule
-\endhead
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-count\strut
-\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
-115.000\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-114.000\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
-115.000\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
-115.000\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-mean\strut
-\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
-58087685.641\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-0.300\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
-2.068\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
-12.905\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-std\strut
-\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
-201707868.192\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-0.544\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
-20.853\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
-84.748\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-min\strut
-\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
-0.000\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-0.000\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
-0.000\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
-0.039\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-25\%\strut
-\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
-3962.001\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-0.024\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
-0.000\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
-0.125\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-50\%\strut
-\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
-97330.031\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-0.091\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
-0.000\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
-0.215\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-75\%\strut
-\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
-3207963.510\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-0.255\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
-0.000\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
-1.584\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.11\columnwidth}\raggedright
-max\strut
-\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright
-1289655958.000\strut
-\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\raggedright
-4.000\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
-223.278\strut
-\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
-885.492\strut
-\end{minipage}\tabularnewline
-\bottomrule
-\end{longtable}
+\begin{verbatim}
+\end{verbatim}
 
 \hypertarget{reference}{%
 \section*{Reference}\label{reference}}
 \addcontentsline{toc}{section}{Reference}
 
 \hypertarget{refs}{}
-\begin{cslreferences}
+\begin{CSLReferences}{1}{0}
 \leavevmode\hypertarget{ref-burkard1997qaplib}{}%
 Burkard RE, Karisch SE, Rendl F (1997) QAPLIB--a quadratic assignment
 problem library. \emph{Journal of Global optimization} 10(4):391--403.
 
 \leavevmode\hypertarget{ref-jiang_l_p-norm_2016}{}%
 Jiang B, Liu YF, Wen Z (2016) L\_p-norm regularization algorithms for
-optimization over permutation matrices. \emph{SIAM Journal on
+optimization over permutation matrices. \emph{{SIAM} Journal on
 Optimization} 26(4):2284--2313.
 
 \leavevmode\hypertarget{ref-xia_efficient_2010}{}%
 Xia Y (2010) An efficient continuation method for quadratic assignment
 problems. \emph{Computers \& Operations Research} 37(6):1027--1032.
-\end{cslreferences}
+
+\end{CSLReferences}
 
 \end{document}

@@ -75,17 +75,38 @@
     code span.va { color: #19177c; } /* Variable */
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
   </style>
   <link rel="stylesheet" href="assets/pandoc.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
    var mathElements = document.getElementsByClassName("math");
+   var macros = [];
    for (var i = 0; i < mathElements.length; i++) {
     var texText = mathElements[i].firstChild;
     if (mathElements[i].tagName == "SPAN") {
      katex.render(texText.data, mathElements[i], {
       displayMode: mathElements[i].classList.contains('display'),
       throwOnError: false,
+      macros: macros,
       fleqn: false
      });
   }}});
@@ -122,17 +143,14 @@
 <li><a href="#goldstein-levitin-poljak-projected-gradient">Goldstein-Levitin-Poljak Projected Gradient</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#computational-results">Computational Results</a></li>
 <li><a href="#reference">Reference</a></li>
 </ul>
 </nav>
 <h1 id="the-problem">The Problem</h1>
-<p>QAP, and alternative descriptions, see <span class="citation" data-cites="jiang_l_p-norm_2016">Jiang et al. (<a href="#ref-jiang_l_p-norm_2016" role="doc-biblioref">2016</a>)</span></p>
+<p>QAP, and alternative descriptions, see <span class="citation" data-cites="jiang_l_p-norm_2016"><a href="#ref-jiang_l_p-norm_2016" role="doc-biblioref">Jiang et al.</a> (<a href="#ref-jiang_l_p-norm_2016" role="doc-biblioref">2016</a>)</span></p>
 <p><span class="math display">\begin{aligned}
-&amp;\min_X f(X) = \textrm{tr}(A^\top XB X^\top)  \\
+\min_X f(X) &amp;= \textrm{tr}(A^\top XB X^\top)  \\
 &amp; = \textrm{tr}(X^\top A^\top XB) &amp; x = \textrm{vec}(X)\\
-&amp; = \left &lt;\textrm{vec}(X),  \textrm{vec}(A^\top X B )  \right &gt; \\
-&amp; = \left &lt;\textrm{vec}(X), B^\top \otimes A^\top \cdot \textrm{vec}(X)  \right &gt; \\ 
 &amp; = x^\top (B^\top \otimes A^\top) x\\ 
 \mathbf{s.t.} &amp; \\ 
 &amp;X \in \Pi_{n}
@@ -141,7 +159,7 @@
 <p><span class="math display"> \Pi_{n}=\left\{X \in \mathbb R ^{n \times n} \mid X e =X^{\top} e = e , X_{i j} \in\{0,1\}\right\}</span></p>
 <p>The convex hull of permutation matrices, the Birkhoﬀ polytope, is defined:</p>
 <p><span class="math display">D _{n}=\left\{X \in \mathbb R ^{n \times n} \mid X e =X^{\top} e = e , X \geq 0 \right\}</span></p>
-<p>for the constraints, also equivalently: <span class="math display">\begin{aligned}
+<p>for the integral constraints, also equivalently: <span class="math display">\begin{aligned}
 &amp; \textrm{tr}(XX^\top) = \left &lt;x, x \right &gt;_F= n, X \in D_{n}
 \end{aligned}</span></p>
 <h2 id="differentiation">Differentiation</h2>
@@ -152,18 +170,25 @@
 <h1 id="mathscr-l_p-regularization"><span class="math inline">\mathscr L_p</span> regularization</h1>
 <p>various form of regularized problem:</p>
 <ul>
-<li><p><span class="math inline">\mathscr L_0</span>: <span class="math inline">f(X) + \sigma ||X||_0</span> is exact to the original problem for efficiently large <span class="math inline">\sigma</span> <span class="citation" data-cites="jiang_l_p-norm_2016">Jiang et al. (<a href="#ref-jiang_l_p-norm_2016" role="doc-biblioref">2016</a>)</span>, but the problem itself is still NP-hard.</p></li>
-<li><p><span class="math inline">\mathscr L_p</span>: also suggested by <span class="citation" data-cites="jiang_l_p-norm_2016">Jiang et al. (<a href="#ref-jiang_l_p-norm_2016" role="doc-biblioref">2016</a>)</span>, good in the sense:</p>
-<ul>
-<li>strongly concave and the global optimizer must be at vertices</li>
-<li><strong>local optimizer is a permutation matrix</strong> if <span class="math inline">\sigma, \epsilon</span> satisfies some condition. Also, there is a lower bound for nonzero entries of the KKT points</li>
-</ul></li>
+<li><span class="math inline">\mathscr L_0</span>, <span class="math inline">f(X) + \sigma ||X||_0</span> is exact to the original problem for efficiently large <span class="math inline">\sigma</span> <span class="citation" data-cites="jiang_l_p-norm_2016"><a href="#ref-jiang_l_p-norm_2016" role="doc-biblioref">Jiang et al.</a> (<a href="#ref-jiang_l_p-norm_2016" role="doc-biblioref">2016</a>)</span>, but the problem itself is still NP-hard.</li>
 </ul>
 <p><span class="math display">\min _{X \in D _{n}} F_{\sigma, p, \epsilon}(X):=f(X)+\sigma\|X+\epsilon 1 \|_{p}^{p}</span></p>
 <ul>
-<li><span class="math inline">\mathscr L_2</span>, and is based on the fact that <span class="math inline">\Pi_n = D_n \bigcap \{X:\textrm{tr}(XX^\top) = n\}</span>, <span class="citation" data-cites="xia_efficient_2010">Xia (<a href="#ref-xia_efficient_2010" role="doc-biblioref">2010</a>)</span></li>
+<li><span class="math inline">\mathscr L_2</span>, and is based on the fact that <span class="math inline">\Pi_n = D_n \bigcap \{X:\textrm{tr}(XX^\top) = n\}</span>, <span class="citation" data-cites="xia_efficient_2010"><a href="#ref-xia_efficient_2010" role="doc-biblioref">Xia</a> (<a href="#ref-xia_efficient_2010" role="doc-biblioref">2010</a>)</span>, see <a href="#mathscr-l_2">implementations</a></li>
 </ul>
 <p><span class="math display">\min_Xf(X)+\mu_{0} \cdot \textrm{tr} \left(X X^{\top}\right)</span></p>
+<ul>
+<li><span class="math inline">\mathscr L_2</span>, using penalized objective, see <a href="#mathscr-l_2--mathscr-l_1-penalized-formulation">implementations</a></li>
+</ul>
+<p><span class="math display">\textrm{tr}(A^\top XB X^\top)  + \mu\cdot n - \mu\cdot \textrm{tr}(XX^\top )</span></p>
+<ul>
+<li><span class="math inline">\mathscr L_p, 0&lt;p&lt; 1</span>, also suggested by <span class="citation" data-cites="jiang_l_p-norm_2016"><a href="#ref-jiang_l_p-norm_2016" role="doc-biblioref">Jiang et al.</a> (<a href="#ref-jiang_l_p-norm_2016" role="doc-biblioref">2016</a>)</span>, good in the sense:
+<ul>
+<li>strongly concave and the global optimizer must be at vertices</li>
+<li><strong>local optimizer is a permutation matrix</strong> if <span class="math inline">\sigma, \epsilon</span> satisfies some condition. Also, there is a lower bound for nonzero entries of the KKT points</li>
+<li>reproduced results</li>
+</ul></li>
+</ul>
 <h2 id="mathscr-l_2"><span class="math inline">\mathscr L_2</span></h2>
 <h3 id="naive">naive</h3>
 <p><span class="math display">\begin{aligned}
@@ -190,8 +215,8 @@ F_{\mu} &amp; =  f  + \mu\cdot | \textrm{tr}(XX^\top ) -  n| \\
 <p>For sufficiently large penalty parameter <span class="math inline">\mu</span>, the problem solves the original problem.</p>
 <p>The penalty method is very likely to become a concave function (even if the original one is convex), and thus it cannot be directly solved by conic solver.</p>
 <h3 id="rosens-projected-gradient">Rosen’s Projected Gradient</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># code see</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>qap.models.qap_model_l2.l2_exact_penalty_gradient_proj</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># code see</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>qap.models.qap_model_l2.l2_exact_penalty_gradient_proj</span></code></pre></div>
 <p>Suppose we do projection on the penalized problem <span class="math inline">F_\mu</span></p>
 <h4 id="derivatives">derivatives</h4>
 <p><span class="math display">\begin{aligned}
@@ -255,98 +280,21 @@ F_{\mu} &amp; =  f  + \mu\cdot | \textrm{tr}(XX^\top ) -  n| \\
 \end{aligned}</span></p>
 <p>You should exchange the most negative <span class="math inline">\Lambda_{ij}</span></p>
 <h3 id="goldstein-levitin-poljak-projected-gradient">Goldstein-Levitin-Poljak Projected Gradient</h3>
-<p>This is a better known projected gradient method.</p>
-<h1 id="computational-results">Computational Results</h1>
-<p>The experiments are done on dataset of <a href="http://anjos.mgi.polymtl.ca/qaplib/">QAPLIB</a>, also see paper <span class="citation" data-cites="burkard1997qaplib">(Burkard et al. <a href="#ref-burkard1997qaplib" role="doc-biblioref">1997</a>)</span></p>
+<p>This is a better known projected gradient method. ## # Computational Results</p>
+<p>The experiments are done on dataset of <a href="http://anjos.mgi.polymtl.ca/qaplib/">QAPLIB</a>, also see paper <span class="citation" data-cites="burkard1997qaplib">(<a href="#ref-burkard1997qaplib" role="doc-biblioref">Burkard et al. 1997</a>)</span></p>
 <p>The <span class="math inline">\mathscr L_2</span> penalized <a href="#mathscr-l_2--mathscr-l_1-penalized-formulation">formulation</a> with code <code>qap.models.qap_model_l2.l2_exact_penalty_gradient_proj</code>, solved by gradient projection of module <code>qap.models.qap_gradient_proj</code> can solve almost all instances, except for very large ones (<span class="math inline">\ge</span> 256), it should be better since it now uses Mosek as backend to solve orthogonal projections, line search for step-size, and so on.</p>
 <p>current benchmark</p>
-<table style="width:86%;">
-<caption>L_2 + L_1 penalized gradient projection</caption>
-<colgroup>
-<col style="width: 12%" />
-<col style="width: 23%" />
-<col style="width: 15%" />
-<col style="width: 17%" />
-<col style="width: 17%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>value</th>
-<th>rel_gap</th>
-<th>trace_res</th>
-<th>runtime</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>count</td>
-<td>115.000</td>
-<td>114.000</td>
-<td>115.000</td>
-<td>115.000</td>
-</tr>
-<tr class="even">
-<td>mean</td>
-<td>58087685.641</td>
-<td>0.300</td>
-<td>2.068</td>
-<td>12.905</td>
-</tr>
-<tr class="odd">
-<td>std</td>
-<td>201707868.192</td>
-<td>0.544</td>
-<td>20.853</td>
-<td>84.748</td>
-</tr>
-<tr class="even">
-<td>min</td>
-<td>0.000</td>
-<td>0.000</td>
-<td>0.000</td>
-<td>0.039</td>
-</tr>
-<tr class="odd">
-<td>25%</td>
-<td>3962.001</td>
-<td>0.024</td>
-<td>0.000</td>
-<td>0.125</td>
-</tr>
-<tr class="even">
-<td>50%</td>
-<td>97330.031</td>
-<td>0.091</td>
-<td>0.000</td>
-<td>0.215</td>
-</tr>
-<tr class="odd">
-<td>75%</td>
-<td>3207963.510</td>
-<td>0.255</td>
-<td>0.000</td>
-<td>1.584</td>
-</tr>
-<tr class="even">
-<td>max</td>
-<td>1289655958.000</td>
-<td>4.000</td>
-<td>223.278</td>
-<td>885.492</td>
-</tr>
-</tbody>
-</table>
+<pre class="table" data-caption="L_2 + L_1 penalized gradient projection" data-source="l2_grad_proj_benchmark.20201012.csv"><code></code></pre>
 <h1 class="unnumbered" id="reference">Reference</h1>
-<div id="refs" class="references hanging-indent" role="doc-bibliography">
-<div id="ref-burkard1997qaplib">
-<p>Burkard RE, Karisch SE, Rendl F (1997) QAPLIB–a quadratic assignment problem library. <em>Journal of Global optimization</em> 10(4):391–403.</p>
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-burkard1997qaplib" class="csl-entry" role="doc-biblioentry">
+Burkard RE, Karisch SE, Rendl F (1997) QAPLIB–a quadratic assignment problem library. <em>Journal of Global optimization</em> 10(4):391–403.
 </div>
-<div id="ref-jiang_l_p-norm_2016">
-<p>Jiang B, Liu YF, Wen Z (2016) L_p-norm regularization algorithms for optimization over permutation matrices. <em>SIAM Journal on Optimization</em> 26(4):2284–2313.</p>
+<div id="ref-jiang_l_p-norm_2016" class="csl-entry" role="doc-biblioentry">
+Jiang B, Liu YF, Wen Z (2016) L_p-norm regularization algorithms for optimization over permutation matrices. <em><span>SIAM</span> Journal on Optimization</em> 26(4):2284–2313.
 </div>
-<div id="ref-xia_efficient_2010">
-<p>Xia Y (2010) An efficient continuation method for quadratic assignment problems. <em>Computers &amp; Operations Research</em> 37(6):1027–1032.</p>
+<div id="ref-xia_efficient_2010" class="csl-entry" role="doc-biblioentry">
+Xia Y (2010) An efficient continuation method for quadratic assignment problems. <em>Computers &amp; Operations Research</em> 37(6):1027–1032.
 </div>
 </div>
 </body>

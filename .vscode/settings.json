@@ -84,7 +84,7 @@
         "--style",
         "chromium"
     ],
-    "python.pythonPath": "/Users/chuwen/anaconda3/bin/python",
+    "python.pythonPath": "/Users/brent/anaconda3/bin/python",
     "window.zoomLevel": -2,
     "workbench.editor.tabSizing": "shrink",
     "latex-workshop.latex.tools": [
